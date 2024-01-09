@@ -26,6 +26,8 @@ func expr(pt ast.Expr) string {
 		return x.Name
 	case *ast.IndexExpr:
 		return IndexExpr{IndexExpr: x}.String()
+	case *ast.InterfaceType:
+		return InterfaceType{InterfaceType: x}.String()
 	case *ast.KeyValueExpr:
 		return KeyValueExpr{KeyValueExpr: x}.String()
 	case *ast.ParenExpr:
