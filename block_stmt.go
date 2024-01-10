@@ -9,6 +9,10 @@ type BlockStmt struct {
 	*ast.BlockStmt
 }
 
+func (b BlockStmt) Stmts() {
+
+}
+
 // String returns a string representation of the BlockStmt.
 //
 // It concatenates the string representation of each statement
@@ -22,5 +26,5 @@ func (b BlockStmt) String() string {
 	for i := 0; i < len(b.List); i++ {
 		stmts = append(stmts, stmt(b.List[i]))
 	}
-	return "{" + strings.Join(stmts, "\n") + "}"
+	return "{\n\t" + strings.Join(stmts, "\n\t") + "\n}"
 }

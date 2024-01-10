@@ -24,6 +24,20 @@ func (f File) specs() []ast.Spec {
 	return lo.Flatten(specsColl)
 }
 
+func (f File) GenDecls() []GenDecl {
+	return lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) (GenDecl, bool) {
+		genDecl, ok := decl.(*ast.GenDecl)
+		return GenDecl{GenDecl: genDecl}, ok
+	})
+}
+
+func (f File) FuncDecls() []FuncDecl {
+	return lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) (FuncDecl, bool) {
+		funcDecl, ok := decl.(*ast.FuncDecl)
+		return FuncDecl{FuncDecl: funcDecl}, ok
+	})
+}
+
 func (f File) ValueSpecs() []ValueSpec {
 	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (ValueSpec, bool) {
 		valueSpec, ok := spec.(*ast.ValueSpec)

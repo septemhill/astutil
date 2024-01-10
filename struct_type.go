@@ -22,6 +22,10 @@ func (st StructType) Fields() []FieldDecl {
 }
 
 func (st StructType) String() string {
+	if len(st.StructType.Fields.List) == 0 {
+		return fmt.Sprintf("type %s struct {}", st.Name)
+	}
+
 	fields := lo.Map(st.Fields(), func(field FieldDecl, _ int) string {
 		return field.String()
 	})

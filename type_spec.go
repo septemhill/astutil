@@ -1,6 +1,8 @@
 package astutil
 
-import "go/ast"
+import (
+	"go/ast"
+)
 
 type TypeSpec struct {
 	*ast.TypeSpec
@@ -13,7 +15,7 @@ func (t TypeSpec) String() string {
 	case *ast.StructType:
 		return StructType{Name: t.Name.Name, StructType: x}.String()
 	case *ast.FuncType:
-		return FuncType{FuncType: x}.String()
+		return FuncType{Name: t.Name.Name, FuncType: x}.String()
 	}
 
 	return "unreachable" + t.Name.Name

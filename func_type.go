@@ -1,8 +1,19 @@
 package astutil
 
-import "go/ast"
+import (
+	"fmt"
+	"go/ast"
+)
+
+const (
+	FnDecl   = "fn-decl"   // func fnDecl(...) {}
+	FnMethod = "fn-method" // fnMethod(...)
+	FnType   = "fn-type"   // type fnType = func(...)
+)
 
 type FuncType struct {
+	Name   string
+	FnType string
 	*ast.FuncType
 }
 
@@ -35,5 +46,13 @@ func (ft FuncType) ResultsList() *ResultsList {
 }
 
 func (ft FuncType) String() string {
+	if ft.FnType == FnDecl {
+		return fmt.Sprintf("func %s %s", ft.Name, ft.ParamsList().String())
+	}
+
+	if ft.FnType == FnMethod {
+		return fmt.Sprintf("func %s %s", ft.Name, ft.ParamsList().String())
+	}
+
 	return ft.ParamsList().String() + ft.ResultsList().String()
 }

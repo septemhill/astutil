@@ -4,6 +4,8 @@ import "go/ast"
 
 func expr(pt ast.Expr) string {
 	switch x := pt.(type) {
+	case nil:
+		return ""
 	case *ast.ArrayType:
 		return ArrayType{ArrayType: x}.String()
 	case *ast.BasicLit:
@@ -23,9 +25,11 @@ func expr(pt ast.Expr) string {
 	case *ast.FuncType:
 		return FuncType{FuncType: x}.String()
 	case *ast.Ident:
-		return x.Name
+		return Ident{Ident: x}.String()
 	case *ast.IndexExpr:
 		return IndexExpr{IndexExpr: x}.String()
+	case *ast.IndexListExpr:
+		return "todo_index_list_expr"
 	case *ast.InterfaceType:
 		return InterfaceType{InterfaceType: x}.String()
 	case *ast.KeyValueExpr:
@@ -34,10 +38,23 @@ func expr(pt ast.Expr) string {
 		return ParenExpr{ParenExpr: x}.String()
 	case *ast.SelectorExpr:
 		return SelectorExpr{SelectorExpr: x}.String()
+	case *ast.SliceExpr:
+		return SliceExpr{SliceExpr: x}.String()
 	case *ast.StarExpr:
 		return StarExpr{StarExpr: x}.String()
+	case *ast.TypeAssertExpr:
+		return "todo_type_assert_expr"
+		// return TypeAssertExpr{TypeAssertExpr: x}.String()
 	case *ast.UnaryExpr:
 		return UnaryExpr{UnaryExpr: x}.String()
 	}
 	return "unreachable_expr"
+}
+
+type Expr struct {
+	ast.Expr
+}
+
+func (s Expr) String() string {
+	return expr(s.Expr)
 }
