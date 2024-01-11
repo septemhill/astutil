@@ -12,7 +12,8 @@ const (
 )
 
 type FuncType struct {
-	Name   string
+	Name string
+	// TODO: add func type
 	FnType string
 	*ast.FuncType
 }

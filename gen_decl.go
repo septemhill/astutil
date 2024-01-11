@@ -1,7 +1,6 @@
 package astutil
 
 import (
-	"fmt"
 	"go/ast"
 	"strings"
 
@@ -17,7 +16,6 @@ func spec(spec ast.Spec) string {
 	case *ast.TypeSpec:
 		return TypeSpec{TypeSpec: x}.String()
 	case *ast.ValueSpec:
-		fmt.Println("GENDECL")
 		return ValueSpec{ValueSpec: x}.String()
 	case *ast.ImportSpec:
 		return ImportSpec{ImportSpec: x}.String()
