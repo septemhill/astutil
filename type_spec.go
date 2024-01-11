@@ -16,7 +16,7 @@ func (t TypeSpec) String() string {
 		return StructType{Name: t.Name.Name, StructType: x}.String()
 	case *ast.FuncType:
 		return FuncType{Name: t.Name.Name, FuncType: x}.String()
+	default:
+		return "unknown_type" + t.Name.Name
 	}
-
-	return "unreachable" + t.Name.Name
 }

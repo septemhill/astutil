@@ -22,6 +22,10 @@ func (fs ForStmt) Post() Stmt {
 	return Stmt{Stmt: fs.ForStmt.Post}
 }
 
+func (fs ForStmt) Body() BlockStmt {
+	return BlockStmt{BlockStmt: fs.ForStmt.Body}
+}
+
 // String returns a string representation of the ForStmt.
 //
 // It concatenates the string representations of the initialization, condition, and post statements
@@ -37,5 +41,5 @@ func (fs ForStmt) String() string {
 		fs.Post().String(),
 	}, "; ")
 
-	return fmt.Sprintf("for %s %s", forCond, stmt(fs.Body))
+	return fmt.Sprintf("for %s %s", forCond, fs.Body())
 }

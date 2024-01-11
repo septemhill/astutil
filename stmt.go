@@ -4,8 +4,12 @@ import (
 	"go/ast"
 )
 
-func stmt(stmt ast.Stmt) string {
-	switch x := stmt.(type) {
+type Stmt struct {
+	ast.Stmt
+}
+
+func (s Stmt) String() string {
+	switch x := s.Stmt.(type) {
 	case *ast.AssignStmt:
 		return AssignStmt{AssignStmt: x}.String()
 	case *ast.BadStmt:
@@ -51,12 +55,4 @@ func stmt(stmt ast.Stmt) string {
 	default:
 		return "unknown_stmt"
 	}
-}
-
-type Stmt struct {
-	ast.Stmt
-}
-
-func (s Stmt) String() string {
-	return stmt(s.Stmt)
 }
