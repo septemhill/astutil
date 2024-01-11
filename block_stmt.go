@@ -22,20 +22,20 @@ func (b *BlockStmt) Stmts() []Stmt {
 }
 
 // TODO: make it work
-func (b *BlockStmt) InsertStmt(i int) error {
-	stmt, err := ParseStmt(`
-		type Base struct{
-			Name string
-			Age string
-		}
-	`)
-	if err != nil {
-		return err
-	}
+// func (b *BlockStmt) InsertStmt(i int) error {
+// 	stmt, err := ParseStmt(`
+// 		type Base struct{
+// 			Name string
+// 			Age string
+// 		}
+// 	`)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	b.BlockStmt.List = append(b.BlockStmt.List, stmt)
-	return nil
-}
+// 	b.BlockStmt.List = append(b.BlockStmt.List, stmt)
+// 	return nil
+// }
 
 // String returns a string representation of the BlockStmt.
 //
