@@ -9,9 +9,13 @@ type BranchStmt struct {
 	*ast.BranchStmt
 }
 
-func (decl BranchStmt) String() string {
-	if decl.Label == nil {
-		return fmt.Sprintf("%v", decl.Tok)
+func (br BranchStmt) Label() Ident {
+	return Ident{Ident: br.BranchStmt.Label}
+}
+
+func (br BranchStmt) String() string {
+	if br.BranchStmt.Label == nil {
+		return fmt.Sprintf("%v", br.Tok)
 	}
-	return fmt.Sprintf("%v %s", decl.Tok, expr(decl.Label))
+	return fmt.Sprintf("%v %s", br.Tok, br.Label())
 }

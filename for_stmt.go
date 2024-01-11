@@ -22,6 +22,14 @@ func (fs ForStmt) Post() Stmt {
 	return Stmt{Stmt: fs.ForStmt.Post}
 }
 
+// String returns a string representation of the ForStmt.
+//
+// It concatenates the string representations of the initialization, condition, and post statements
+// with semicolons, and then formats the resulting string using the for loop format.
+// The resulting string represents the for loop statement.
+//
+// Returns:
+//   - The string representation of the ForStmt.
 func (fs ForStmt) String() string {
 	forCond := strings.Join([]string{
 		fs.Init().String(),

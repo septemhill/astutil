@@ -12,6 +12,9 @@ func (decl DeclStmt) String() string {
 		return FuncDecl{FuncDecl: x}.String()
 	case *ast.GenDecl:
 		return GenDecl{GenDecl: x}.String()
+	case *ast.BadDecl:
+		return "todo_bad_decl"
+	default:
+		return "unknown_decl"
 	}
-	return "unreachable"
 }

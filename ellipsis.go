@@ -6,7 +6,11 @@ type Ellipsis struct {
 	*ast.Ellipsis
 }
 
+func (e Ellipsis) ElementType() Expr {
+	return Expr{Expr: e.Ellipsis.Elt}
+}
+
 // String returns a string representation of the Ellipsis.
 func (e Ellipsis) String() string {
-	return "..." + expr(e.Elt)
+	return "..." + e.ElementType().String()
 }

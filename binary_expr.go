@@ -9,6 +9,18 @@ type BinaryExpr struct {
 	*ast.BinaryExpr
 }
 
+func (be BinaryExpr) Lhs() Expr {
+	return Expr{Expr: be.BinaryExpr.X}
+}
+
+func (be BinaryExpr) Rhs() Expr {
+	return Expr{Expr: be.BinaryExpr.Y}
+}
+
+func (be BinaryExpr) Operator() string {
+	return be.BinaryExpr.Op.String()
+}
+
 // String returns a string representation of the BinaryExpr.
 //
 // It returns a formatted string that represents the BinaryExpr,
@@ -18,5 +30,5 @@ type BinaryExpr struct {
 // The function name is String.
 // The return type is string.
 func (be BinaryExpr) String() string {
-	return fmt.Sprintf("%s %s %s", expr(be.X), be.Op.String(), expr(be.Y))
+	return fmt.Sprintf("%s %s %s", be.Lhs(), be.Operator(), be.Rhs())
 }

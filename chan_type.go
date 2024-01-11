@@ -9,15 +9,26 @@ type ChanType struct {
 	*ast.ChanType
 }
 
+func (c ChanType) Value() Expr {
+	return Expr{Expr: c.ChanType.Value}
+}
+
+func (c ChanType) Type() string {
+	switch c.Dir {
+	case ast.RECV:
+		return "<-chan"
+	case ast.SEND:
+		return "chan<-"
+	default:
+		return "chan"
+	}
+}
+
 // String returns a string representation of the ChanType.
+//
+// It checks the direction of the channel and formats the string accordingly.
+// The parameter 'c' is the ChanType object.
+// The return type is a string.
 func (c ChanType) String() string {
-	if c.Dir == ast.RECV {
-		return fmt.Sprintf("<-chan %s", expr(c.Value))
-	}
-
-	if c.Dir == ast.SEND {
-		return fmt.Sprintf("chan<- %s", expr(c.Value))
-	}
-
-	return fmt.Sprintf("chan %s", expr(c.Value))
+	return fmt.Sprintf("%s %s", c.Type(), c.Value())
 }

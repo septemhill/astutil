@@ -3,14 +3,18 @@ package astutil
 import (
 	"go/ast"
 	"strings"
+
+	"github.com/samber/lo"
 )
 
 type BlockStmt struct {
 	*ast.BlockStmt
 }
 
-func (b BlockStmt) Stmts() {
-
+func (b BlockStmt) Stmts() []Stmt {
+	return lo.Map(b.BlockStmt.List, func(x ast.Stmt, _ int) Stmt {
+		return Stmt{Stmt: x}
+	})
 }
 
 // String returns a string representation of the BlockStmt.
@@ -22,9 +26,9 @@ func (b BlockStmt) Stmts() {
 // Returns:
 // - The string representation of the BlockStmt.
 func (b BlockStmt) String() string {
-	var stmts []string
-	for i := 0; i < len(b.List); i++ {
-		stmts = append(stmts, stmt(b.List[i]))
-	}
+	stmts := lo.Map(b.Stmts(), func(x Stmt, _ int) string {
+		return x.String()
+	})
+
 	return "{\n\t" + strings.Join(stmts, "\n\t") + "\n}"
 }

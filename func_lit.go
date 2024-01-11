@@ -9,6 +9,14 @@ type FuncLit struct {
 	*ast.FuncLit
 }
 
+func (f FuncLit) Type() FuncType {
+	return FuncType{FuncType: f.FuncLit.Type}
+}
+
+func (f FuncLit) Body() BlockStmt {
+	return BlockStmt{BlockStmt: f.FuncLit.Body}
+}
+
 func (f FuncLit) String() string {
-	return fmt.Sprintf("func %s %s", expr(f.Type), stmt(f.Body))
+	return fmt.Sprintf("func %s %s", f.Type(), f.Body())
 }
