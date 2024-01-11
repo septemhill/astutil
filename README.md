@@ -22,6 +22,11 @@ import "github.com/septemhill/astutil"
 You can then use the utility functions provided by the astutil package in your
 code.
 
+# TODO
+
+- [ ] Introduce AST modify functionality
+- [ ] Add generic support
+
 # Contributing
 
 Contributions to the `astutil` package are welcome! If you find any issues or
