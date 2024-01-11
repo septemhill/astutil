@@ -19,8 +19,8 @@ func (ft MethodExpr) ParamsNames() []string {
 	return names
 }
 
-func (ft MethodExpr) ParamsTypes() []TypeLit {
-	var types []TypeLit
+func (ft MethodExpr) ParamsTypes() []Expr {
+	var types []Expr
 	params := ft.ParamsList().Params()
 
 	for i := 0; i < len(params); i++ {

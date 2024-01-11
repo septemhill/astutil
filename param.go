@@ -10,10 +10,10 @@ type Param struct {
 	*ast.Field
 }
 
-func (p Param) Type() TypeLit {
-	return TypeLit{Field: p.Field}
+func (p Param) Type() Expr {
+	return Expr{Expr: p.Field.Type}
 }
 
 func (p Param) String() string {
-	return fmt.Sprintf("%s %s", p.Name, p.Type().String())
+	return fmt.Sprintf("%s %s", p.Name, p.Type())
 }

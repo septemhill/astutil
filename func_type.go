@@ -28,8 +28,8 @@ func (ft FuncType) ParamsNames() []string {
 	return names
 }
 
-func (ft FuncType) ParamsTypes() []TypeLit {
-	var types []TypeLit
+func (ft FuncType) ParamsTypes() []Expr {
+	var types []Expr
 	params := ft.ParamsList().Params()
 
 	for i := 0; i < len(params); i++ {

@@ -34,5 +34,5 @@ func (ifs IfStmt) Else() Stmt {
 //
 // The return type is a string.
 func (ifs IfStmt) String() string {
-	return fmt.Sprintf("if %s %s %s", expr(ifs.IfStmt.Cond), ifs.Body(), ifs.Else())
+	return fmt.Sprintf("if %s %s %s", ifs.Cond(), ifs.Body(), ifs.Else())
 }
