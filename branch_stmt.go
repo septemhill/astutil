@@ -9,11 +9,15 @@ type BranchStmt struct {
 	*ast.BranchStmt
 }
 
-func (br BranchStmt) Label() Ident {
+func NewBranchStmt(b *ast.BranchStmt) *BranchStmt {
+	return &BranchStmt{BranchStmt: b}
+}
+
+func (br *BranchStmt) Label() Ident {
 	return Ident{Ident: br.BranchStmt.Label}
 }
 
-func (br BranchStmt) String() string {
+func (br *BranchStmt) String() string {
 	if br.BranchStmt.Label == nil {
 		return fmt.Sprintf("%v", br.Tok)
 	}

@@ -9,11 +9,15 @@ type IndexExpr struct {
 	*ast.IndexExpr
 }
 
-func (i IndexExpr) Expr() Expr {
+func NewIndexExpr(i *ast.IndexExpr) *IndexExpr {
+	return &IndexExpr{IndexExpr: i}
+}
+
+func (i *IndexExpr) Expr() Expr {
 	return Expr{Expr: i.IndexExpr.X}
 }
 
-func (i IndexExpr) Index() Expr {
+func (i *IndexExpr) Index() Expr {
 	return Expr{Expr: i.IndexExpr.Index}
 }
 
@@ -24,6 +28,6 @@ func (i IndexExpr) Index() Expr {
 //
 // Returns:
 // - a string representation of the IndexExpr.
-func (i IndexExpr) String() string {
+func (i *IndexExpr) String() string {
 	return fmt.Sprintf("%s[%s]", i.Expr(), i.Index())
 }

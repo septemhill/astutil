@@ -6,7 +6,11 @@ type DeclStmt struct {
 	*ast.DeclStmt
 }
 
-func (decl DeclStmt) String() string {
+func NewDeclStmt(decl *ast.DeclStmt) *DeclStmt {
+	return &DeclStmt{DeclStmt: decl}
+}
+
+func (decl *DeclStmt) String() string {
 	switch x := decl.Decl.(type) {
 	case *ast.FuncDecl:
 		return FuncDecl{FuncDecl: x}.String()

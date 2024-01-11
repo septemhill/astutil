@@ -9,11 +9,15 @@ type ArrayType struct {
 	*ast.ArrayType
 }
 
-func (a ArrayType) ElementType() Expr {
+func NewArrayType(a *ast.ArrayType) *ArrayType {
+	return &ArrayType{ArrayType: a}
+}
+
+func (a *ArrayType) ElementType() Expr {
 	return Expr{Expr: a.Elt}
 }
 
-func (a ArrayType) Len() Expr {
+func (a *ArrayType) Len() Expr {
 	return Expr{Expr: a.ArrayType.Len}
 }
 
@@ -27,7 +31,7 @@ func (a ArrayType) Len() Expr {
 //
 // Returns:
 // - The string representation of the ArrayType.
-func (a ArrayType) String() string {
+func (a *ArrayType) String() string {
 	if a.ArrayType.Len == nil {
 		return fmt.Sprintf("[]%s", a.ElementType())
 	}

@@ -7,45 +7,45 @@ func expr(pt ast.Expr) string {
 	case nil:
 		return ""
 	case *ast.ArrayType:
-		return ArrayType{ArrayType: x}.String()
+		return NewArrayType(x).String()
 	case *ast.BasicLit:
 		return x.Value
 	case *ast.BinaryExpr:
-		return BinaryExpr{BinaryExpr: x}.String()
+		return NewBinaryExpr(x).String()
 	case *ast.CallExpr:
-		return CallExpr{CallExpr: x}.String()
+		return NewCallExpr(x).String()
 	case *ast.ChanType:
-		return ChanType{ChanType: x}.String()
+		return NewChanType(x).String()
 	case *ast.CompositeLit:
-		return CompositeLit{CompositeLit: x}.String()
+		return NewCompositeLit(x).String()
 	case *ast.Ellipsis:
-		return Ellipsis{Ellipsis: x}.String()
+		return NewEllipsis(x).String()
 	case *ast.FuncLit:
-		return FuncLit{FuncLit: x}.String()
+		return NewFuncLit(x).String()
 	case *ast.FuncType:
-		return FuncType{FuncType: x}.String()
+		return NewFuncType(x, "", FnExpr).String()
 	case *ast.Ident:
-		return Ident{Ident: x}.String()
+		return NewIdent(x).String()
 	case *ast.IndexExpr:
-		return IndexExpr{IndexExpr: x}.String()
+		return NewIndexExpr(x).String()
 	case *ast.IndexListExpr:
-		return IndexListExpr{IndexListExpr: x}.String()
+		return NewIndexListExpr(x).String()
 	case *ast.InterfaceType:
 		return InterfaceType{InterfaceType: x}.String()
 	case *ast.KeyValueExpr:
-		return KeyValueExpr{KeyValueExpr: x}.String()
+		return NewKeyValueExpr(x).String()
 	case *ast.ParenExpr:
-		return ParenExpr{ParenExpr: x}.String()
+		return NewParenExpr(x).String()
 	case *ast.SelectorExpr:
-		return SelectorExpr{SelectorExpr: x}.String()
+		return NewSelectorExpr(x).String()
 	case *ast.SliceExpr:
-		return SliceExpr{SliceExpr: x}.String()
+		return NewSliceExpr(x).String()
 	case *ast.StarExpr:
-		return StarExpr{StarExpr: x}.String()
+		return NewStarExpr(x).String()
 	case *ast.TypeAssertExpr:
-		return TypeAssertExpr{TypeAssertExpr: x}.String()
+		return NewTypeAssertExpr(x).String()
 	case *ast.UnaryExpr:
-		return UnaryExpr{UnaryExpr: x}.String()
+		return NewUnaryExpr(x).String()
 	default:
 		return "unknown_expr"
 	}

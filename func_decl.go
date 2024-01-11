@@ -13,16 +13,20 @@ func (ft FuncDecl) Recv() ReceiverExpr {
 	return ReceiverExpr{FieldList: ft.FuncDecl.Recv}
 }
 
-func (ft FuncDecl) Name() Ident {
-	return Ident{Ident: ft.FuncDecl.Name}
+func (ft FuncDecl) Name() *Ident {
+	return &Ident{Ident: ft.FuncDecl.Name}
 }
 
-func (ft FuncDecl) Body() BlockStmt {
-	return BlockStmt{BlockStmt: ft.FuncDecl.Body}
+func (ft FuncDecl) Body() *BlockStmt {
+	return NewBlockStmt(ft.FuncDecl.Body)
 }
 
-func (ft FuncDecl) Type() FuncType {
-	return FuncType{FuncType: ft.FuncDecl.Type}
+func (ft FuncDecl) Type() *FuncType {
+	if ft.FuncDecl.Recv == nil {
+		return NewFuncType(ft.FuncDecl.Type, ft.Name().String(), FnDecl)
+	}
+	return NewFuncType(ft.FuncDecl.Type, ft.Name().String(), FnMethod)
+
 }
 
 // String returns a string representation of the FuncDecl.
@@ -33,7 +37,7 @@ func (ft FuncDecl) Type() FuncType {
 // "func Recv.Name() Type Body".
 func (ft FuncDecl) String() string {
 	if ft.FuncDecl.Recv == nil {
-		return fmt.Sprintf("func %s%s %s", ft.Name(), ft.Type(), ft.Body())
+		return fmt.Sprintf("func %s %s", ft.Type(), ft.Body())
 	}
-	return fmt.Sprintf("func %s %s%s %s", ft.Recv().String(), ft.Name(), ft.Type(), ft.Body())
+	return fmt.Sprintf("func %s %s %s", ft.Recv().String(), ft.Type(), ft.Body())
 }

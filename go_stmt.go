@@ -9,7 +9,11 @@ type GoStmt struct {
 	*ast.GoStmt
 }
 
-func (g GoStmt) Call() Expr {
+func NewGoStmt(g *ast.GoStmt) *GoStmt {
+	return &GoStmt{GoStmt: g}
+}
+
+func (g *GoStmt) Call() Expr {
 	return Expr{Expr: g.GoStmt.Call}
 }
 
@@ -17,6 +21,6 @@ func (g GoStmt) Call() Expr {
 //
 // It formats the GoStmt as "go <call>". The <call> is obtained by calling the
 // Call() method of the GoStmt. The resulting string is returned.
-func (g GoStmt) String() string {
+func (g *GoStmt) String() string {
 	return fmt.Sprintf("go %s", g.Call())
 }

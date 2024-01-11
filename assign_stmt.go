@@ -12,13 +12,17 @@ type AssignStmt struct {
 	*ast.AssignStmt
 }
 
-func (s AssignStmt) Lhs() []Expr {
+func NewAssignStmt(x *ast.AssignStmt) *AssignStmt {
+	return &AssignStmt{AssignStmt: x}
+}
+
+func (s *AssignStmt) Lhs() []Expr {
 	return lo.Map(s.AssignStmt.Lhs, func(x ast.Expr, _ int) Expr {
 		return Expr{Expr: x}
 	})
 }
 
-func (s AssignStmt) Rhs() []Expr {
+func (s *AssignStmt) Rhs() []Expr {
 	return lo.Map(s.AssignStmt.Rhs, func(x ast.Expr, _ int) Expr {
 		return Expr{Expr: x}
 	})
@@ -33,7 +37,7 @@ func (s AssignStmt) Rhs() []Expr {
 //
 // Returns:
 //   - string: The string representation of the AssignStmt.
-func (s AssignStmt) String() string {
+func (s *AssignStmt) String() string {
 	lhs := lo.Map(s.Lhs(), func(x Expr, _ int) string {
 		return x.String()
 	})

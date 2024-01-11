@@ -12,13 +12,17 @@ type ReturnStmt struct {
 	*ast.ReturnStmt
 }
 
-func (r ReturnStmt) Results() []Expr {
+func NewReturnStmt(b *ast.ReturnStmt) *ReturnStmt {
+	return &ReturnStmt{ReturnStmt: b}
+}
+
+func (r *ReturnStmt) Results() []Expr {
 	return lo.Map(r.ReturnStmt.Results, func(x ast.Expr, _ int) Expr {
 		return Expr{Expr: x}
 	})
 }
 
-func (r ReturnStmt) String() string {
+func (r *ReturnStmt) String() string {
 	exprs := lo.Map(r.Results(), func(x Expr, _ int) string {
 		return x.String()
 	})

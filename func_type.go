@@ -9,16 +9,20 @@ const (
 	FnDecl   = "fn-decl"   // func fnDecl(...) {}
 	FnMethod = "fn-method" // fnMethod(...)
 	FnType   = "fn-type"   // type fnType = func(...)
+	FnExpr   = "fn-expr"   // _, err := fnExpr(...)
 )
 
 type FuncType struct {
-	Name string
-	// TODO: add func type
+	Name   string
 	FnType string
 	*ast.FuncType
 }
 
-func (ft FuncType) ParamsNames() []string {
+func NewFuncType(f *ast.FuncType, name string, fnType string) *FuncType {
+	return &FuncType{FuncType: f, Name: name, FnType: fnType}
+}
+
+func (ft *FuncType) ParamsNames() []string {
 	var names []string
 	params := ft.ParamsList().Params()
 
@@ -28,7 +32,7 @@ func (ft FuncType) ParamsNames() []string {
 	return names
 }
 
-func (ft FuncType) ParamsTypes() []Expr {
+func (ft *FuncType) ParamsTypes() []Expr {
 	var types []Expr
 	params := ft.ParamsList().Params()
 
@@ -38,22 +42,22 @@ func (ft FuncType) ParamsTypes() []Expr {
 	return types
 }
 
-func (ft FuncType) ParamsList() *ParamsList {
+func (ft *FuncType) ParamsList() *ParamsList {
 	return &ParamsList{FieldList: ft.FuncType.Params}
 }
 
-func (ft FuncType) ResultsList() *ResultsList {
+func (ft *FuncType) ResultsList() *ResultsList {
 	return &ResultsList{FieldList: ft.FuncType.Results}
 }
 
-func (ft FuncType) String() string {
-	if ft.FnType == FnDecl {
-		return fmt.Sprintf("func %s %s", ft.Name, ft.ParamsList().String())
+func (ft *FuncType) String() string {
+	switch ft.FnType {
+	case FnDecl:
+		return fmt.Sprintf("%s%s%s", ft.Name, ft.ParamsList().String(), ft.ResultsList().String())
+	case FnMethod:
+		return fmt.Sprintf("%s%s%s", ft.Name, ft.ParamsList().String(), ft.ResultsList().String())
+	default:
+		f := fmt.Sprintf("type %s = func%s %s", ft.Name, ft.ParamsList().String(), ft.ResultsList().String())
+		return f
 	}
-
-	if ft.FnType == FnMethod {
-		return fmt.Sprintf("func %s %s", ft.Name, ft.ParamsList().String())
-	}
-
-	return ft.ParamsList().String() + ft.ResultsList().String()
 }

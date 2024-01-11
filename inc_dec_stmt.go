@@ -9,6 +9,10 @@ type IncDecStmt struct {
 	*ast.IncDecStmt
 }
 
-func (s IncDecStmt) String() string {
+func NewIncDecStmt(is *ast.IncDecStmt) *IncDecStmt {
+	return &IncDecStmt{IncDecStmt: is}
+}
+
+func (s *IncDecStmt) String() string {
 	return fmt.Sprintf("%s%s", s.X, s.Tok)
 }

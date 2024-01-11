@@ -9,19 +9,23 @@ type IfStmt struct {
 	*ast.IfStmt
 }
 
-func (ifs IfStmt) Init() Stmt {
+func NewIfStmt(is *ast.IfStmt) *IfStmt {
+	return &IfStmt{IfStmt: is}
+}
+
+func (ifs *IfStmt) Init() Stmt {
 	return Stmt{Stmt: ifs.IfStmt.Init}
 }
 
-func (ifs IfStmt) Cond() Expr {
+func (ifs *IfStmt) Cond() Expr {
 	return Expr{Expr: ifs.IfStmt.Cond}
 }
 
-func (ifs IfStmt) Body() BlockStmt {
-	return BlockStmt{BlockStmt: ifs.IfStmt.Body}
+func (ifs *IfStmt) Body() *BlockStmt {
+	return NewBlockStmt(ifs.IfStmt.Body)
 }
 
-func (ifs IfStmt) Else() Stmt {
+func (ifs *IfStmt) Else() Stmt {
 	return Stmt{Stmt: ifs.IfStmt.Else}
 }
 
@@ -33,6 +37,6 @@ func (ifs IfStmt) Else() Stmt {
 // is the string representation of the else block.
 //
 // The return type is a string.
-func (ifs IfStmt) String() string {
+func (ifs *IfStmt) String() string {
 	return fmt.Sprintf("if %s %s %s", ifs.Cond(), ifs.Body(), ifs.Else())
 }

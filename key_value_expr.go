@@ -9,11 +9,15 @@ type KeyValueExpr struct {
 	*ast.KeyValueExpr
 }
 
-func (k KeyValueExpr) Key() Expr {
+func NewKeyValueExpr(x *ast.KeyValueExpr) *KeyValueExpr {
+	return &KeyValueExpr{KeyValueExpr: x}
+}
+
+func (k *KeyValueExpr) Key() Expr {
 	return Expr{Expr: k.KeyValueExpr.Key}
 }
 
-func (k KeyValueExpr) Value() Expr {
+func (k *KeyValueExpr) Value() Expr {
 	return Expr{Expr: k.KeyValueExpr.Value}
 }
 
@@ -21,6 +25,6 @@ func (k KeyValueExpr) Value() Expr {
 //
 // It concatenates the key and value of the KeyValueExpr, separated by a colon.
 // The resulting string is returned.
-func (k KeyValueExpr) String() string {
+func (k *KeyValueExpr) String() string {
 	return fmt.Sprintf("%s: %s", k.Key(), k.Value())
 }

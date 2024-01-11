@@ -11,47 +11,47 @@ type Stmt struct {
 func (s Stmt) String() string {
 	switch x := s.Stmt.(type) {
 	case *ast.AssignStmt:
-		return AssignStmt{AssignStmt: x}.String()
+		return NewAssignStmt(x).String()
 	case *ast.BadStmt:
 		return "todo_bad_stmt"
 	case *ast.BlockStmt:
-		return BlockStmt{BlockStmt: x}.String()
+		return NewBlockStmt(x).String()
 	case *ast.BranchStmt:
-		return BranchStmt{BranchStmt: x}.String()
+		return NewBranchStmt(x).String()
 	case *ast.CaseClause:
-		return CaseClause{CaseClause: x}.String()
+		return NewCaseClause(x).String()
 	case *ast.CommClause:
-		return CommClause{CommClause: x}.String()
+		return NewCommClause(x).String()
 	case *ast.DeclStmt:
-		return DeclStmt{DeclStmt: x}.String()
+		return NewDeclStmt(x).String()
 	case *ast.DeferStmt:
-		return DeferStmt{DeferStmt: x}.String()
+		return NewDeferStmt(x).String()
 	case *ast.EmptyStmt:
 		return "todo_empty_stmt"
 	case *ast.ExprStmt:
-		return ExprStmt{ExprStmt: x}.String()
+		return NewExprStmt(x).String()
 	case *ast.ForStmt:
-		return ForStmt{ForStmt: x}.String()
+		return NewForStmt(x).String()
 	case *ast.GoStmt:
-		return GoStmt{GoStmt: x}.String()
+		return NewGoStmt(x).String()
 	case *ast.IfStmt:
-		return IfStmt{IfStmt: x}.String()
+		return NewIfStmt(x).String()
 	case *ast.IncDecStmt:
-		return IncDecStmt{IncDecStmt: x}.String()
+		return NewIncDecStmt(x).String()
 	case *ast.LabeledStmt:
-		return LabeledStmt{LabeledStmt: x}.String()
+		return NewLabeledStmt(x).String()
 	case *ast.RangeStmt:
-		return RangeStmt{RangeStmt: x}.String()
+		return NewRangeStmt(x).String()
 	case *ast.ReturnStmt:
-		return ReturnStmt{ReturnStmt: x}.String()
+		return NewReturnStmt(x).String()
 	case *ast.SelectStmt:
-		return SelectStmt{SelectStmt: x}.String()
+		return NewSelectStmt(x).String()
 	case *ast.SendStmt:
-		return SendStmt{SendStmt: x}.String()
+		return NewSendStmt(x).String()
 	case *ast.SwitchStmt:
-		return SwitchStmt{SwitchStmt: x}.String()
+		return NewSwitchStmt(x).String()
 	case *ast.TypeSwitchStmt:
-		return TypeSwitchStmt{TypeSwitchStmt: x}.String()
+		return NewTypeSwitchStmt(x).String()
 	default:
 		return "unknown_stmt"
 	}

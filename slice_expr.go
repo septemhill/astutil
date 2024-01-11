@@ -9,15 +9,19 @@ type SliceExpr struct {
 	*ast.SliceExpr
 }
 
-func (s SliceExpr) Low() Expr {
+func NewSliceExpr(x *ast.SliceExpr) *SliceExpr {
+	return &SliceExpr{SliceExpr: x}
+}
+
+func (s *SliceExpr) Low() Expr {
 	return Expr{Expr: s.SliceExpr.Low}
 }
 
-func (s SliceExpr) High() Expr {
+func (s *SliceExpr) High() Expr {
 	return Expr{Expr: s.SliceExpr.High}
 }
 
-func (s SliceExpr) Expr() Expr {
+func (s *SliceExpr) Expr() Expr {
 	return Expr{Expr: s.SliceExpr.X}
 }
 
@@ -31,7 +35,7 @@ func (s SliceExpr) Expr() Expr {
 // Returns:
 //
 //	string: The string representation of the SliceExpr.
-func (s SliceExpr) String() string {
+func (s *SliceExpr) String() string {
 	if !s.Slice3 {
 		return fmt.Sprintf("%s[%s:%s]", s.Expr(), s.Low(), s.High())
 	}

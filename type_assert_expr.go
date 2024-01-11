@@ -9,11 +9,15 @@ type TypeAssertExpr struct {
 	*ast.TypeAssertExpr
 }
 
-func (t TypeAssertExpr) Expr() Expr {
+func NewTypeAssertExpr(x *ast.TypeAssertExpr) TypeAssertExpr {
+	return TypeAssertExpr{TypeAssertExpr: x}
+}
+
+func (t *TypeAssertExpr) Expr() Expr {
 	return Expr{Expr: t.TypeAssertExpr.X}
 }
 
-func (t TypeAssertExpr) Type() Expr {
+func (t *TypeAssertExpr) Type() Expr {
 	return Expr{Expr: t.TypeAssertExpr.Type}
 }
 

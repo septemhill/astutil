@@ -15,7 +15,7 @@ func (t TypeSpec) String() string {
 	case *ast.StructType:
 		return StructType{Name: t.Name.Name, StructType: x}.String()
 	case *ast.FuncType:
-		return FuncType{Name: t.Name.Name, FuncType: x}.String()
+		return NewFuncType(x, t.Name.Name, FnType).String()
 	default:
 		return "unknown_type" + t.Name.Name
 	}

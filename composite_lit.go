@@ -12,18 +12,22 @@ type CompositeLit struct {
 	*ast.CompositeLit
 }
 
-func (c CompositeLit) ElementTypes() []Expr {
+func NewCompositeLit(c *ast.CompositeLit) *CompositeLit {
+	return &CompositeLit{CompositeLit: c}
+}
+
+func (c *CompositeLit) ElementTypes() []Expr {
 	return lo.Map(c.Elts, func(x ast.Expr, _ int) Expr {
 		return Expr{Expr: x}
 	})
 }
 
-func (c CompositeLit) Type() Expr {
+func (c *CompositeLit) Type() Expr {
 	return Expr{Expr: c.CompositeLit.Type}
 }
 
 // String returns a string representation of the CompositeLit.
-func (c CompositeLit) String() string {
+func (c *CompositeLit) String() string {
 	lits := lo.Map(c.ElementTypes(), func(x Expr, _ int) string {
 		return x.String()
 	})

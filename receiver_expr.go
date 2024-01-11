@@ -9,8 +9,8 @@ type ReceiverExpr struct {
 	*ast.FieldList
 }
 
-func (r ReceiverExpr) Name() Ident {
-	return Ident{Ident: r.List[0].Names[0]}
+func (r ReceiverExpr) Name() *Ident {
+	return &Ident{Ident: r.List[0].Names[0]}
 }
 
 func (r ReceiverExpr) Type() Expr {

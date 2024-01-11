@@ -6,10 +6,18 @@ type StarExpr struct {
 	*ast.StarExpr
 }
 
-func (s StarExpr) String() string {
-	switch x := s.X.(type) {
+func NewStarExpr(x *ast.StarExpr) *StarExpr {
+	return &StarExpr{StarExpr: x}
+}
+
+func (s *StarExpr) Expr() Expr {
+	return Expr{Expr: s.StarExpr.X}
+}
+
+func (s *StarExpr) String() string {
+	switch s.X.(type) {
 	case *ast.SelectorExpr:
-		return "*" + SelectorExpr{SelectorExpr: x}.String()
+		return "*" + s.Expr().String()
 	}
 	return "*" + s.X.(*ast.Ident).Name
 }

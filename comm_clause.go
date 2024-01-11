@@ -12,17 +12,21 @@ type CommClause struct {
 	*ast.CommClause
 }
 
-func (c CommClause) Comm() Stmt {
+func NewCommClause(c *ast.CommClause) *CommClause {
+	return &CommClause{CommClause: c}
+}
+
+func (c *CommClause) Comm() Stmt {
 	return Stmt{Stmt: c.CommClause.Comm}
 }
 
-func (c CommClause) Body() []Stmt {
+func (c *CommClause) Body() []Stmt {
 	return lo.Map(c.CommClause.Body, func(item ast.Stmt, _ int) Stmt {
 		return Stmt{Stmt: item}
 	})
 }
 
-func (c CommClause) String() string {
+func (c *CommClause) String() string {
 	bodies := lo.Map(c.Body(), func(x Stmt, _ int) string {
 		return x.String()
 	})

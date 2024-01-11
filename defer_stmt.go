@@ -9,7 +9,11 @@ type DeferStmt struct {
 	*ast.DeferStmt
 }
 
-func (ds DeferStmt) Call() Expr {
+func NewDeferStmt(ds *ast.DeferStmt) *DeferStmt {
+	return &DeferStmt{DeferStmt: ds}
+}
+
+func (ds *DeferStmt) Call() Expr {
 	return Expr{Expr: ds.DeferStmt.Call}
 }
 
@@ -18,6 +22,6 @@ func (ds DeferStmt) Call() Expr {
 // It formats the DeferStmt object as "defer [Call result]", where [Call result] is the
 // string representation of the result of the Call method.
 // It then returns the formatted string.
-func (ds DeferStmt) String() string {
+func (ds *DeferStmt) String() string {
 	return fmt.Sprintf("defer %v", ds.Call())
 }

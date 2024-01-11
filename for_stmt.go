@@ -10,20 +10,24 @@ type ForStmt struct {
 	*ast.ForStmt
 }
 
-func (fs ForStmt) Init() Stmt {
+func NewForStmt(fs *ast.ForStmt) *ForStmt {
+	return &ForStmt{ForStmt: fs}
+}
+
+func (fs *ForStmt) Init() Stmt {
 	return Stmt{Stmt: fs.ForStmt.Init}
 }
 
-func (fs ForStmt) Cond() Expr {
+func (fs *ForStmt) Cond() Expr {
 	return Expr{Expr: fs.ForStmt.Cond}
 }
 
-func (fs ForStmt) Post() Stmt {
+func (fs *ForStmt) Post() Stmt {
 	return Stmt{Stmt: fs.ForStmt.Post}
 }
 
-func (fs ForStmt) Body() BlockStmt {
-	return BlockStmt{BlockStmt: fs.ForStmt.Body}
+func (fs *ForStmt) Body() *BlockStmt {
+	return NewBlockStmt(fs.ForStmt.Body)
 }
 
 // String returns a string representation of the ForStmt.
@@ -34,7 +38,7 @@ func (fs ForStmt) Body() BlockStmt {
 //
 // Returns:
 //   - The string representation of the ForStmt.
-func (fs ForStmt) String() string {
+func (fs *ForStmt) String() string {
 	forCond := strings.Join([]string{
 		fs.Init().String(),
 		fs.Cond().String(),

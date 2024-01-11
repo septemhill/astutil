@@ -9,14 +9,18 @@ type UnaryExpr struct {
 	*ast.UnaryExpr
 }
 
-func (v UnaryExpr) Expr() Expr {
+func NewUnaryExpr(x *ast.UnaryExpr) *UnaryExpr {
+	return &UnaryExpr{UnaryExpr: x}
+}
+
+func (v *UnaryExpr) Expr() Expr {
 	return Expr{Expr: v.UnaryExpr.X}
 }
 
-func (v UnaryExpr) Operator() string {
+func (v *UnaryExpr) Operator() string {
 	return v.UnaryExpr.Op.String()
 }
 
-func (u UnaryExpr) String() string {
+func (u *UnaryExpr) String() string {
 	return fmt.Sprintf("%s%s", u.Op.String(), u.Expr())
 }
