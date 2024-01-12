@@ -25,9 +25,7 @@ func (c *CommClause) Comm() Stmt {
 }
 
 func (c *CommClause) Body() []Stmt {
-	return lo.Map(c.CommClause.Body, func(item ast.Stmt, _ int) Stmt {
-		return NewStmt(item)
-	})
+	return toStmt(c.CommClause.Body)
 }
 
 func (c *CommClause) String() string {

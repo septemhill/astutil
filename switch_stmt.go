@@ -25,9 +25,7 @@ func (s *SwitchStmt) Tag() Expr {
 }
 
 func (s *SwitchStmt) Body() []Stmt {
-	return lo.Map(s.SwitchStmt.Body.List, func(item ast.Stmt, _ int) Stmt {
-		return NewStmt(item)
-	})
+	return toStmt(s.SwitchStmt.Body.List)
 }
 
 func (s *SwitchStmt) String() string {

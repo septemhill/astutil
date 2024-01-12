@@ -25,9 +25,7 @@ func (c *CallExpr) Func() Expr {
 }
 
 func (c *CallExpr) Args() []Expr {
-	return lo.Map(c.CallExpr.Args, func(x ast.Expr, _ int) Expr {
-		return NewExpr(x)
-	})
+	return toExprs(c.CallExpr.Args)
 }
 
 // String returns a string representation of the CallExpr.

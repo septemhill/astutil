@@ -1,6 +1,10 @@
 package astutil
 
-import "go/ast"
+import (
+	"go/ast"
+
+	"github.com/samber/lo"
+)
 
 type StmtType int
 
@@ -86,6 +90,12 @@ type Stmt interface {
 
 	String() string
 	StmtType() StmtType
+}
+
+func toStmt(stmts []ast.Stmt) []Stmt {
+	return lo.Map(stmts, func(stmt ast.Stmt, _ int) Stmt {
+		return NewStmt(stmt)
+	})
 }
 
 func NewStmt(stmt ast.Stmt) Stmt {

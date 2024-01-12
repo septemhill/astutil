@@ -61,6 +61,10 @@ func (f *File) ImportSpecs() []*ImportSpec {
 	})
 }
 
+// func (f *File) Decls() []Decl {
+// 	return f.Decls
+// }
+
 func (f *File) String() string {
 	return f.File.Name.Name
 }

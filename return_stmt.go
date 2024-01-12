@@ -21,9 +21,7 @@ func (r *ReturnStmt) StmtType() StmtType {
 }
 
 func (r *ReturnStmt) Results() []Expr {
-	return lo.Map(r.ReturnStmt.Results, func(x ast.Expr, _ int) Expr {
-		return NewExpr(x)
-	})
+	return toExprs(r.ReturnStmt.Results)
 }
 
 func (r *ReturnStmt) String() string {

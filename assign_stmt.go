@@ -21,15 +21,11 @@ func (s *AssignStmt) StmtType() StmtType {
 }
 
 func (s *AssignStmt) Lhs() []Expr {
-	return lo.Map(s.AssignStmt.Lhs, func(x ast.Expr, _ int) Expr {
-		return NewExpr(x)
-	})
+	return toExprs(s.AssignStmt.Lhs)
 }
 
 func (s *AssignStmt) Rhs() []Expr {
-	return lo.Map(s.AssignStmt.Rhs, func(x ast.Expr, _ int) Expr {
-		return NewExpr(x)
-	})
+	return toExprs(s.AssignStmt.Rhs)
 }
 
 // String returns a string representation of the AssignStmt.

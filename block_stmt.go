@@ -23,9 +23,7 @@ func (b *BlockStmt) StmtType() StmtType {
 }
 
 func (b *BlockStmt) Stmts() []Stmt {
-	return lo.Map(b.BlockStmt.List, func(x ast.Stmt, _ int) Stmt {
-		return NewStmt(x)
-	})
+	return toStmt(b.BlockStmt.List)
 }
 
 func (b *BlockStmt) PrependStmt(st string) error {

@@ -21,9 +21,7 @@ func (c *CompositeLit) ExprType() ExprType {
 }
 
 func (c *CompositeLit) ElementTypes() []Expr {
-	return lo.Map(c.Elts, func(x ast.Expr, _ int) Expr {
-		return NewExpr(x)
-	})
+	return toExprs(c.Elts)
 }
 
 func (c *CompositeLit) Type() Expr {

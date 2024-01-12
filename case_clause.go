@@ -21,15 +21,11 @@ func (cc *CaseClause) StmtType() StmtType {
 }
 
 func (cc *CaseClause) List() []Expr {
-	return lo.Map(cc.CaseClause.List, func(x ast.Expr, _ int) Expr {
-		return NewExpr(x)
-	})
+	return toExprs(cc.CaseClause.List)
 }
 
 func (cc *CaseClause) Body() []Stmt {
-	return lo.Map(cc.CaseClause.Body, func(item ast.Stmt, _ int) Stmt {
-		return NewStmt(item)
-	})
+	return toStmt(cc.CaseClause.Body)
 }
 
 // String returns a string representation of the CaseClause.
