@@ -13,6 +13,10 @@ func NewFuncDecl(funcDecl *ast.FuncDecl) *FuncDecl {
 	return &FuncDecl{FuncDecl: funcDecl}
 }
 
+func (ft *FuncDecl) DeclType() DeclType {
+	return FuncDeclType
+}
+
 func (ft *FuncDecl) Recv() ReceiverExpr {
 	return ReceiverExpr{FieldList: ft.FuncDecl.Recv}
 }

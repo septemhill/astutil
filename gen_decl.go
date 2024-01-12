@@ -15,6 +15,10 @@ func NewGenDecl(genDecl *ast.GenDecl) *GenDecl {
 	return &GenDecl{GenDecl: genDecl}
 }
 
+func (g *GenDecl) DeclType() DeclType {
+	return GenDeclType
+}
+
 func (g *GenDecl) Specs() []*Spec {
 	return lo.Map(g.GenDecl.Specs, func(s ast.Spec, _ int) *Spec {
 		return NewSpec(s)

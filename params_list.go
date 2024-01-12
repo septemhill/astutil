@@ -17,11 +17,11 @@ func (pl *ParamsList) Len() int {
 }
 
 func (pl *ParamsList) Params() []*Param {
-	return lo.Map(pl.List, func(x *ast.Field, _ int) *Param {
+	return lo.Map(pl.List, func(x *ast.Field, i int) *Param {
 		if x.Names != nil {
 			return &Param{Name: x.Names[0].Name, Field: x}
 		}
-		return &Param{Name: fmt.Sprintf("_a%d", len(pl.List)), Field: x}
+		return &Param{Name: fmt.Sprintf("_a%d", i), Field: x}
 	})
 }
 
