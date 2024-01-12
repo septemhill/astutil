@@ -15,7 +15,7 @@ func NewTypeSpec(typeSpec *ast.TypeSpec) *TypeSpec {
 func (t *TypeSpec) String() string {
 	switch x := t.Type.(type) {
 	case *ast.InterfaceType:
-		return InterfaceType{Name: t.Name.Name, InterfaceType: x}.String()
+		return NewInterfaceType(t.Name.Name, x).String()
 	case *ast.StructType:
 		return NewStructType(t.Name.Name, x).String()
 	case *ast.FuncType:

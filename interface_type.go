@@ -13,24 +13,22 @@ type InterfaceType struct {
 	*ast.InterfaceType
 }
 
-func (it InterfaceType) ExprType() ExprType {
+func NewInterfaceType(name string, interfaceType *ast.InterfaceType) *InterfaceType {
+	return &InterfaceType{Name: name, InterfaceType: interfaceType}
+}
+
+func (it *InterfaceType) ExprType() ExprType {
 	return InterfaceExprType
 }
 
-func (it InterfaceType) Methods() []MethodExpr {
-	var methods []MethodExpr
-
-	for i := 0; i < len(it.InterfaceType.Methods.List); i++ {
-		methods = append(methods, MethodExpr{
-			Name:     it.InterfaceType.Methods.List[i].Names[0].Name,
-			FuncType: it.InterfaceType.Methods.List[i].Type.(*ast.FuncType)})
-	}
-
-	return methods
+func (it *InterfaceType) Methods() []*FuncType {
+	return lo.Map(it.InterfaceType.Methods.List, func(x *ast.Field, _ int) *FuncType {
+		return NewFuncType(x.Type.(*ast.FuncType), x.Names[0].Name, FnMethod)
+	})
 }
 
-func (it InterfaceType) String() string {
-	methods := lo.Map(it.Methods(), func(x MethodExpr, _ int) string {
+func (it *InterfaceType) String() string {
+	methods := lo.Map(it.Methods(), func(x *FuncType, _ int) string {
 		return x.String()
 	})
 

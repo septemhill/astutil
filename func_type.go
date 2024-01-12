@@ -55,7 +55,6 @@ func (ft *FuncType) String() string {
 	case FnMethod:
 		return fmt.Sprintf("%s%s%s", ft.Name, ft.ParamsList().String(), ft.ResultsList().String())
 	default:
-		f := fmt.Sprintf("type %s = func%s %s", ft.Name, ft.ParamsList().String(), ft.ResultsList().String())
-		return f
+		return fmt.Sprintf("type %s = func%s %s", ft.Name, ft.ParamsList().String(), ft.ResultsList().String())
 	}
 }

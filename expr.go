@@ -118,7 +118,7 @@ func NewExpr(expr ast.Expr) Expr {
 	case *ast.IndexListExpr:
 		return NewIndexListExpr(x)
 	case *ast.InterfaceType:
-		return InterfaceType{InterfaceType: x}
+		return NewInterfaceType("", x)
 	case *ast.KeyValueExpr:
 		return NewKeyValueExpr(x)
 	case *ast.ParenExpr:
