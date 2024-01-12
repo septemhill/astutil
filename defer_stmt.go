@@ -13,8 +13,8 @@ func NewDeferStmt(ds *ast.DeferStmt) *DeferStmt {
 	return &DeferStmt{DeferStmt: ds}
 }
 
-func (ds *DeferStmt) Call() Expr {
-	return Expr{Expr: ds.DeferStmt.Call}
+func (ds *DeferStmt) Call() *Expr {
+	return NewExpr(ds.DeferStmt.Call)
 }
 
 // String returns a string representation of the DeferStmt object.

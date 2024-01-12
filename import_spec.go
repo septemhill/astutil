@@ -1,11 +1,25 @@
 package astutil
 
-import "go/ast"
+import (
+	"fmt"
+	"go/ast"
+)
 
 type ImportSpec struct {
 	*ast.ImportSpec
 }
 
-func (imp ImportSpec) String() string {
-	return imp.ImportSpec.Path.Value
+func NewImportSpec(importSpec *ast.ImportSpec) *ImportSpec {
+	return &ImportSpec{ImportSpec: importSpec}
+}
+
+func (imp *ImportSpec) Name() *Ident {
+	return NewIdent(imp.ImportSpec.Name)
+}
+
+func (imp *ImportSpec) String() string {
+	if imp.ImportSpec.Name != nil {
+		return fmt.Sprintf("import %s %s", imp.Name(), imp.ImportSpec.Path.Value)
+	}
+	return "import " + imp.ImportSpec.Path.Value
 }

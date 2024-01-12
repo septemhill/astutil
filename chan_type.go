@@ -13,8 +13,8 @@ func NewChanType(c *ast.ChanType) *ChanType {
 	return &ChanType{ChanType: c}
 }
 
-func (c *ChanType) Value() Expr {
-	return Expr{Expr: c.ChanType.Value}
+func (c *ChanType) Value() *Expr {
+	return NewExpr(c.ChanType.Value)
 }
 
 func (c *ChanType) Type() string {

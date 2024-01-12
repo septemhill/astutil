@@ -2,8 +2,16 @@ package astutil
 
 import "go/ast"
 
-func expr(pt ast.Expr) string {
-	switch x := pt.(type) {
+type Expr struct {
+	ast.Expr
+}
+
+func NewExpr(expr ast.Expr) *Expr {
+	return &Expr{Expr: expr}
+}
+
+func (s Expr) String() string {
+	switch x := s.Expr.(type) {
 	case nil:
 		return ""
 	case *ast.ArrayType:
@@ -49,12 +57,4 @@ func expr(pt ast.Expr) string {
 	default:
 		return "unknown_expr"
 	}
-}
-
-type Expr struct {
-	ast.Expr
-}
-
-func (s Expr) String() string {
-	return expr(s.Expr)
 }

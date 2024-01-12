@@ -2,6 +2,8 @@ package astutil
 
 import (
 	"go/ast"
+
+	"github.com/samber/lo"
 )
 
 type MethodExpr struct {
@@ -10,23 +12,15 @@ type MethodExpr struct {
 }
 
 func (ft MethodExpr) ParamsNames() []string {
-	var names []string
-	params := ft.ParamsList().Params()
-
-	for i := 0; i < len(params); i++ {
-		names = append(names, params[i].Name)
-	}
-	return names
+	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) string {
+		return x.Name
+	})
 }
 
-func (ft MethodExpr) ParamsTypes() []Expr {
-	var types []Expr
-	params := ft.ParamsList().Params()
-
-	for i := 0; i < len(params); i++ {
-		types = append(types, params[i].Type())
-	}
-	return types
+func (ft MethodExpr) ParamsTypes() []*Expr {
+	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) *Expr {
+		return x.Type()
+	})
 }
 
 func (ft MethodExpr) ParamsList() *ParamsList {

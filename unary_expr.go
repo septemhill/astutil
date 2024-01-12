@@ -13,8 +13,8 @@ func NewUnaryExpr(x *ast.UnaryExpr) *UnaryExpr {
 	return &UnaryExpr{UnaryExpr: x}
 }
 
-func (v *UnaryExpr) Expr() Expr {
-	return Expr{Expr: v.UnaryExpr.X}
+func (v *UnaryExpr) Expr() *Expr {
+	return NewExpr(v.UnaryExpr.X)
 }
 
 func (v *UnaryExpr) Operator() string {

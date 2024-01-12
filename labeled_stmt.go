@@ -10,8 +10,8 @@ func NewLabeledStmt(ls *ast.LabeledStmt) *LabeledStmt {
 	return &LabeledStmt{LabeledStmt: ls}
 }
 
-func (l *LabeledStmt) Stmt() Stmt {
-	return Stmt{Stmt: l.LabeledStmt.Stmt}
+func (l *LabeledStmt) Stmt() *Stmt {
+	return NewStmt(l.LabeledStmt.Stmt)
 }
 
 func (l *LabeledStmt) String() string {

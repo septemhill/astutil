@@ -13,12 +13,12 @@ func NewTypeSwitchStmt(b *ast.TypeSwitchStmt) *TypeSwitchStmt {
 	return &TypeSwitchStmt{TypeSwitchStmt: b}
 }
 
-func (t *TypeSwitchStmt) Init() Stmt {
-	return Stmt{Stmt: t.TypeSwitchStmt.Init}
+func (t *TypeSwitchStmt) Init() *Stmt {
+	return NewStmt(t.TypeSwitchStmt.Init)
 }
 
-func (t *TypeSwitchStmt) Assign() Stmt {
-	return Stmt{Stmt: t.TypeSwitchStmt.Assign}
+func (t *TypeSwitchStmt) Assign() *Stmt {
+	return NewStmt(t.TypeSwitchStmt.Assign)
 }
 
 func (t *TypeSwitchStmt) Body() *BlockStmt {

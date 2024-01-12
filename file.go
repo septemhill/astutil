@@ -11,51 +11,49 @@ type File struct {
 }
 
 func (f File) specs() []ast.Spec {
-	decls := lo.Filter(f.Decls, func(item ast.Decl, _ int) bool {
-		_, ok := item.(*ast.GenDecl)
-		return ok
-	})
-
-	specsColl := lo.FilterMap(decls, func(decl ast.Decl, _ int) ([]ast.Spec, bool) {
-		genDecl := decl.(*ast.GenDecl)
-		return genDecl.Specs, true
+	specsColl := lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) ([]ast.Spec, bool) {
+		genDecl, ok := decl.(*ast.GenDecl)
+		if ok {
+			return genDecl.Specs, true
+		}
+		return nil, false
 	})
 
 	return lo.Flatten(specsColl)
 }
 
-func (f File) GenDecls() []GenDecl {
-	return lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) (GenDecl, bool) {
+func (f File) GenDecls() []*GenDecl {
+	return lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) (*GenDecl, bool) {
 		genDecl, ok := decl.(*ast.GenDecl)
-		return GenDecl{GenDecl: genDecl}, ok
+		return NewGenDecl(genDecl), ok
 	})
 }
 
-func (f File) FuncDecls() []FuncDecl {
-	return lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) (FuncDecl, bool) {
+func (f File) FuncDecls() []*FuncDecl {
+	return lo.FilterMap(f.Decls, func(decl ast.Decl, _ int) (*FuncDecl, bool) {
 		funcDecl, ok := decl.(*ast.FuncDecl)
-		return FuncDecl{FuncDecl: funcDecl}, ok
+		return NewFuncDecl(funcDecl), ok
 	})
 }
 
-func (f File) ValueSpecs() []ValueSpec {
-	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (ValueSpec, bool) {
+func (f File) ValueSpecs() []*ValueSpec {
+	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (*ValueSpec, bool) {
 		valueSpec, ok := spec.(*ast.ValueSpec)
-		return ValueSpec{ValueSpec: valueSpec}, ok
+		return NewValueSpec(valueSpec), ok
 	})
 }
 
-func (f File) TypeSpecs() []TypeSpec {
-	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (TypeSpec, bool) {
+func (f File) TypeSpecs() []*TypeSpec {
+	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (*TypeSpec, bool) {
 		typeSpec, ok := spec.(*ast.TypeSpec)
-		return TypeSpec{TypeSpec: typeSpec}, ok
+		return NewTypeSpec(typeSpec), ok
 	})
 }
 
-func (f File) ImportSpecs() []ImportSpec {
-	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (ImportSpec, bool) {
+func (f File) ImportSpecs() []*ImportSpec {
+	return lo.FilterMap(f.specs(), func(spec ast.Spec, _ int) (*ImportSpec, bool) {
 		importSpec, ok := spec.(*ast.ImportSpec)
-		return ImportSpec{ImportSpec: importSpec}, ok
+		return NewImportSpec(importSpec), ok
 	})
 }
 

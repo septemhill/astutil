@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"go/ast"
 	"strings"
+
+	"github.com/samber/lo"
 )
 
 type ParamsList struct {
@@ -15,27 +17,18 @@ func (pl *ParamsList) Len() int {
 }
 
 func (pl *ParamsList) Params() []*Param {
-	var params []*Param
-
-	for i := 0; i < len(pl.List); i++ {
-		if pl.List[i].Names != nil {
-			params = append(params, &Param{Name: pl.List[i].Names[0].Name, Field: pl.List[i]})
-		} else {
-			params = append(params, &Param{Name: fmt.Sprintf("_a%d", i), Field: pl.List[i]})
+	return lo.Map(pl.List, func(x *ast.Field, _ int) *Param {
+		if x.Names != nil {
+			return &Param{Name: x.Names[0].Name, Field: x}
 		}
-	}
-
-	return params
+		return &Param{Name: fmt.Sprintf("_a%d", len(pl.List)), Field: x}
+	})
 }
 
 func (pl *ParamsList) String() string {
-	var params []string
-
-	pas := pl.Params()
-
-	for i := 0; i < len(pas); i++ {
-		params = append(params, pas[i].String())
-	}
+	params := lo.Map(pl.Params(), func(x *Param, _ int) string {
+		return x.String()
+	})
 
 	return "(" + strings.Join(params, ", ") + ") "
 }

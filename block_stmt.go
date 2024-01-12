@@ -1,10 +1,13 @@
 package astutil
 
 import (
+	"errors"
 	"go/ast"
+	"slices"
 	"strings"
 
 	"github.com/samber/lo"
+	"github.com/shurcooL/go/parserutil"
 )
 
 type BlockStmt struct {
@@ -15,27 +18,45 @@ func NewBlockStmt(block *ast.BlockStmt) *BlockStmt {
 	return &BlockStmt{BlockStmt: block}
 }
 
-func (b *BlockStmt) Stmts() []Stmt {
-	return lo.Map(b.BlockStmt.List, func(x ast.Stmt, _ int) Stmt {
-		return Stmt{Stmt: x}
+func (b *BlockStmt) Stmts() []*Stmt {
+	return lo.Map(b.BlockStmt.List, func(x ast.Stmt, _ int) *Stmt {
+		return NewStmt(x)
 	})
 }
 
-// TODO: make it work
-// func (b *BlockStmt) InsertStmt(i int) error {
-// 	stmt, err := ParseStmt(`
-// 		type Base struct{
-// 			Name string
-// 			Age string
-// 		}
-// 	`)
-// 	if err != nil {
-// 		return err
-// 	}
+func (b *BlockStmt) PrependStmt(st string) error {
+	stmt, err := parserutil.ParseStmt(st)
+	if err != nil {
+		return err
+	}
 
-// 	b.BlockStmt.List = append(b.BlockStmt.List, stmt)
-// 	return nil
-// }
+	b.List = append([]ast.Stmt{stmt}, b.List...)
+	return nil
+}
+
+func (b *BlockStmt) InsertStmt(i int, st string) error {
+	if i < 0 || i > len(b.List) {
+		return errors.New("index out of range")
+	}
+
+	stmt, err := parserutil.ParseStmt(st)
+	if err != nil {
+		return err
+	}
+
+	b.List = slices.Insert(b.List, i, stmt)
+	return nil
+}
+
+func (b *BlockStmt) AppendStmt(st string) error {
+	stmt, err := parserutil.ParseStmt(st)
+	if err != nil {
+		return err
+	}
+
+	b.List = append(b.List, stmt)
+	return nil
+}
 
 // String returns a string representation of the BlockStmt.
 //
@@ -46,7 +67,7 @@ func (b *BlockStmt) Stmts() []Stmt {
 // Returns:
 // - The string representation of the BlockStmt.
 func (b *BlockStmt) String() string {
-	stmts := lo.Map(b.Stmts(), func(x Stmt, _ int) string {
+	stmts := lo.Map(b.Stmts(), func(x *Stmt, _ int) string {
 		return x.String()
 	})
 

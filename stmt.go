@@ -8,7 +8,35 @@ type Stmt struct {
 	ast.Stmt
 }
 
-func (s Stmt) String() string {
+// type StmtType int
+
+// const (
+// 	AssignStmtType StmtType = iota
+// 	BlockStmtType
+// 	BranchStmtType
+// 	CaseClauseType
+// 	CommClauseType
+// 	DeclStmtType
+// 	DeferStmtType
+// 	EmptyStmtType
+// 	ExprStmtType
+// 	ForStmtType
+// 	GoStmtType
+// 	IfStmtType
+// 	LabeledStmtType
+// 	ReturnStmtType
+// 	SendStmtType
+// 	SelectStmtType
+// 	SwitchStmtType
+// 	TypeAssertStmtType
+// 	TypesSwitchStmtType
+// )
+
+func NewStmt(x ast.Stmt) *Stmt {
+	return &Stmt{Stmt: x}
+}
+
+func (s *Stmt) String() string {
 	switch x := s.Stmt.(type) {
 	case *ast.AssignStmt:
 		return NewAssignStmt(x).String()

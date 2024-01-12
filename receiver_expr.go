@@ -13,8 +13,8 @@ func (r ReceiverExpr) Name() *Ident {
 	return &Ident{Ident: r.List[0].Names[0]}
 }
 
-func (r ReceiverExpr) Type() Expr {
-	return Expr{Expr: r.List[0].Type}
+func (r ReceiverExpr) Type() *Expr {
+	return NewExpr(r.List[0].Type)
 }
 
 // String returns a string representation of the ReceiverExpr.

@@ -13,8 +13,8 @@ func (fd FieldDecl) Name() string {
 	return fd.Field.Names[0].Name
 }
 
-func (fd FieldDecl) Type() Expr {
-	return Expr{Expr: fd.Field.Type}
+func (fd FieldDecl) Type() *Expr {
+	return NewExpr(fd.Field.Type)
 }
 
 func (fd FieldDecl) String() string {

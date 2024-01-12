@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"go/ast"
 	"strings"
+
+	"github.com/samber/lo"
 )
 
 type InterfaceType struct {
@@ -24,12 +26,9 @@ func (it InterfaceType) Methods() []MethodExpr {
 }
 
 func (it InterfaceType) String() string {
-	var methods []string
-
-	ms := it.Methods()
-	for i := 0; i < len(ms); i++ {
-		methods = append(methods, ms[i].String())
-	}
+	methods := lo.Map(it.Methods(), func(x MethodExpr, _ int) string {
+		return x.String()
+	})
 
 	return fmt.Sprintf("type %s interface {\n\t%s\n}", it.Name, strings.Join(methods, "\n\t"))
 }

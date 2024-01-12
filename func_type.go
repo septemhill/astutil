@@ -3,6 +3,8 @@ package astutil
 import (
 	"fmt"
 	"go/ast"
+
+	"github.com/samber/lo"
 )
 
 const (
@@ -23,23 +25,15 @@ func NewFuncType(f *ast.FuncType, name string, fnType string) *FuncType {
 }
 
 func (ft *FuncType) ParamsNames() []string {
-	var names []string
-	params := ft.ParamsList().Params()
-
-	for i := 0; i < len(params); i++ {
-		names = append(names, params[i].Name)
-	}
-	return names
+	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) string {
+		return x.Name
+	})
 }
 
-func (ft *FuncType) ParamsTypes() []Expr {
-	var types []Expr
-	params := ft.ParamsList().Params()
-
-	for i := 0; i < len(params); i++ {
-		types = append(types, params[i].Type())
-	}
-	return types
+func (ft *FuncType) ParamsTypes() []*Expr {
+	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) *Expr {
+		return x.Type()
+	})
 }
 
 func (ft *FuncType) ParamsList() *ParamsList {

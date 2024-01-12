@@ -13,7 +13,11 @@ type StructType struct {
 	*ast.StructType
 }
 
-func (st StructType) Fields() []FieldDecl {
+func NewStructType(name string, structType *ast.StructType) *StructType {
+	return &StructType{Name: name, StructType: structType}
+}
+
+func (st *StructType) Fields() []FieldDecl {
 	var fields []FieldDecl
 	for _, field := range st.StructType.Fields.List {
 		fields = append(fields, FieldDecl{Field: field})
@@ -21,7 +25,7 @@ func (st StructType) Fields() []FieldDecl {
 	return fields
 }
 
-func (st StructType) String() string {
+func (st *StructType) String() string {
 	if len(st.StructType.Fields.List) == 0 {
 		return fmt.Sprintf("type %s struct {}", st.Name)
 	}

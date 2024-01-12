@@ -13,12 +13,12 @@ func NewTypeAssertExpr(x *ast.TypeAssertExpr) TypeAssertExpr {
 	return TypeAssertExpr{TypeAssertExpr: x}
 }
 
-func (t *TypeAssertExpr) Expr() Expr {
-	return Expr{Expr: t.TypeAssertExpr.X}
+func (t *TypeAssertExpr) Expr() *Expr {
+	return NewExpr(t.TypeAssertExpr.X)
 }
 
-func (t *TypeAssertExpr) Type() Expr {
-	return Expr{Expr: t.TypeAssertExpr.Type}
+func (t *TypeAssertExpr) Type() *Expr {
+	return NewExpr(t.TypeAssertExpr.Type)
 }
 
 // String returns a string representation of the TypeAssertExpr.

@@ -13,9 +13,9 @@ func NewDeclStmt(decl *ast.DeclStmt) *DeclStmt {
 func (decl *DeclStmt) String() string {
 	switch x := decl.Decl.(type) {
 	case *ast.FuncDecl:
-		return FuncDecl{FuncDecl: x}.String()
+		return NewFuncDecl(x).String()
 	case *ast.GenDecl:
-		return GenDecl{GenDecl: x}.String()
+		return NewGenDecl(x).String()
 	case *ast.BadDecl:
 		return "todo_bad_decl"
 	default:

@@ -13,12 +13,12 @@ func NewBinaryExpr(b *ast.BinaryExpr) *BinaryExpr {
 	return &BinaryExpr{BinaryExpr: b}
 }
 
-func (be *BinaryExpr) Lhs() Expr {
-	return Expr{Expr: be.BinaryExpr.X}
+func (be *BinaryExpr) Lhs() *Expr {
+	return NewExpr(be.BinaryExpr.X)
 }
 
-func (be *BinaryExpr) Rhs() Expr {
-	return Expr{Expr: be.BinaryExpr.Y}
+func (be *BinaryExpr) Rhs() *Expr {
+	return NewExpr(be.BinaryExpr.Y)
 }
 
 func (be *BinaryExpr) Operator() string {

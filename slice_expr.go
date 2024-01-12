@@ -13,16 +13,16 @@ func NewSliceExpr(x *ast.SliceExpr) *SliceExpr {
 	return &SliceExpr{SliceExpr: x}
 }
 
-func (s *SliceExpr) Low() Expr {
-	return Expr{Expr: s.SliceExpr.Low}
+func (s *SliceExpr) Low() *Expr {
+	return NewExpr(s.SliceExpr.Low)
 }
 
-func (s *SliceExpr) High() Expr {
-	return Expr{Expr: s.SliceExpr.High}
+func (s *SliceExpr) High() *Expr {
+	return NewExpr(s.SliceExpr.High)
 }
 
-func (s *SliceExpr) Expr() Expr {
-	return Expr{Expr: s.SliceExpr.X}
+func (s *SliceExpr) Expr() *Expr {
+	return NewExpr(s.SliceExpr.X)
 }
 
 // String returns a string representation of the SliceExpr.

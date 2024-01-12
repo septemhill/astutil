@@ -13,12 +13,12 @@ func NewArrayType(a *ast.ArrayType) *ArrayType {
 	return &ArrayType{ArrayType: a}
 }
 
-func (a *ArrayType) ElementType() Expr {
-	return Expr{Expr: a.Elt}
+func (a *ArrayType) ElementType() *Expr {
+	return NewExpr(a.Elt)
 }
 
-func (a *ArrayType) Len() Expr {
-	return Expr{Expr: a.ArrayType.Len}
+func (a *ArrayType) Len() *Expr {
+	return NewExpr(a.ArrayType.Len)
 }
 
 // String returns a string representation of the ArrayType.

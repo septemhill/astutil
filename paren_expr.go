@@ -13,8 +13,8 @@ func NewParenExpr(x *ast.ParenExpr) *ParenExpr {
 	return &ParenExpr{ParenExpr: x}
 }
 
-func (p *ParenExpr) Expr() Expr {
-	return Expr{Expr: p.ParenExpr.X}
+func (p *ParenExpr) Expr() *Expr {
+	return NewExpr(p.ParenExpr.X)
 }
 
 func (p *ParenExpr) String() string {

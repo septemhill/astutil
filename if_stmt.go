@@ -13,20 +13,20 @@ func NewIfStmt(is *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: is}
 }
 
-func (ifs *IfStmt) Init() Stmt {
-	return Stmt{Stmt: ifs.IfStmt.Init}
+func (ifs *IfStmt) Init() *Stmt {
+	return NewStmt(ifs.IfStmt.Init)
 }
 
-func (ifs *IfStmt) Cond() Expr {
-	return Expr{Expr: ifs.IfStmt.Cond}
+func (ifs *IfStmt) Cond() *Expr {
+	return NewExpr(ifs.IfStmt.Cond)
 }
 
 func (ifs *IfStmt) Body() *BlockStmt {
 	return NewBlockStmt(ifs.IfStmt.Body)
 }
 
-func (ifs *IfStmt) Else() Stmt {
-	return Stmt{Stmt: ifs.IfStmt.Else}
+func (ifs *IfStmt) Else() *Stmt {
+	return NewStmt(ifs.IfStmt.Else)
 }
 
 // String returns a string representation of the IfStmt.

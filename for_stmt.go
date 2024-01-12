@@ -14,16 +14,16 @@ func NewForStmt(fs *ast.ForStmt) *ForStmt {
 	return &ForStmt{ForStmt: fs}
 }
 
-func (fs *ForStmt) Init() Stmt {
-	return Stmt{Stmt: fs.ForStmt.Init}
+func (fs *ForStmt) Init() *Stmt {
+	return NewStmt(fs.ForStmt.Init)
 }
 
-func (fs *ForStmt) Cond() Expr {
-	return Expr{Expr: fs.ForStmt.Cond}
+func (fs *ForStmt) Cond() *Expr {
+	return NewExpr(fs.ForStmt.Cond)
 }
 
-func (fs *ForStmt) Post() Stmt {
-	return Stmt{Stmt: fs.ForStmt.Post}
+func (fs *ForStmt) Post() *Stmt {
+	return NewStmt(fs.ForStmt.Post)
 }
 
 func (fs *ForStmt) Body() *BlockStmt {
