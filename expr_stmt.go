@@ -12,11 +12,11 @@ func NewExprStmt(es *ast.ExprStmt) *ExprStmt {
 	return &ExprStmt{ExprStmt: es}
 }
 
-func (e *ExprStmt) Type() StmtType {
+func (e *ExprStmt) StmtType() StmtType {
 	return ExprStmtType
 }
 
-func (e *ExprStmt) Expr() *Expr {
+func (e *ExprStmt) Expr() Expr {
 	return NewExpr(e.ExprStmt.X)
 }
 

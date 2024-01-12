@@ -10,7 +10,7 @@ func NewDeclStmt(decl *ast.DeclStmt) *DeclStmt {
 	return &DeclStmt{DeclStmt: decl}
 }
 
-func (decl *DeclStmt) Type() StmtType {
+func (decl *DeclStmt) StmtType() StmtType {
 	return DeclStmtType
 }
 

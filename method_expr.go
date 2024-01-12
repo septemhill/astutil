@@ -17,8 +17,8 @@ func (ft MethodExpr) ParamsNames() []string {
 	})
 }
 
-func (ft MethodExpr) ParamsTypes() []*Expr {
-	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) *Expr {
+func (ft MethodExpr) ParamsTypes() []Expr {
+	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) Expr {
 		return x.Type()
 	})
 }

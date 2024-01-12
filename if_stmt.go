@@ -13,7 +13,7 @@ func NewIfStmt(is *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: is}
 }
 
-func (ifs *IfStmt) Type() StmtType {
+func (ifs *IfStmt) StmtType() StmtType {
 	return IfStmtType
 }
 
@@ -21,7 +21,7 @@ func (ifs *IfStmt) Init() Stmt {
 	return NewStmt(ifs.IfStmt.Init)
 }
 
-func (ifs *IfStmt) Cond() *Expr {
+func (ifs *IfStmt) Cond() Expr {
 	return NewExpr(ifs.IfStmt.Cond)
 }
 

@@ -13,7 +13,7 @@ func (r ReceiverExpr) Name() *Ident {
 	return &Ident{Ident: r.List[0].Names[0]}
 }
 
-func (r ReceiverExpr) Type() *Expr {
+func (r ReceiverExpr) Type() Expr {
 	return NewExpr(r.List[0].Type)
 }
 

@@ -10,7 +10,11 @@ func NewEllipsis(e *ast.Ellipsis) *Ellipsis {
 	return &Ellipsis{Ellipsis: e}
 }
 
-func (e *Ellipsis) ElementType() *Expr {
+func (e *Ellipsis) ExprType() ExprType {
+	return EllipsisExprType
+}
+
+func (e *Ellipsis) ElementType() Expr {
 	return NewExpr(e.Ellipsis.Elt)
 }
 

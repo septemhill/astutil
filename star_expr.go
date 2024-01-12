@@ -10,7 +10,11 @@ func NewStarExpr(x *ast.StarExpr) *StarExpr {
 	return &StarExpr{StarExpr: x}
 }
 
-func (s *StarExpr) Expr() *Expr {
+func (s *StarExpr) ExprType() ExprType {
+	return StarExprType
+}
+
+func (s *StarExpr) Expr() Expr {
 	return NewExpr(s.StarExpr.X)
 }
 

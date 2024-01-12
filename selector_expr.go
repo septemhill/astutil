@@ -10,6 +10,10 @@ func NewSelectorExpr(x *ast.SelectorExpr) *SelectorExpr {
 	return &SelectorExpr{SelectorExpr: x}
 }
 
+func (s *SelectorExpr) ExprType() ExprType {
+	return SelectorExprType
+}
+
 func (s *SelectorExpr) String() string {
 	return s.X.(*ast.Ident).Name + "." + s.Sel.Name
 }

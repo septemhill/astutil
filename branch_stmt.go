@@ -13,7 +13,7 @@ func NewBranchStmt(b *ast.BranchStmt) *BranchStmt {
 	return &BranchStmt{BranchStmt: b}
 }
 
-func (br *BranchStmt) Type() StmtType {
+func (br *BranchStmt) StmtType() StmtType {
 	return BranchStmtType
 }
 

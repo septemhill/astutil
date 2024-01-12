@@ -18,7 +18,7 @@ func NewBlockStmt(block *ast.BlockStmt) *BlockStmt {
 	return &BlockStmt{BlockStmt: block}
 }
 
-func (b *BlockStmt) Type() StmtType {
+func (b *BlockStmt) StmtType() StmtType {
 	return BlockStmtType
 }
 

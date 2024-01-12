@@ -12,6 +12,10 @@ func NewIdent(i *ast.Ident) *Ident {
 	return &Ident{Ident: i}
 }
 
+func (i *Ident) ExprType() ExprType {
+	return IdentExprType
+}
+
 func (i *Ident) String() string {
 	return i.Name
 }

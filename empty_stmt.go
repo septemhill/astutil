@@ -10,7 +10,7 @@ func NewEmptyStmt(x *ast.EmptyStmt) *EmptyStmt {
 	return &EmptyStmt{EmptyStmt: x}
 }
 
-func (s *EmptyStmt) Type() StmtType {
+func (s *EmptyStmt) StmtType() StmtType {
 	return EmptyStmtType
 }
 

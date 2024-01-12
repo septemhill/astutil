@@ -13,11 +13,15 @@ func NewKeyValueExpr(x *ast.KeyValueExpr) *KeyValueExpr {
 	return &KeyValueExpr{KeyValueExpr: x}
 }
 
-func (k *KeyValueExpr) Key() *Expr {
+func (k *KeyValueExpr) ExprType() ExprType {
+	return KeyValueExprType
+}
+
+func (k *KeyValueExpr) Key() Expr {
 	return NewExpr(k.KeyValueExpr.Key)
 }
 
-func (k *KeyValueExpr) Value() *Expr {
+func (k *KeyValueExpr) Value() Expr {
 	return NewExpr(k.KeyValueExpr.Value)
 }
 

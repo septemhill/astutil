@@ -24,14 +24,18 @@ func NewFuncType(f *ast.FuncType, name string, fnType string) *FuncType {
 	return &FuncType{FuncType: f, Name: name, FnType: fnType}
 }
 
+func (ft *FuncType) ExprType() ExprType {
+	return FuncExprType
+}
+
 func (ft *FuncType) ParamsNames() []string {
 	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) string {
 		return x.Name
 	})
 }
 
-func (ft *FuncType) ParamsTypes() []*Expr {
-	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) *Expr {
+func (ft *FuncType) ParamsTypes() []Expr {
+	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) Expr {
 		return x.Type()
 	})
 }

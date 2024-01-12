@@ -13,6 +13,10 @@ func NewFuncLit(f *ast.FuncLit) *FuncLit {
 	return &FuncLit{FuncLit: f}
 }
 
+func (f *FuncLit) ExprType() ExprType {
+	return FuncLitExprType
+}
+
 func (f *FuncLit) Type() *FuncType {
 	return NewFuncType(f.FuncLit.Type, "", FnDecl)
 }

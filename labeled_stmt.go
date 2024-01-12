@@ -10,7 +10,7 @@ func NewLabeledStmt(ls *ast.LabeledStmt) *LabeledStmt {
 	return &LabeledStmt{LabeledStmt: ls}
 }
 
-func (l *LabeledStmt) Type() StmtType {
+func (l *LabeledStmt) StmtType() StmtType {
 	return LabeledStmtType
 }
 

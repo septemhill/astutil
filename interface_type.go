@@ -13,6 +13,10 @@ type InterfaceType struct {
 	*ast.InterfaceType
 }
 
+func (it InterfaceType) ExprType() ExprType {
+	return InterfaceExprType
+}
+
 func (it InterfaceType) Methods() []MethodExpr {
 	var methods []MethodExpr
 

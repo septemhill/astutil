@@ -13,7 +13,7 @@ func NewSelectStmt(b *ast.SelectStmt) *SelectStmt {
 	return &SelectStmt{SelectStmt: b}
 }
 
-func (ss *SelectStmt) Type() StmtType {
+func (ss *SelectStmt) StmtType() StmtType {
 	return SelectStmtType
 }
 

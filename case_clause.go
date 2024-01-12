@@ -16,12 +16,12 @@ func NewCaseClause(c *ast.CaseClause) *CaseClause {
 	return &CaseClause{CaseClause: c}
 }
 
-func (cc *CaseClause) Type() StmtType {
+func (cc *CaseClause) StmtType() StmtType {
 	return CaseClauseType
 }
 
-func (cc *CaseClause) List() []*Expr {
-	return lo.Map(cc.CaseClause.List, func(x ast.Expr, _ int) *Expr {
+func (cc *CaseClause) List() []Expr {
+	return lo.Map(cc.CaseClause.List, func(x ast.Expr, _ int) Expr {
 		return NewExpr(x)
 	})
 }
@@ -44,7 +44,7 @@ func (cc *CaseClause) Body() []Stmt {
 // a newline character, prepended with "case" and the joined list of
 // expressions.
 func (cc *CaseClause) String() string {
-	list := lo.Map(cc.List(), func(x *Expr, _ int) string {
+	list := lo.Map(cc.List(), func(x Expr, _ int) string {
 		return x.String()
 	})
 

@@ -13,11 +13,15 @@ func NewIndexExpr(i *ast.IndexExpr) *IndexExpr {
 	return &IndexExpr{IndexExpr: i}
 }
 
-func (i *IndexExpr) Expr() *Expr {
+func (i *IndexExpr) ExprType() ExprType {
+	return IndexExprType
+}
+
+func (i *IndexExpr) Expr() Expr {
 	return NewExpr(i.IndexExpr.X)
 }
 
-func (i *IndexExpr) Index() *Expr {
+func (i *IndexExpr) Index() Expr {
 	return NewExpr(i.IndexExpr.Index)
 }
 

@@ -13,11 +13,15 @@ func NewBinaryExpr(b *ast.BinaryExpr) *BinaryExpr {
 	return &BinaryExpr{BinaryExpr: b}
 }
 
-func (be *BinaryExpr) Lhs() *Expr {
+func (be *BinaryExpr) ExprType() ExprType {
+	return BinaryExprType
+}
+
+func (be *BinaryExpr) Lhs() Expr {
 	return NewExpr(be.BinaryExpr.X)
 }
 
-func (be *BinaryExpr) Rhs() *Expr {
+func (be *BinaryExpr) Rhs() Expr {
 	return NewExpr(be.BinaryExpr.Y)
 }
 

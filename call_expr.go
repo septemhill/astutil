@@ -16,12 +16,16 @@ func NewCallExpr(c *ast.CallExpr) *CallExpr {
 	return &CallExpr{CallExpr: c}
 }
 
-func (c *CallExpr) Func() *Expr {
+func (c *CallExpr) ExprType() ExprType {
+	return CallExprType
+}
+
+func (c *CallExpr) Func() Expr {
 	return NewExpr(c.CallExpr.Fun)
 }
 
-func (c *CallExpr) Args() []*Expr {
-	return lo.Map(c.CallExpr.Args, func(x ast.Expr, _ int) *Expr {
+func (c *CallExpr) Args() []Expr {
+	return lo.Map(c.CallExpr.Args, func(x ast.Expr, _ int) Expr {
 		return NewExpr(x)
 	})
 }
@@ -31,7 +35,7 @@ func (c *CallExpr) Args() []*Expr {
 // It concatenates the name of the function and its arguments into a single string.
 // It returns the resulting string.
 func (c *CallExpr) String() string {
-	args := lo.Map(c.Args(), func(x *Expr, _ int) string {
+	args := lo.Map(c.Args(), func(x Expr, _ int) string {
 		return x.String()
 	})
 

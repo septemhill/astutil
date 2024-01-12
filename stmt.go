@@ -51,7 +51,7 @@ func (st StmtType) String() string {
 	case TypeSwitchStmtType:
 		return "TypeSwitchStmtType"
 	default:
-		return "UnknownType"
+		return "UnknownStmtType"
 	}
 }
 
@@ -85,7 +85,7 @@ type Stmt interface {
 	ast.Stmt
 
 	String() string
-	Type() StmtType
+	StmtType() StmtType
 }
 
 func NewStmt(stmt ast.Stmt) Stmt {

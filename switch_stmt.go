@@ -16,11 +16,11 @@ func NewSwitchStmt(b *ast.SwitchStmt) *SwitchStmt {
 	return &SwitchStmt{SwitchStmt: b}
 }
 
-func (s *SwitchStmt) Type() StmtType {
+func (s *SwitchStmt) StmtType() StmtType {
 	return SwitchStmtType
 }
 
-func (s *SwitchStmt) Tag() *Expr {
+func (s *SwitchStmt) Tag() Expr {
 	return NewExpr(s.SwitchStmt.Tag)
 }
 

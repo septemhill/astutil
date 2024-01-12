@@ -13,7 +13,11 @@ func NewUnaryExpr(x *ast.UnaryExpr) *UnaryExpr {
 	return &UnaryExpr{UnaryExpr: x}
 }
 
-func (v *UnaryExpr) Expr() *Expr {
+func (v *UnaryExpr) ExprType() ExprType {
+	return UnaryExprType
+}
+
+func (v *UnaryExpr) Expr() Expr {
 	return NewExpr(v.UnaryExpr.X)
 }
 

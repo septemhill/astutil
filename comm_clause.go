@@ -16,7 +16,7 @@ func NewCommClause(c *ast.CommClause) *CommClause {
 	return &CommClause{CommClause: c}
 }
 
-func (c *CommClause) Type() StmtType {
+func (c *CommClause) StmtType() StmtType {
 	return CommClauseType
 }
 

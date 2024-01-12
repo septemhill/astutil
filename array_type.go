@@ -13,11 +13,15 @@ func NewArrayType(a *ast.ArrayType) *ArrayType {
 	return &ArrayType{ArrayType: a}
 }
 
-func (a *ArrayType) ElementType() *Expr {
+func (a *ArrayType) ExprType() ExprType {
+	return ArrayExprType
+}
+
+func (a *ArrayType) ElementType() Expr {
 	return NewExpr(a.Elt)
 }
 
-func (a *ArrayType) Len() *Expr {
+func (a *ArrayType) Len() Expr {
 	return NewExpr(a.ArrayType.Len)
 }
 

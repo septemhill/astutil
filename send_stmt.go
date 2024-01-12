@@ -13,15 +13,15 @@ func NewSendStmt(b *ast.SendStmt) *SendStmt {
 	return &SendStmt{SendStmt: b}
 }
 
-func (send *SendStmt) Type() StmtType {
+func (send *SendStmt) StmtType() StmtType {
 	return SendStmtType
 }
 
-func (send *SendStmt) Chan() *Expr {
+func (send *SendStmt) Chan() Expr {
 	return NewExpr(send.SendStmt.Chan)
 }
 
-func (send *SendStmt) Value() *Expr {
+func (send *SendStmt) Value() Expr {
 	return NewExpr(send.SendStmt.Value)
 }
 

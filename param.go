@@ -10,7 +10,7 @@ type Param struct {
 	*ast.Field
 }
 
-func (p *Param) Type() *Expr {
+func (p *Param) Type() Expr {
 	return NewExpr(p.Field.Type)
 }
 

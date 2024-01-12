@@ -10,6 +10,10 @@ func NewIndexListExpr(i *ast.IndexListExpr) *IndexListExpr {
 	return &IndexListExpr{IndexListExpr: i}
 }
 
+func (i *IndexListExpr) ExprType() ExprType {
+	return IndexListExprType
+}
+
 func (i *IndexListExpr) String() string {
 	return "todo_index_list_expr"
 }

@@ -10,7 +10,7 @@ func NewBadStmt(x *ast.BadStmt) *BadStmt {
 	return &BadStmt{BadStmt: x}
 }
 
-func (s *BadStmt) Type() StmtType {
+func (s *BadStmt) StmtType() StmtType {
 	return BadStmtType
 }
 

@@ -14,7 +14,7 @@ func NewForStmt(fs *ast.ForStmt) *ForStmt {
 	return &ForStmt{ForStmt: fs}
 }
 
-func (fs *ForStmt) Type() StmtType {
+func (fs *ForStmt) StmtType() StmtType {
 	return ForStmtType
 }
 
@@ -22,7 +22,7 @@ func (fs *ForStmt) Init() Stmt {
 	return NewStmt(fs.ForStmt.Init)
 }
 
-func (fs *ForStmt) Cond() *Expr {
+func (fs *ForStmt) Cond() Expr {
 	return NewExpr(fs.ForStmt.Cond)
 }
 

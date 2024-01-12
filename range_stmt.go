@@ -13,19 +13,19 @@ func NewRangeStmt(b *ast.RangeStmt) *RangeStmt {
 	return &RangeStmt{RangeStmt: b}
 }
 
-func (rs *RangeStmt) Type() StmtType {
+func (rs *RangeStmt) StmtType() StmtType {
 	return RangeStmtType
 }
 
-func (rs *RangeStmt) Key() *Expr {
+func (rs *RangeStmt) Key() Expr {
 	return NewExpr(rs.RangeStmt.Key)
 }
 
-func (rs *RangeStmt) Value() *Expr {
+func (rs *RangeStmt) Value() Expr {
 	return NewExpr(rs.RangeStmt.Value)
 }
 
-func (rs *RangeStmt) Expr() *Expr {
+func (rs *RangeStmt) Expr() Expr {
 	return NewExpr(rs.RangeStmt.X)
 }
 
