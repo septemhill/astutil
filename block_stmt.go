@@ -18,8 +18,12 @@ func NewBlockStmt(block *ast.BlockStmt) *BlockStmt {
 	return &BlockStmt{BlockStmt: block}
 }
 
-func (b *BlockStmt) Stmts() []*Stmt {
-	return lo.Map(b.BlockStmt.List, func(x ast.Stmt, _ int) *Stmt {
+func (b *BlockStmt) Type() StmtType {
+	return BlockStmtType
+}
+
+func (b *BlockStmt) Stmts() []Stmt {
+	return lo.Map(b.BlockStmt.List, func(x ast.Stmt, _ int) Stmt {
 		return NewStmt(x)
 	})
 }
@@ -67,7 +71,7 @@ func (b *BlockStmt) AppendStmt(st string) error {
 // Returns:
 // - The string representation of the BlockStmt.
 func (b *BlockStmt) String() string {
-	stmts := lo.Map(b.Stmts(), func(x *Stmt, _ int) string {
+	stmts := lo.Map(b.Stmts(), func(x Stmt, _ int) string {
 		return x.String()
 	})
 

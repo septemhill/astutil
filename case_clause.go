@@ -16,14 +16,18 @@ func NewCaseClause(c *ast.CaseClause) *CaseClause {
 	return &CaseClause{CaseClause: c}
 }
 
+func (cc *CaseClause) Type() StmtType {
+	return CaseClauseType
+}
+
 func (cc *CaseClause) List() []*Expr {
 	return lo.Map(cc.CaseClause.List, func(x ast.Expr, _ int) *Expr {
 		return NewExpr(x)
 	})
 }
 
-func (cc *CaseClause) Body() []*Stmt {
-	return lo.Map(cc.CaseClause.Body, func(item ast.Stmt, _ int) *Stmt {
+func (cc *CaseClause) Body() []Stmt {
+	return lo.Map(cc.CaseClause.Body, func(item ast.Stmt, _ int) Stmt {
 		return NewStmt(item)
 	})
 }
@@ -44,7 +48,7 @@ func (cc *CaseClause) String() string {
 		return x.String()
 	})
 
-	bodies := lo.Map(cc.Body(), func(x *Stmt, _ int) string {
+	bodies := lo.Map(cc.Body(), func(x Stmt, _ int) string {
 		return x.String()
 	})
 

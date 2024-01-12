@@ -13,6 +13,10 @@ func NewDeferStmt(ds *ast.DeferStmt) *DeferStmt {
 	return &DeferStmt{DeferStmt: ds}
 }
 
+func (ds *DeferStmt) Type() StmtType {
+	return DeferStmtType
+}
+
 func (ds *DeferStmt) Call() *Expr {
 	return NewExpr(ds.DeferStmt.Call)
 }

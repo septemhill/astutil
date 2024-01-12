@@ -16,6 +16,10 @@ func NewReturnStmt(b *ast.ReturnStmt) *ReturnStmt {
 	return &ReturnStmt{ReturnStmt: b}
 }
 
+func (r *ReturnStmt) Type() StmtType {
+	return ReturnStmtType
+}
+
 func (r *ReturnStmt) Results() []*Expr {
 	return lo.Map(r.ReturnStmt.Results, func(x ast.Expr, _ int) *Expr {
 		return NewExpr(x)

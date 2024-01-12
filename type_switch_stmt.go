@@ -13,11 +13,15 @@ func NewTypeSwitchStmt(b *ast.TypeSwitchStmt) *TypeSwitchStmt {
 	return &TypeSwitchStmt{TypeSwitchStmt: b}
 }
 
-func (t *TypeSwitchStmt) Init() *Stmt {
+func (t *TypeSwitchStmt) Type() StmtType {
+	return TypeSwitchStmtType
+}
+
+func (t *TypeSwitchStmt) Init() Stmt {
 	return NewStmt(t.TypeSwitchStmt.Init)
 }
 
-func (t *TypeSwitchStmt) Assign() *Stmt {
+func (t *TypeSwitchStmt) Assign() Stmt {
 	return NewStmt(t.TypeSwitchStmt.Assign)
 }
 

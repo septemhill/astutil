@@ -1,7 +1,9 @@
 package astutil
 
 import (
+	"fmt"
 	"go/ast"
+	"strings"
 
 	"github.com/samber/lo"
 )
@@ -14,14 +16,27 @@ func NewSwitchStmt(b *ast.SwitchStmt) *SwitchStmt {
 	return &SwitchStmt{SwitchStmt: b}
 }
 
-func (s *SwitchStmt) Body() []*Stmt {
-	return lo.Map(s.SwitchStmt.Body.List, func(item ast.Stmt, _ int) *Stmt {
+func (s *SwitchStmt) Type() StmtType {
+	return SwitchStmtType
+}
+
+func (s *SwitchStmt) Tag() *Expr {
+	return NewExpr(s.SwitchStmt.Tag)
+}
+
+func (s *SwitchStmt) Body() []Stmt {
+	return lo.Map(s.SwitchStmt.Body.List, func(item ast.Stmt, _ int) Stmt {
 		return NewStmt(item)
 	})
 }
 
 func (s *SwitchStmt) String() string {
-	// return fmt.Sprintf("switch %")
-	// TODO: make it work
-	return "switch %"
+	bodies := lo.Map(s.Body(), func(x Stmt, _ int) string {
+		return x.String()
+	})
+
+	if s.SwitchStmt.Tag == nil {
+		return fmt.Sprintf("switch {\n\t%s\n}", strings.Join(bodies, "\n"))
+	}
+	return fmt.Sprintf("switch %s {\n\t%s\n}", s.Tag(), strings.Join(bodies, "\n"))
 }

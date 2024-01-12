@@ -13,6 +13,10 @@ func NewSelectStmt(b *ast.SelectStmt) *SelectStmt {
 	return &SelectStmt{SelectStmt: b}
 }
 
+func (ss *SelectStmt) Type() StmtType {
+	return SelectStmtType
+}
+
 func (ss *SelectStmt) Body() *BlockStmt {
 	return NewBlockStmt(ss.SelectStmt.Body)
 }

@@ -13,7 +13,11 @@ func NewIfStmt(is *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: is}
 }
 
-func (ifs *IfStmt) Init() *Stmt {
+func (ifs *IfStmt) Type() StmtType {
+	return IfStmtType
+}
+
+func (ifs *IfStmt) Init() Stmt {
 	return NewStmt(ifs.IfStmt.Init)
 }
 
@@ -25,7 +29,7 @@ func (ifs *IfStmt) Body() *BlockStmt {
 	return NewBlockStmt(ifs.IfStmt.Body)
 }
 
-func (ifs *IfStmt) Else() *Stmt {
+func (ifs *IfStmt) Else() Stmt {
 	return NewStmt(ifs.IfStmt.Else)
 }
 

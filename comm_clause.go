@@ -16,18 +16,22 @@ func NewCommClause(c *ast.CommClause) *CommClause {
 	return &CommClause{CommClause: c}
 }
 
-func (c *CommClause) Comm() *Stmt {
+func (c *CommClause) Type() StmtType {
+	return CommClauseType
+}
+
+func (c *CommClause) Comm() Stmt {
 	return NewStmt(c.CommClause.Comm)
 }
 
-func (c *CommClause) Body() []*Stmt {
-	return lo.Map(c.CommClause.Body, func(item ast.Stmt, _ int) *Stmt {
+func (c *CommClause) Body() []Stmt {
+	return lo.Map(c.CommClause.Body, func(item ast.Stmt, _ int) Stmt {
 		return NewStmt(item)
 	})
 }
 
 func (c *CommClause) String() string {
-	bodies := lo.Map(c.Body(), func(x *Stmt, _ int) string {
+	bodies := lo.Map(c.Body(), func(x Stmt, _ int) string {
 		return x.String()
 	})
 	return fmt.Sprintf("case %s:\n\t%s", c.Comm().String(), strings.Join(bodies, "\n\t"))

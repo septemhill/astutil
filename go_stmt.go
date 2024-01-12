@@ -13,6 +13,10 @@ func NewGoStmt(g *ast.GoStmt) *GoStmt {
 	return &GoStmt{GoStmt: g}
 }
 
+func (g *GoStmt) Type() StmtType {
+	return GoStmtType
+}
+
 func (g *GoStmt) Call() *Expr {
 	return NewExpr(g.GoStmt.Call)
 }

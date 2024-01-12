@@ -13,6 +13,10 @@ func NewRangeStmt(b *ast.RangeStmt) *RangeStmt {
 	return &RangeStmt{RangeStmt: b}
 }
 
+func (rs *RangeStmt) Type() StmtType {
+	return RangeStmtType
+}
+
 func (rs *RangeStmt) Key() *Expr {
 	return NewExpr(rs.RangeStmt.Key)
 }

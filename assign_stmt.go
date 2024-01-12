@@ -16,6 +16,10 @@ func NewAssignStmt(x *ast.AssignStmt) *AssignStmt {
 	return &AssignStmt{AssignStmt: x}
 }
 
+func (s *AssignStmt) Type() StmtType {
+	return AssignStmtType
+}
+
 func (s *AssignStmt) Lhs() []*Expr {
 	return lo.Map(s.AssignStmt.Lhs, func(x ast.Expr, _ int) *Expr {
 		return NewExpr(x)

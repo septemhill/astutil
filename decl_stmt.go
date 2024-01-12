@@ -10,6 +10,10 @@ func NewDeclStmt(decl *ast.DeclStmt) *DeclStmt {
 	return &DeclStmt{DeclStmt: decl}
 }
 
+func (decl *DeclStmt) Type() StmtType {
+	return DeclStmtType
+}
+
 func (decl *DeclStmt) String() string {
 	switch x := decl.Decl.(type) {
 	case *ast.FuncDecl:
