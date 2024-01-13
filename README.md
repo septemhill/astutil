@@ -25,6 +25,9 @@ code.
 # TODO
 
 - [ ] Introduce AST modify functionality
+  - [ ] Imports (Add / Remove)
+  - [ ] Statement (Add / Remove)
+  - [ ] Expression (Modify value / variable name)
 - [ ] Add generic support
 
 # Contributing
