@@ -1,6 +1,6 @@
-# astutil
+# goastutil
 
-The `astutil` package provides utility functions for working with Go abstract
+The `goastutil` package provides utility functions for working with Go abstract
 syntax tree (AST).
 
 ## Installation
@@ -8,7 +8,7 @@ syntax tree (AST).
 To install the `astutil` package, run the following command:
 
 ```shell
-go get https://github.com/septemhill/goastutil
+go get github.com/septemhill/goastutil
 ```
 
 # Usage
@@ -16,7 +16,7 @@ go get https://github.com/septemhill/goastutil
 To use the astutil package, import it in your Go code:
 
 ```go
-import "https://github.com/septemhill/goastutil"
+import "github.com/septemhill/goastutil"
 ```
 
 You can then use the utility functions provided by the astutil package in your
@@ -32,5 +32,5 @@ code.
 
 # Contributing
 
-Contributions to the `astutil` package are welcome! If you find any issues or
+Contributions to the `goastutil` package are welcome! If you find any issues or
 have any improvements to suggest, please open an issue or submit a pull request.
