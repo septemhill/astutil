@@ -7,6 +7,7 @@ import (
 )
 
 type ForStmt struct {
+	parent Stmt
 	*ast.ForStmt
 }
 
@@ -14,12 +15,17 @@ func NewForStmt(fs *ast.ForStmt) *ForStmt {
 	return &ForStmt{ForStmt: fs}
 }
 
+func NewForStmtWithParent(parent Stmt, fs *ast.ForStmt) *ForStmt {
+	return &ForStmt{ForStmt: fs, parent: parent}
+}
+
 func (fs *ForStmt) StmtType() StmtType {
 	return ForStmtType
 }
 
 func (fs *ForStmt) Init() Stmt {
-	return NewStmt(fs.ForStmt.Init)
+	// return NewStmt(fs.ForStmt.Init)
+	return NewStmtWithParent(fs, fs.ForStmt.Init)
 }
 
 func (fs *ForStmt) Cond() Expr {
@@ -27,7 +33,8 @@ func (fs *ForStmt) Cond() Expr {
 }
 
 func (fs *ForStmt) Post() Stmt {
-	return NewStmt(fs.ForStmt.Post)
+	// return NewStmt(fs.ForStmt.Post)
+	return NewStmtWithParent(fs, fs.ForStmt.Post)
 }
 
 func (fs *ForStmt) Body() *BlockStmt {

@@ -6,11 +6,16 @@ import (
 )
 
 type GoStmt struct {
+	parent Stmt
 	*ast.GoStmt
 }
 
 func NewGoStmt(g *ast.GoStmt) *GoStmt {
 	return &GoStmt{GoStmt: g}
+}
+
+func NewGoStmtWithParent(parent Stmt, g *ast.GoStmt) *GoStmt {
+	return &GoStmt{GoStmt: g, parent: parent}
 }
 
 func (g *GoStmt) StmtType() StmtType {

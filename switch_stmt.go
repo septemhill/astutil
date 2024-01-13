@@ -9,11 +9,16 @@ import (
 )
 
 type SwitchStmt struct {
+	parent Stmt
 	*ast.SwitchStmt
 }
 
 func NewSwitchStmt(b *ast.SwitchStmt) *SwitchStmt {
 	return &SwitchStmt{SwitchStmt: b}
+}
+
+func NewSwitchStmtWithParent(parent Stmt, b *ast.SwitchStmt) *SwitchStmt {
+	return &SwitchStmt{SwitchStmt: b, parent: parent}
 }
 
 func (s *SwitchStmt) StmtType() StmtType {
@@ -25,7 +30,8 @@ func (s *SwitchStmt) Tag() Expr {
 }
 
 func (s *SwitchStmt) Body() []Stmt {
-	return toStmt(s.SwitchStmt.Body.List)
+	// return toStmt(s.SwitchStmt.Body.List)
+	return toStmtWithParent(s, s.SwitchStmt.Body.List)
 }
 
 // TODO: add PrependCase, InsertCase, and RemoveCase

@@ -6,11 +6,16 @@ import (
 )
 
 type IncDecStmt struct {
+	parent Stmt
 	*ast.IncDecStmt
 }
 
 func NewIncDecStmt(is *ast.IncDecStmt) *IncDecStmt {
 	return &IncDecStmt{IncDecStmt: is}
+}
+
+func NewIncDecStmtWithParent(parent Stmt, is *ast.IncDecStmt) *IncDecStmt {
+	return &IncDecStmt{IncDecStmt: is, parent: parent}
 }
 
 func (s *IncDecStmt) StmtType() StmtType {

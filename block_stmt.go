@@ -9,6 +9,7 @@ import (
 )
 
 type BlockStmt struct {
+	parent Stmt
 	*ast.BlockStmt
 }
 
@@ -16,12 +17,17 @@ func NewBlockStmt(block *ast.BlockStmt) *BlockStmt {
 	return &BlockStmt{BlockStmt: block}
 }
 
+func NewBlockStmtWithParent(parent Stmt, block *ast.BlockStmt) *BlockStmt {
+	return &BlockStmt{BlockStmt: block, parent: parent}
+}
+
 func (b *BlockStmt) StmtType() StmtType {
 	return BlockStmtType
 }
 
 func (b *BlockStmt) Stmts() []Stmt {
-	return toStmt(b.BlockStmt.List)
+	// return toStmt(b.BlockStmt.List)
+	return toStmtWithParent(b, b.BlockStmt.List)
 }
 
 // TODO: remove PrependStmt, InsertStmt, and RemoveStmt

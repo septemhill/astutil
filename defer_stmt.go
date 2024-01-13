@@ -6,11 +6,16 @@ import (
 )
 
 type DeferStmt struct {
+	parent Stmt
 	*ast.DeferStmt
 }
 
 func NewDeferStmt(ds *ast.DeferStmt) *DeferStmt {
 	return &DeferStmt{DeferStmt: ds}
+}
+
+func NewDeferStmtWithParent(parent Stmt, ds *ast.DeferStmt) *DeferStmt {
+	return &DeferStmt{DeferStmt: ds, parent: parent}
 }
 
 func (ds *DeferStmt) StmtType() StmtType {

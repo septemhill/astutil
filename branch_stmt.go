@@ -6,11 +6,16 @@ import (
 )
 
 type BranchStmt struct {
+	parent Stmt
 	*ast.BranchStmt
 }
 
 func NewBranchStmt(b *ast.BranchStmt) *BranchStmt {
 	return &BranchStmt{BranchStmt: b}
+}
+
+func NewBranchStmtWithParent(parent Stmt, b *ast.BranchStmt) *BranchStmt {
+	return &BranchStmt{BranchStmt: b, parent: parent}
 }
 
 func (br *BranchStmt) StmtType() StmtType {

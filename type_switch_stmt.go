@@ -6,6 +6,7 @@ import (
 )
 
 type TypeSwitchStmt struct {
+	parent Stmt
 	*ast.TypeSwitchStmt
 }
 
@@ -13,16 +14,22 @@ func NewTypeSwitchStmt(b *ast.TypeSwitchStmt) *TypeSwitchStmt {
 	return &TypeSwitchStmt{TypeSwitchStmt: b}
 }
 
+func NewTypeSwitchStmtWithParent(parent Stmt, b *ast.TypeSwitchStmt) *TypeSwitchStmt {
+	return &TypeSwitchStmt{TypeSwitchStmt: b, parent: parent}
+}
+
 func (t *TypeSwitchStmt) StmtType() StmtType {
 	return TypeSwitchStmtType
 }
 
 func (t *TypeSwitchStmt) Init() Stmt {
-	return NewStmt(t.TypeSwitchStmt.Init)
+	// return NewStmt(t.TypeSwitchStmt.Init)
+	return NewStmtWithParent(t, t.TypeSwitchStmt.Init)
 }
 
 func (t *TypeSwitchStmt) Assign() Stmt {
-	return NewStmt(t.TypeSwitchStmt.Assign)
+	// return NewStmt(t.TypeSwitchStmt.Assign)
+	return NewStmtWithParent(t, t.TypeSwitchStmt.Assign)
 }
 
 func (t *TypeSwitchStmt) Body() *BlockStmt {

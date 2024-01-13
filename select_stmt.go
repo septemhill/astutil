@@ -6,11 +6,16 @@ import (
 )
 
 type SelectStmt struct {
+	parent Stmt
 	*ast.SelectStmt
 }
 
 func NewSelectStmt(b *ast.SelectStmt) *SelectStmt {
 	return &SelectStmt{SelectStmt: b}
+}
+
+func NewSelectStmtWithParent(parent Stmt, b *ast.SelectStmt) *SelectStmt {
+	return &SelectStmt{SelectStmt: b, parent: parent}
 }
 
 func (ss *SelectStmt) StmtType() StmtType {

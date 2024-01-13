@@ -6,6 +6,7 @@ import (
 )
 
 type IfStmt struct {
+	parent Stmt
 	*ast.IfStmt
 }
 
@@ -13,12 +14,17 @@ func NewIfStmt(is *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: is}
 }
 
+func NewIfStmtWithParent(parent Stmt, is *ast.IfStmt) *IfStmt {
+	return &IfStmt{IfStmt: is, parent: parent}
+}
+
 func (ifs *IfStmt) StmtType() StmtType {
 	return IfStmtType
 }
 
 func (ifs *IfStmt) Init() Stmt {
-	return NewStmt(ifs.IfStmt.Init)
+	// return NewStmt(ifs.IfStmt.Init)
+	return NewStmtWithParent(ifs, ifs.IfStmt.Init)
 }
 
 func (ifs *IfStmt) Cond() Expr {
@@ -30,7 +36,8 @@ func (ifs *IfStmt) Body() *BlockStmt {
 }
 
 func (ifs *IfStmt) Else() Stmt {
-	return NewStmt(ifs.IfStmt.Else)
+	// return NewStmt(ifs.IfStmt.Else)
+	return NewStmtWithParent(ifs, ifs.IfStmt.Else)
 }
 
 // String returns a string representation of the IfStmt.

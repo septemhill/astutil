@@ -5,11 +5,16 @@ import (
 )
 
 type ExprStmt struct {
+	parent Stmt
 	*ast.ExprStmt
 }
 
 func NewExprStmt(es *ast.ExprStmt) *ExprStmt {
 	return &ExprStmt{ExprStmt: es}
+}
+
+func NewExprStmtWithParent(parent Stmt, es *ast.ExprStmt) *ExprStmt {
+	return &ExprStmt{ExprStmt: es, parent: parent}
 }
 
 func (e *ExprStmt) StmtType() StmtType {

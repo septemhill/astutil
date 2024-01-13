@@ -3,11 +3,16 @@ package astutil
 import "go/ast"
 
 type DeclStmt struct {
+	parent Stmt
 	*ast.DeclStmt
 }
 
 func NewDeclStmt(decl *ast.DeclStmt) *DeclStmt {
 	return &DeclStmt{DeclStmt: decl}
+}
+
+func NewDeclStmtWithParent(parent Stmt, decl *ast.DeclStmt) *DeclStmt {
+	return &DeclStmt{DeclStmt: decl, parent: parent}
 }
 
 func (decl *DeclStmt) StmtType() StmtType {

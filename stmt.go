@@ -103,6 +103,12 @@ func toStmt(stmts []ast.Stmt) []Stmt {
 	})
 }
 
+func toStmtWithParent(parent Stmt, stmts []ast.Stmt) []Stmt {
+	return lo.Map(stmts, func(stmt ast.Stmt, _ int) Stmt {
+		return NewStmtWithParent(parent, stmt)
+	})
+}
+
 func NewStmt(stmt ast.Stmt) Stmt {
 	switch x := stmt.(type) {
 	case *ast.AssignStmt:
@@ -147,6 +153,55 @@ func NewStmt(stmt ast.Stmt) Stmt {
 		return NewSwitchStmt(x)
 	case *ast.TypeSwitchStmt:
 		return NewTypeSwitchStmt(x)
+	default:
+		return nil
+	}
+}
+
+func NewStmtWithParent(parent Stmt, stmt ast.Stmt) Stmt {
+	switch x := stmt.(type) {
+	case *ast.AssignStmt:
+		return NewAssignStmtWithParent(parent, x)
+	case *ast.BadStmt:
+		return NewBadStmtWithParent(parent, x)
+	case *ast.BlockStmt:
+		return NewBlockStmtWithParent(parent, x)
+	case *ast.BranchStmt:
+		return NewBranchStmtWithParent(parent, x)
+	case *ast.CaseClause:
+		return NewCaseClauseWithParent(parent, x)
+	case *ast.CommClause:
+		return NewCommClauseWithParent(parent, x)
+	case *ast.DeclStmt:
+		return NewDeclStmtWithParent(parent, x)
+	case *ast.DeferStmt:
+		return NewDeferStmtWithParent(parent, x)
+	case *ast.EmptyStmt:
+		return NewEmptyStmtWithParent(parent, x)
+	case *ast.ExprStmt:
+		return NewExprStmtWithParent(parent, x)
+	case *ast.ForStmt:
+		return NewForStmtWithParent(parent, x)
+	case *ast.GoStmt:
+		return NewGoStmtWithParent(parent, x)
+	case *ast.IfStmt:
+		return NewIfStmtWithParent(parent, x)
+	case *ast.IncDecStmt:
+		return NewIncDecStmtWithParent(parent, x)
+	case *ast.LabeledStmt:
+		return NewLabeledStmtWithParent(parent, x)
+	case *ast.RangeStmt:
+		return NewRangeStmtWithParent(parent, x)
+	case *ast.ReturnStmt:
+		return NewReturnStmtWithParent(parent, x)
+	case *ast.SelectStmt:
+		return NewSelectStmtWithParent(parent, x)
+	case *ast.SendStmt:
+		return NewSendStmtWithParent(parent, x)
+	case *ast.SwitchStmt:
+		return NewSwitchStmtWithParent(parent, x)
+	case *ast.TypeSwitchStmt:
+		return NewTypeSwitchStmtWithParent(parent, x)
 	default:
 		return nil
 	}

@@ -6,11 +6,16 @@ import (
 )
 
 type RangeStmt struct {
+	parent Stmt
 	*ast.RangeStmt
 }
 
 func NewRangeStmt(b *ast.RangeStmt) *RangeStmt {
 	return &RangeStmt{RangeStmt: b}
+}
+
+func NewRangeStmtWithParent(parent Stmt, b *ast.RangeStmt) *RangeStmt {
+	return &RangeStmt{RangeStmt: b, parent: parent}
 }
 
 func (rs *RangeStmt) StmtType() StmtType {

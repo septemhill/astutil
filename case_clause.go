@@ -9,11 +9,16 @@ import (
 )
 
 type CaseClause struct {
+	parent Stmt
 	*ast.CaseClause
 }
 
 func NewCaseClause(c *ast.CaseClause) *CaseClause {
 	return &CaseClause{CaseClause: c}
+}
+
+func NewCaseClauseWithParent(parent Stmt, c *ast.CaseClause) *CaseClause {
+	return &CaseClause{CaseClause: c, parent: parent}
 }
 
 func (cc *CaseClause) StmtType() StmtType {
@@ -25,7 +30,8 @@ func (cc *CaseClause) List() []Expr {
 }
 
 func (cc *CaseClause) Body() []Stmt {
-	return toStmt(cc.CaseClause.Body)
+	// return toStmt(cc.CaseClause.Body)
+	return toStmtWithParent(cc, cc.CaseClause.Body)
 }
 
 // String returns a string representation of the CaseClause.

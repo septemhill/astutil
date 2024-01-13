@@ -9,11 +9,16 @@ import (
 )
 
 type AssignStmt struct {
+	parent Stmt
 	*ast.AssignStmt
 }
 
 func NewAssignStmt(x *ast.AssignStmt) *AssignStmt {
 	return &AssignStmt{AssignStmt: x}
+}
+
+func NewAssignStmtWithParent(parent Stmt, x *ast.AssignStmt) *AssignStmt {
+	return &AssignStmt{AssignStmt: x, parent: parent}
 }
 
 func (s *AssignStmt) StmtType() StmtType {

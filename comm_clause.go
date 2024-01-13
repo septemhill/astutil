@@ -9,6 +9,7 @@ import (
 )
 
 type CommClause struct {
+	parent Stmt
 	*ast.CommClause
 }
 
@@ -16,16 +17,22 @@ func NewCommClause(c *ast.CommClause) *CommClause {
 	return &CommClause{CommClause: c}
 }
 
+func NewCommClauseWithParent(parent Stmt, c *ast.CommClause) *CommClause {
+	return &CommClause{CommClause: c, parent: parent}
+}
+
 func (c *CommClause) StmtType() StmtType {
 	return CommClauseType
 }
 
 func (c *CommClause) Comm() Stmt {
-	return NewStmt(c.CommClause.Comm)
+	// return NewStmt(c.CommClause.Comm)
+	return NewStmtWithParent(c, c.CommClause.Comm)
 }
 
 func (c *CommClause) Body() []Stmt {
-	return toStmt(c.CommClause.Body)
+	// return toStmt(c.CommClause.Body)
+	return toStmtWithParent(c, c.CommClause.Body)
 }
 
 func (c *CommClause) String() string {

@@ -6,11 +6,16 @@ import (
 )
 
 type SendStmt struct {
+	parent Stmt
 	*ast.SendStmt
 }
 
 func NewSendStmt(b *ast.SendStmt) *SendStmt {
 	return &SendStmt{SendStmt: b}
+}
+
+func NewSendStmtWithParent(parent Stmt, b *ast.SendStmt) *SendStmt {
+	return &SendStmt{SendStmt: b, parent: parent}
 }
 
 func (send *SendStmt) StmtType() StmtType {
