@@ -8,7 +8,7 @@ syntax tree (AST).
 To install the `astutil` package, run the following command:
 
 ```shell
-go get -u github.com/septemhill/astutil
+go get https://github.com/septemhill/goastutil
 ```
 
 # Usage
@@ -16,7 +16,7 @@ go get -u github.com/septemhill/astutil
 To use the astutil package, import it in your Go code:
 
 ```go
-import "github.com/septemhill/astutil"
+import "https://github.com/septemhill/goastutil"
 ```
 
 You can then use the utility functions provided by the astutil package in your
