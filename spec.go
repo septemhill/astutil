@@ -2,23 +2,43 @@ package astutil
 
 import "go/ast"
 
-type Spec struct {
-	ast.Spec
-}
+type SpecType int
 
-func NewSpec(spec ast.Spec) *Spec {
-	return &Spec{Spec: spec}
-}
+const (
+	TypeSpecType = iota
+	ValueSpecType
+	ImportSpecType
+)
 
-func (spec *Spec) String() string {
-	switch x := spec.Spec.(type) {
-	case *ast.TypeSpec:
-		return NewTypeSpec(x).String()
-	case *ast.ValueSpec:
-		return NewValueSpec(x).String()
-	case *ast.ImportSpec:
-		return NewImportSpec(x).String()
+func (st SpecType) String() string {
+	switch st {
+	case TypeSpecType:
+		return "TypeSpec"
+	case ValueSpecType:
+		return "ValueSpec"
+	case ImportSpecType:
+		return "ImportSpec"
 	default:
-		return "unknown_spec"
+		return "UnknownSpec"
+	}
+}
+
+type Spec interface {
+	ast.Spec
+
+	String() string
+	SpecType() SpecType
+}
+
+func NewSpec(spec ast.Spec) Spec {
+	switch x := spec.(type) {
+	case *ast.TypeSpec:
+		return NewTypeSpec(x)
+	case *ast.ValueSpec:
+		return NewValueSpec(x)
+	case *ast.ImportSpec:
+		return NewImportSpec(x)
+	default:
+		return nil
 	}
 }

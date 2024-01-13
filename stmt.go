@@ -85,6 +85,11 @@ const (
 	UnknownType
 )
 
+type AppendPrepender interface {
+	PrependStmt(Stmt) error
+	AppendStmt(Stmt) error
+}
+
 type Stmt interface {
 	ast.Stmt
 

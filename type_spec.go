@@ -12,6 +12,10 @@ func NewTypeSpec(typeSpec *ast.TypeSpec) *TypeSpec {
 	return &TypeSpec{TypeSpec: typeSpec}
 }
 
+func (t *TypeSpec) SpecType() SpecType {
+	return TypeSpecType
+}
+
 func (t *TypeSpec) String() string {
 	switch x := t.Type.(type) {
 	case *ast.InterfaceType:

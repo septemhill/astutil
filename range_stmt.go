@@ -33,6 +33,13 @@ func (rs *RangeStmt) Body() *BlockStmt {
 	return NewBlockStmt(rs.RangeStmt.Body)
 }
 
+// TODO: add PrependStmt, InsertStmt, and RemoveStmt
+func (rs *RangeStmt) PrependStmt() error { return nil }
+
+func (rs *RangeStmt) InsertStmt() error { return nil }
+
+func (rs *RangeStmt) RemoveStmt() error { return nil }
+
 // String returns a string representation of the RangeStmt.
 //
 // The String method returns a formatted string that represents the RangeStmt.

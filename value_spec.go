@@ -13,6 +13,10 @@ func NewValueSpec(valueSpec *ast.ValueSpec) *ValueSpec {
 	return &ValueSpec{ValueSpec: valueSpec}
 }
 
+func (v *ValueSpec) SpecType() SpecType {
+	return ValueSpecType
+}
+
 func (v *ValueSpec) String() string {
 	if v.Type == nil {
 		return fmt.Sprintf("%s %s = %v",

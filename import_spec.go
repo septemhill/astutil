@@ -13,6 +13,10 @@ func NewImportSpec(importSpec *ast.ImportSpec) *ImportSpec {
 	return &ImportSpec{ImportSpec: importSpec}
 }
 
+func (imp *ImportSpec) SpecType() SpecType {
+	return ImportSpecType
+}
+
 func (imp *ImportSpec) Name() *Ident {
 	return NewIdent(imp.ImportSpec.Name)
 }
