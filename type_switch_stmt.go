@@ -29,6 +29,13 @@ func (t *TypeSwitchStmt) Body() *BlockStmt {
 	return NewBlockStmt(t.TypeSwitchStmt.Body)
 }
 
+// TODO: add PrependCase, InsertCase, and RemoveCase
+func (t *TypeSwitchStmt) PrependCase() error { return nil }
+
+func (t *TypeSwitchStmt) InsertCase() error { return nil }
+
+func (t *TypeSwitchStmt) RemoveCase() error { return nil }
+
 // String returns a string representation of the TypeSwitchStmt.
 //
 // It returns a formatted string that represents the TypeSwitchStmt,

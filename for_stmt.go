@@ -34,6 +34,13 @@ func (fs *ForStmt) Body() *BlockStmt {
 	return NewBlockStmt(fs.ForStmt.Body)
 }
 
+// TODO: add PrependStmt, InsertStmt, and RemoveStmt
+func (fs *ForStmt) PrependStmt() error { return nil }
+
+func (fs *ForStmt) InsertStmt() error { return nil }
+
+func (fs *ForStmt) RemoveStmt() error { return nil }
+
 // String returns a string representation of the ForStmt.
 //
 // It concatenates the string representations of the initialization, condition, and post statements

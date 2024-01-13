@@ -25,6 +25,13 @@ func (f *FuncLit) Body() *BlockStmt {
 	return NewBlockStmt(f.FuncLit.Body)
 }
 
+// TODO: add PrependStmt, InsertStmt, and RemoveStmt
+func (f *FuncLit) PrependStmt() error { return nil }
+
+func (f *FuncLit) InsertStmt() error { return nil }
+
+func (f *FuncLit) RemoveStmt() error { return nil }
+
 func (f *FuncLit) String() string {
 	return fmt.Sprintf("func%s %s", f.Type(), f.Body())
 }

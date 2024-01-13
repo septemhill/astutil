@@ -3,10 +3,12 @@ package astutil
 import (
 	"fmt"
 	"go/ast"
+	"slices"
 
 	"strings"
 
 	"github.com/samber/lo"
+	"github.com/shurcooL/go/parserutil"
 	"mvdan.cc/gofumpt/format"
 )
 
@@ -65,10 +67,32 @@ func (f *File) ImportSpecs() []*ImportSpec {
 	})
 }
 
-func (f *File) Decls() []Decl {
-	return lo.Map(f.File.Decls, func(decl ast.Decl, _ int) Decl {
-		return NewDecl(decl)
+func (f *File) AddImports(pkgs []string) error {
+	imp := fmt.Sprintf("import(\n\t\"%s\"\n)", strings.Join(pkgs, "\"\n\t\""))
+
+	decl, err := parserutil.ParseDecl(imp)
+	if err != nil {
+		return err
+	}
+
+	f.File.Decls = append(f.File.Decls, decl)
+	return nil
+}
+
+func (f *File) RemoveImports(pkgs []string) error {
+	genDecls := f.GenDecls()
+
+	lo.ForEach(genDecls, func(decl *GenDecl, _ int) {
+		decl.GenDecl.Specs = lo.Filter(decl.GenDecl.Specs, func(spec ast.Spec, _ int) bool {
+			importSpec, ok := spec.(*ast.ImportSpec)
+			if !ok {
+				return true
+			}
+			return slices.Index(pkgs, importSpec.Path.Value[1:len(importSpec.Path.Value)-1]) < 0
+		})
 	})
+
+	return nil
 }
 
 func (f *File) String() string {

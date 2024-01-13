@@ -21,6 +21,13 @@ func (ss *SelectStmt) Body() *BlockStmt {
 	return NewBlockStmt(ss.SelectStmt.Body)
 }
 
+// TODO: add PrependCase, InsertCase, and RemoveCase
+func (ss *SelectStmt) PrependCase() error { return nil }
+
+func (ss *SelectStmt) InsertCase() error { return nil }
+
+func (ss *SelectStmt) RemoveCase() error { return nil }
+
 // String returns a string representation of the SelectStmt.
 //
 // It returns a formatted string containing the "select" keyword and the body of the SelectStmt.

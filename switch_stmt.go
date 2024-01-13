@@ -28,6 +28,13 @@ func (s *SwitchStmt) Body() []Stmt {
 	return toStmt(s.SwitchStmt.Body.List)
 }
 
+// TODO: add PrependCase, InsertCase, and RemoveCase
+func (s *SwitchStmt) PrependCase() error { return nil }
+
+func (s *SwitchStmt) InsertCase() error { return nil }
+
+func (s *SwitchStmt) RemoveCase() error { return nil }
+
 func (s *SwitchStmt) String() string {
 	bodies := lo.Map(s.Body(), func(x Stmt, _ int) string {
 		return x.String()

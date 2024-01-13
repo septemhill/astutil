@@ -1,9 +1,7 @@
 package astutil
 
 import (
-	"errors"
 	"go/ast"
-	"slices"
 	"strings"
 
 	"github.com/samber/lo"
@@ -26,29 +24,39 @@ func (b *BlockStmt) Stmts() []Stmt {
 	return toStmt(b.BlockStmt.List)
 }
 
-func (b *BlockStmt) PrependStmt(st string) error {
-	stmt, err := parserutil.ParseStmt(st)
-	if err != nil {
-		return err
-	}
+// TODO: remove PrependStmt, InsertStmt, and RemoveStmt
+// func (b *BlockStmt) PrependStmt(st string) error {
+// 	stmt, err := parserutil.ParseStmt(st)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	b.List = append([]ast.Stmt{stmt}, b.List...)
-	return nil
-}
+// 	b.List = append([]ast.Stmt{stmt}, b.List...)
+// 	return nil
+// }
 
-func (b *BlockStmt) InsertStmt(i int, st string) error {
-	if i < 0 || i > len(b.List) {
-		return errors.New("index out of range")
-	}
+// func (b *BlockStmt) InsertStmt(i int, st string) error {
+// 	if i < 0 || i > len(b.List) {
+// 		return errors.New("index out of range")
+// 	}
 
-	stmt, err := parserutil.ParseStmt(st)
-	if err != nil {
-		return err
-	}
+// 	stmt, err := parserutil.ParseStmt(st)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	b.List = slices.Insert(b.List, i, stmt)
-	return nil
-}
+// 	b.List = slices.Insert(b.List, i, stmt)
+// 	return nil
+// }
+
+// func (b *BlockStmt) RemoveStmt(i int) error {
+// 	if i < 0 || i >= len(b.List) {
+// 		return errors.New("index out of range")
+// 	}
+
+// 	b.List = slices.Delete(b.List, i, i+1)
+// 	return nil
+// }
 
 func (b *BlockStmt) AppendStmt(st string) error {
 	stmt, err := parserutil.ParseStmt(st)
