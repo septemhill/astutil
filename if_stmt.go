@@ -14,6 +14,22 @@ func NewIfStmt(is *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: is}
 }
 
+func (s *IfStmt) PrependStmt(st string) error {
+	return nil
+}
+
+func (s *IfStmt) AppendStmt(st string) error {
+	return nil
+}
+
+func (s *IfStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *IfStmt) AppendDecl(st string) error {
+	return nil
+}
+
 func NewIfStmtWithParent(parent Stmt, stmt *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: stmt, parent: parent}
 }
@@ -49,5 +65,8 @@ func (ifs *IfStmt) Else() Stmt {
 //
 // The return type is a string.
 func (ifs *IfStmt) String() string {
-	return fmt.Sprintf("if %s %s %s", ifs.Cond(), ifs.Body(), ifs.Else())
+	if ifs.Else() == nil {
+		return fmt.Sprintf("if %s %s", ifs.Cond(), ifs.Body())
+	}
+	return fmt.Sprintf("if %s %s else %s", ifs.Cond(), ifs.Body(), ifs.Else())
 }
