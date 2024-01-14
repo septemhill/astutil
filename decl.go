@@ -7,6 +7,7 @@ type DeclType int
 const (
 	GenDeclType = iota
 	FuncDeclType
+	BadDeclType
 )
 
 func (dt DeclType) String() string {
@@ -15,6 +16,8 @@ func (dt DeclType) String() string {
 		return "GenDecl"
 	case FuncDeclType:
 		return "FuncDecl"
+	case BadDeclType:
+		return "BadDecl"
 	default:
 		return "UnknownDecl"
 	}
@@ -28,11 +31,13 @@ type Decl interface {
 }
 
 func NewDecl(decl ast.Decl) Decl {
-	switch x := decl.(type) {
+	switch decl := decl.(type) {
 	case *ast.GenDecl:
-		return NewGenDecl(x)
+		return NewGenDecl(decl)
 	case *ast.FuncDecl:
-		return NewFuncDecl(x)
+		return NewFuncDecl(decl)
+	case *ast.BadDecl:
+		return NewBadDecl(decl)
 	default:
 		return nil
 	}

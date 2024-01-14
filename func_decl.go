@@ -9,8 +9,8 @@ type FuncDecl struct {
 	*ast.FuncDecl
 }
 
-func NewFuncDecl(funcDecl *ast.FuncDecl) *FuncDecl {
-	return &FuncDecl{FuncDecl: funcDecl}
+func NewFuncDecl(decl *ast.FuncDecl) *FuncDecl {
+	return &FuncDecl{FuncDecl: decl}
 }
 
 func (ft *FuncDecl) DeclType() DeclType {

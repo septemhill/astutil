@@ -22,14 +22,6 @@ func (s *IfStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.IfStmt)
 }
 
-func (s *IfStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *IfStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (ifs *IfStmt) StmtType() StmtType {
 	return IfStmtType
 }

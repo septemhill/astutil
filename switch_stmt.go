@@ -25,14 +25,6 @@ func (s *SwitchStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.SwitchStmt)
 }
 
-func (s *SwitchStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *SwitchStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (s *SwitchStmt) StmtType() StmtType {
 	return SwitchStmtType
 }

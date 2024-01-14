@@ -22,14 +22,6 @@ func (s *BranchStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.BranchStmt)
 }
 
-func (s *BranchStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *BranchStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (br *BranchStmt) StmtType() StmtType {
 	return BranchStmtType
 }

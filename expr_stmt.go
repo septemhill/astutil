@@ -21,14 +21,6 @@ func (s *ExprStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.ExprStmt)
 }
 
-func (s *ExprStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *ExprStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (e *ExprStmt) StmtType() StmtType {
 	return ExprStmtType
 }

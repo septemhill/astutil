@@ -19,14 +19,6 @@ func (s *EmptyStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.EmptyStmt)
 }
 
-func (s *EmptyStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *EmptyStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (s *EmptyStmt) StmtType() StmtType {
 	return EmptyStmtType
 }

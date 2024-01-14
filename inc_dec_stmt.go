@@ -22,14 +22,6 @@ func (s *IncDecStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.IncDecStmt)
 }
 
-func (s *IncDecStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *IncDecStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (s *IncDecStmt) StmtType() StmtType {
 	return IncDecStmtType
 }

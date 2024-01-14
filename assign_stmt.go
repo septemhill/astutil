@@ -25,14 +25,6 @@ func (s *AssignStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.AssignStmt)
 }
 
-func (s *AssignStmt) PrependDecl(decl string) error {
-	return nil
-}
-
-func (s *AssignStmt) AppendDecl(decl string) error {
-	return nil
-}
-
 func (s *AssignStmt) StmtType() StmtType {
 	return AssignStmtType
 }

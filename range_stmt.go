@@ -22,14 +22,6 @@ func (s *RangeStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.RangeStmt)
 }
 
-func (s *RangeStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *RangeStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (rs *RangeStmt) StmtType() StmtType {
 	return RangeStmtType
 }

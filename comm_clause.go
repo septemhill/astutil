@@ -27,14 +27,6 @@ func (s *CommClause) AppendStmt(st string) error {
 	return nil
 }
 
-func (s *CommClause) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *CommClause) AppendDecl(st string) error {
-	return nil
-}
-
 func (c *CommClause) StmtType() StmtType {
 	return CommClauseType
 }

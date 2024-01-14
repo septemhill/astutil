@@ -22,14 +22,6 @@ func (s *SelectStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.SelectStmt)
 }
 
-func (s *SelectStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *SelectStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (ss *SelectStmt) StmtType() StmtType {
 	return SelectStmtType
 }

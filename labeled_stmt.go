@@ -19,14 +19,6 @@ func (s *LabeledStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.LabeledStmt)
 }
 
-func (s *LabeledStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *LabeledStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (l *LabeledStmt) StmtType() StmtType {
 	return LabeledStmtType
 }

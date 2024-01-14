@@ -88,14 +88,7 @@ const (
 type StmtAppendPrepender interface {
 	PrependStmt(string) error
 	AppendStmt(string) error
-	PrependDecl(string) error
-	AppendDecl(string) error
 }
-
-// type DeclAppendPrepender interface {
-// 	PrependDecl(string) error
-// 	AppendDecl(string) error
-// }
 
 type Stmt interface {
 	ast.Stmt

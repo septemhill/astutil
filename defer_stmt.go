@@ -22,14 +22,6 @@ func (s *DeferStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.DeferStmt)
 }
 
-func (s *DeferStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *DeferStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (ds *DeferStmt) StmtType() StmtType {
 	return DeferStmtType
 }

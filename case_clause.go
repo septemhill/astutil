@@ -27,14 +27,6 @@ func (s *CaseClause) AppendStmt(st string) error {
 	return nil
 }
 
-func (s *CaseClause) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *CaseClause) AppendDecl(st string) error {
-	return nil
-}
-
 func (cc *CaseClause) StmtType() StmtType {
 	return CaseClauseType
 }

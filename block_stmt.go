@@ -24,14 +24,6 @@ func (s *BlockStmt) AppendStmt(st string) error {
 	return ErrNotAppendPrepend
 }
 
-func (s *BlockStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *BlockStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (b *BlockStmt) StmtType() StmtType {
 	return BlockStmtType
 }

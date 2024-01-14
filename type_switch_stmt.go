@@ -22,14 +22,6 @@ func (s *TypeSwitchStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.TypeSwitchStmt)
 }
 
-func (s *TypeSwitchStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *TypeSwitchStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (t *TypeSwitchStmt) StmtType() StmtType {
 	return TypeSwitchStmtType
 }

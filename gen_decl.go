@@ -11,8 +11,8 @@ type GenDecl struct {
 	*ast.GenDecl
 }
 
-func NewGenDecl(genDecl *ast.GenDecl) *GenDecl {
-	return &GenDecl{GenDecl: genDecl}
+func NewGenDecl(decl *ast.GenDecl) *GenDecl {
+	return &GenDecl{GenDecl: decl}
 }
 
 func (g *GenDecl) DeclType() DeclType {

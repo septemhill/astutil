@@ -23,14 +23,6 @@ func (s *ForStmt) AppendStmt(st string) error {
 	return appendStmt(st, s.parent, s.ForStmt)
 }
 
-func (s *ForStmt) PrependDecl(st string) error {
-	return nil
-}
-
-func (s *ForStmt) AppendDecl(st string) error {
-	return nil
-}
-
 func (fs *ForStmt) StmtType() StmtType {
 	return ForStmtType
 }
