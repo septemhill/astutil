@@ -11,12 +11,24 @@ type ForStmt struct {
 	*ast.ForStmt
 }
 
-func NewForStmt(fs *ast.ForStmt) *ForStmt {
-	return &ForStmt{ForStmt: fs}
+func NewForStmt(parent Stmt, stmt *ast.ForStmt) *ForStmt {
+	return &ForStmt{ForStmt: stmt, parent: parent}
 }
 
-func NewForStmtWithParent(parent Stmt, stmt *ast.ForStmt) *ForStmt {
-	return &ForStmt{ForStmt: stmt, parent: parent}
+func (s *ForStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.ForStmt)
+}
+
+func (s *ForStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.ForStmt)
+}
+
+func (s *ForStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *ForStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (fs *ForStmt) StmtType() StmtType {
@@ -25,7 +37,7 @@ func (fs *ForStmt) StmtType() StmtType {
 
 func (fs *ForStmt) Init() Stmt {
 	// return NewStmt(fs.ForStmt.Init)
-	return NewStmtWithParent(fs, fs.ForStmt.Init)
+	return NewStmt(fs, fs.ForStmt.Init)
 }
 
 func (fs *ForStmt) Cond() Expr {
@@ -34,19 +46,12 @@ func (fs *ForStmt) Cond() Expr {
 
 func (fs *ForStmt) Post() Stmt {
 	// return NewStmt(fs.ForStmt.Post)
-	return NewStmtWithParent(fs, fs.ForStmt.Post)
+	return NewStmt(fs, fs.ForStmt.Post)
 }
 
 func (fs *ForStmt) Body() *BlockStmt {
-	return NewBlockStmtWithParent(fs, fs.ForStmt.Body)
+	return NewBlockStmt(fs, fs.ForStmt.Body)
 }
-
-// TODO: add PrependStmt, InsertStmt, and RemoveStmt
-func (fs *ForStmt) PrependStmt() error { return nil }
-
-func (fs *ForStmt) InsertStmt() error { return nil }
-
-func (fs *ForStmt) RemoveStmt() error { return nil }
 
 // String returns a string representation of the ForStmt.
 //

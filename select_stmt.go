@@ -10,12 +10,24 @@ type SelectStmt struct {
 	*ast.SelectStmt
 }
 
-func NewSelectStmt(b *ast.SelectStmt) *SelectStmt {
-	return &SelectStmt{SelectStmt: b}
+func NewSelectStmt(parent Stmt, stmt *ast.SelectStmt) *SelectStmt {
+	return &SelectStmt{SelectStmt: stmt, parent: parent}
 }
 
-func NewSelectStmtWithParent(parent Stmt, stmt *ast.SelectStmt) *SelectStmt {
-	return &SelectStmt{SelectStmt: stmt, parent: parent}
+func (s *SelectStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.SelectStmt)
+}
+
+func (s *SelectStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.SelectStmt)
+}
+
+func (s *SelectStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *SelectStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (ss *SelectStmt) StmtType() StmtType {
@@ -23,7 +35,7 @@ func (ss *SelectStmt) StmtType() StmtType {
 }
 
 func (ss *SelectStmt) Body() *BlockStmt {
-	return NewBlockStmtWithParent(ss, ss.SelectStmt.Body)
+	return NewBlockStmt(ss, ss.SelectStmt.Body)
 }
 
 // TODO: add PrependCase, InsertCase, and RemoveCase

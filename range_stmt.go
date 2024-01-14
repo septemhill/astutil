@@ -10,12 +10,24 @@ type RangeStmt struct {
 	*ast.RangeStmt
 }
 
-func NewRangeStmt(b *ast.RangeStmt) *RangeStmt {
-	return &RangeStmt{RangeStmt: b}
+func NewRangeStmt(parent Stmt, stmt *ast.RangeStmt) *RangeStmt {
+	return &RangeStmt{RangeStmt: stmt, parent: parent}
 }
 
-func NewRangeStmtWithParent(parent Stmt, stmt *ast.RangeStmt) *RangeStmt {
-	return &RangeStmt{RangeStmt: stmt, parent: parent}
+func (s *RangeStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.RangeStmt)
+}
+
+func (s *RangeStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.RangeStmt)
+}
+
+func (s *RangeStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *RangeStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (rs *RangeStmt) StmtType() StmtType {
@@ -35,15 +47,8 @@ func (rs *RangeStmt) Expr() Expr {
 }
 
 func (rs *RangeStmt) Body() *BlockStmt {
-	return NewBlockStmt(rs.RangeStmt.Body)
+	return NewBlockStmt(rs, rs.RangeStmt.Body)
 }
-
-// TODO: add PrependStmt, InsertStmt, and RemoveStmt
-func (rs *RangeStmt) PrependStmt() error { return nil }
-
-func (rs *RangeStmt) InsertStmt() error { return nil }
-
-func (rs *RangeStmt) RemoveStmt() error { return nil }
 
 // String returns a string representation of the RangeStmt.
 //

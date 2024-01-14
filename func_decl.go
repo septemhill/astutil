@@ -26,7 +26,7 @@ func (ft *FuncDecl) Name() *Ident {
 }
 
 func (ft *FuncDecl) Body() *BlockStmt {
-	return NewBlockStmt(ft.FuncDecl.Body)
+	return NewBlockStmt(nil, ft.FuncDecl.Body)
 }
 
 func (ft *FuncDecl) Type() *FuncType {

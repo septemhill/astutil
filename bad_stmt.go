@@ -7,12 +7,24 @@ type BadStmt struct {
 	*ast.BadStmt
 }
 
-func NewBadStmt(x *ast.BadStmt) *BadStmt {
-	return &BadStmt{BadStmt: x}
+func NewBadStmt(parent Stmt, stmt *ast.BadStmt) *BadStmt {
+	return &BadStmt{BadStmt: stmt, parent: parent}
 }
 
-func NewBadStmtWithParent(parent Stmt, stmt *ast.BadStmt) *BadStmt {
-	return &BadStmt{BadStmt: stmt, parent: parent}
+func (s *BadStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.BadStmt)
+}
+
+func (s *BadStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.BadStmt)
+}
+
+func (s *BadStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *BadStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (s *BadStmt) StmtType() StmtType {

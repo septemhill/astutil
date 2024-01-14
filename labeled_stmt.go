@@ -7,12 +7,24 @@ type LabeledStmt struct {
 	*ast.LabeledStmt
 }
 
-func NewLabeledStmt(ls *ast.LabeledStmt) *LabeledStmt {
-	return &LabeledStmt{LabeledStmt: ls}
+func NewLabeledStmt(parent Stmt, stmt *ast.LabeledStmt) *LabeledStmt {
+	return &LabeledStmt{LabeledStmt: stmt, parent: parent}
 }
 
-func NewLabeledStmtWithParent(parent Stmt, stmt *ast.LabeledStmt) *LabeledStmt {
-	return &LabeledStmt{LabeledStmt: stmt, parent: parent}
+func (s *LabeledStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.LabeledStmt)
+}
+
+func (s *LabeledStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.LabeledStmt)
+}
+
+func (s *LabeledStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *LabeledStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (l *LabeledStmt) StmtType() StmtType {
@@ -21,7 +33,7 @@ func (l *LabeledStmt) StmtType() StmtType {
 
 func (l *LabeledStmt) Stmt() Stmt {
 	// return NewStmt(l.LabeledStmt.Stmt)
-	return NewStmtWithParent(l, l.LabeledStmt.Stmt)
+	return NewStmt(l, l.LabeledStmt.Stmt)
 }
 
 func (l *LabeledStmt) String() string {

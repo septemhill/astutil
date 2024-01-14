@@ -10,12 +10,24 @@ type BranchStmt struct {
 	*ast.BranchStmt
 }
 
-func NewBranchStmt(b *ast.BranchStmt) *BranchStmt {
-	return &BranchStmt{BranchStmt: b}
+func NewBranchStmt(parent Stmt, stmt *ast.BranchStmt) *BranchStmt {
+	return &BranchStmt{BranchStmt: stmt, parent: parent}
 }
 
-func NewBranchStmtWithParent(parent Stmt, stmt *ast.BranchStmt) *BranchStmt {
-	return &BranchStmt{BranchStmt: stmt, parent: parent}
+func (s *BranchStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.BranchStmt)
+}
+
+func (s *BranchStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.BranchStmt)
+}
+
+func (s *BranchStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *BranchStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (br *BranchStmt) StmtType() StmtType {

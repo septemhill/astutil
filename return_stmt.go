@@ -13,12 +13,24 @@ type ReturnStmt struct {
 	*ast.ReturnStmt
 }
 
-func NewReturnStmt(b *ast.ReturnStmt) *ReturnStmt {
-	return &ReturnStmt{ReturnStmt: b}
+func NewReturnStmt(parent Stmt, stmt *ast.ReturnStmt) *ReturnStmt {
+	return &ReturnStmt{ReturnStmt: stmt, parent: parent}
 }
 
-func NewReturnStmtWithParent(parent Stmt, stmt *ast.ReturnStmt) *ReturnStmt {
-	return &ReturnStmt{ReturnStmt: stmt, parent: parent}
+func (s *ReturnStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.ReturnStmt)
+}
+
+func (s *ReturnStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.ReturnStmt)
+}
+
+func (s *ReturnStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *ReturnStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (r *ReturnStmt) StmtType() StmtType {

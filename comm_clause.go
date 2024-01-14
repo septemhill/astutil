@@ -13,12 +13,26 @@ type CommClause struct {
 	*ast.CommClause
 }
 
-func NewCommClause(c *ast.CommClause) *CommClause {
-	return &CommClause{CommClause: c}
+func NewCommClause(parent Stmt, stmt *ast.CommClause) *CommClause {
+	return &CommClause{CommClause: stmt, parent: parent}
 }
 
-func NewCommClauseWithParent(parent Stmt, stmt *ast.CommClause) *CommClause {
-	return &CommClause{CommClause: stmt, parent: parent}
+func (s *CommClause) PrependStmt(st string) error {
+	// TODO: Could only prepend case clause
+	return nil
+}
+
+func (s *CommClause) AppendStmt(st string) error {
+	// TODO: Could only append case clause
+	return nil
+}
+
+func (s *CommClause) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *CommClause) AppendDecl(st string) error {
+	return nil
 }
 
 func (c *CommClause) StmtType() StmtType {
@@ -27,12 +41,12 @@ func (c *CommClause) StmtType() StmtType {
 
 func (c *CommClause) Comm() Stmt {
 	// return NewStmt(c.CommClause.Comm)
-	return NewStmtWithParent(c, c.CommClause.Comm)
+	return NewStmt(c, c.CommClause.Comm)
 }
 
 func (c *CommClause) Body() []Stmt {
 	// return toStmt(c.CommClause.Body)
-	return toStmtWithParent(c, c.CommClause.Body)
+	return toStmt(c, c.CommClause.Body)
 }
 
 func (c *CommClause) String() string {

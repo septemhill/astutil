@@ -7,12 +7,24 @@ type EmptyStmt struct {
 	*ast.EmptyStmt
 }
 
-func NewEmptyStmt(x *ast.EmptyStmt) *EmptyStmt {
-	return &EmptyStmt{EmptyStmt: x}
+func NewEmptyStmt(parent Stmt, stmt *ast.EmptyStmt) *EmptyStmt {
+	return &EmptyStmt{EmptyStmt: stmt, parent: parent}
 }
 
-func NewEmptyStmtWithParent(parent Stmt, stmt *ast.EmptyStmt) *EmptyStmt {
-	return &EmptyStmt{EmptyStmt: stmt, parent: parent}
+func (s *EmptyStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.EmptyStmt)
+}
+
+func (s *EmptyStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.EmptyStmt)
+}
+
+func (s *EmptyStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *EmptyStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (s *EmptyStmt) StmtType() StmtType {

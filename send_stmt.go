@@ -10,12 +10,24 @@ type SendStmt struct {
 	*ast.SendStmt
 }
 
-func NewSendStmt(b *ast.SendStmt) *SendStmt {
-	return &SendStmt{SendStmt: b}
+func NewSendStmt(parent Stmt, stmt *ast.SendStmt) *SendStmt {
+	return &SendStmt{SendStmt: stmt, parent: parent}
 }
 
-func NewSendStmtWithParent(parent Stmt, stmt *ast.SendStmt) *SendStmt {
-	return &SendStmt{SendStmt: stmt, parent: parent}
+func (s *SendStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.SendStmt)
+}
+
+func (s *SendStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.SendStmt)
+}
+
+func (s *SendStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *SendStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (send *SendStmt) StmtType() StmtType {

@@ -10,12 +10,24 @@ type DeferStmt struct {
 	*ast.DeferStmt
 }
 
-func NewDeferStmt(ds *ast.DeferStmt) *DeferStmt {
-	return &DeferStmt{DeferStmt: ds}
+func NewDeferStmt(parent Stmt, stmt *ast.DeferStmt) *DeferStmt {
+	return &DeferStmt{DeferStmt: stmt, parent: parent}
 }
 
-func NewDeferStmtWithParent(parent Stmt, stmt *ast.DeferStmt) *DeferStmt {
-	return &DeferStmt{DeferStmt: stmt, parent: parent}
+func (s *DeferStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.DeferStmt)
+}
+
+func (s *DeferStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.DeferStmt)
+}
+
+func (s *DeferStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *DeferStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (ds *DeferStmt) StmtType() StmtType {

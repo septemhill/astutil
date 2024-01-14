@@ -99,116 +99,62 @@ type StmtAppendPrepender interface {
 
 type Stmt interface {
 	ast.Stmt
+	StmtAppendPrepender
 
 	String() string
 	StmtType() StmtType
 }
 
-// func toStmt(stmts []ast.Stmt) []Stmt {
-// 	return lo.Map(stmts, func(stmt ast.Stmt, _ int) Stmt {
-// 		return NewStmt(stmt)
-// 	})
-// }
-
-func toStmtWithParent(parent Stmt, stmts []ast.Stmt) []Stmt {
+func toStmt(parent Stmt, stmts []ast.Stmt) []Stmt {
 	return lo.Map(stmts, func(stmt ast.Stmt, _ int) Stmt {
-		return NewStmtWithParent(parent, stmt)
+		return NewStmt(parent, stmt)
 	})
 }
 
-// func NewStmt(stmt ast.Stmt) Stmt {
-// 	switch x := stmt.(type) {
-// 	case *ast.AssignStmt:
-// 		return NewAssignStmt(x)
-// 	case *ast.BadStmt:
-// 		return NewBadStmt(x)
-// 	case *ast.BlockStmt:
-// 		return NewBlockStmt(x)
-// 	case *ast.BranchStmt:
-// 		return NewBranchStmt(x)
-// 	case *ast.CaseClause:
-// 		return NewCaseClause(x)
-// 	case *ast.CommClause:
-// 		return NewCommClause(x)
-// 	case *ast.DeclStmt:
-// 		return NewDeclStmt(x)
-// 	case *ast.DeferStmt:
-// 		return NewDeferStmt(x)
-// 	case *ast.EmptyStmt:
-// 		return NewEmptyStmt(x)
-// 	case *ast.ExprStmt:
-// 		return NewExprStmt(x)
-// 	case *ast.ForStmt:
-// 		return NewForStmt(x)
-// 	case *ast.GoStmt:
-// 		return NewGoStmt(x)
-// 	case *ast.IfStmt:
-// 		return NewIfStmt(x)
-// 	case *ast.IncDecStmt:
-// 		return NewIncDecStmt(x)
-// 	case *ast.LabeledStmt:
-// 		return NewLabeledStmt(x)
-// 	case *ast.RangeStmt:
-// 		return NewRangeStmt(x)
-// 	case *ast.ReturnStmt:
-// 		return NewReturnStmt(x)
-// 	case *ast.SelectStmt:
-// 		return NewSelectStmt(x)
-// 	case *ast.SendStmt:
-// 		return NewSendStmt(x)
-// 	case *ast.SwitchStmt:
-// 		return NewSwitchStmt(x)
-// 	case *ast.TypeSwitchStmt:
-// 		return NewTypeSwitchStmt(x)
-// 	default:
-// 		return nil
-// 	}
-// }
-
-func NewStmtWithParent(parent Stmt, stmt ast.Stmt) Stmt {
+func NewStmt(parent Stmt, stmt ast.Stmt) Stmt {
 	switch stmt := stmt.(type) {
 	case *ast.AssignStmt:
-		return NewAssignStmtWithParent(parent, stmt)
+		return NewAssignStmt(parent, stmt)
 	case *ast.BadStmt:
-		return NewBadStmtWithParent(parent, stmt)
+		return NewBadStmt(parent, stmt)
 	case *ast.BlockStmt:
-		return NewBlockStmtWithParent(parent, stmt)
+		return NewBlockStmt(nil, stmt)
 	case *ast.BranchStmt:
-		return NewBranchStmtWithParent(parent, stmt)
+		return NewBranchStmt(parent, stmt)
 	case *ast.CaseClause:
-		return NewCaseClauseWithParent(parent, stmt)
+		return NewCaseClause(parent, stmt)
 	case *ast.CommClause:
-		return NewCommClauseWithParent(parent, stmt)
+		return NewCommClause(parent, stmt)
 	case *ast.DeclStmt:
-		return NewDeclStmtWithParent(parent, stmt)
+		return NewDeclStmt(parent, stmt)
 	case *ast.DeferStmt:
-		return NewDeferStmtWithParent(parent, stmt)
+		return NewDeferStmt(parent, stmt)
 	case *ast.EmptyStmt:
-		return NewEmptyStmtWithParent(parent, stmt)
+		return NewEmptyStmt(parent, stmt)
 	case *ast.ExprStmt:
-		return NewExprStmtWithParent(parent, stmt)
+		return NewExprStmt(parent, stmt)
 	case *ast.ForStmt:
-		return NewForStmtWithParent(parent, stmt)
+		return NewForStmt(parent, stmt)
 	case *ast.GoStmt:
-		return NewGoStmtWithParent(parent, stmt)
+		return NewGoStmt(parent, stmt)
 	case *ast.IfStmt:
-		return NewIfStmtWithParent(parent, stmt)
+		return NewIfStmt(parent, stmt)
 	case *ast.IncDecStmt:
-		return NewIncDecStmtWithParent(parent, stmt)
+		return NewIncDecStmt(parent, stmt)
 	case *ast.LabeledStmt:
-		return NewLabeledStmtWithParent(parent, stmt)
+		return NewLabeledStmt(parent, stmt)
 	case *ast.RangeStmt:
-		return NewRangeStmtWithParent(parent, stmt)
+		return NewRangeStmt(parent, stmt)
 	case *ast.ReturnStmt:
-		return NewReturnStmtWithParent(parent, stmt)
+		return NewReturnStmt(parent, stmt)
 	case *ast.SelectStmt:
-		return NewSelectStmtWithParent(parent, stmt)
+		return NewSelectStmt(parent, stmt)
 	case *ast.SendStmt:
-		return NewSendStmtWithParent(parent, stmt)
+		return NewSendStmt(parent, stmt)
 	case *ast.SwitchStmt:
-		return NewSwitchStmtWithParent(parent, stmt)
+		return NewSwitchStmt(parent, stmt)
 	case *ast.TypeSwitchStmt:
-		return NewTypeSwitchStmtWithParent(parent, stmt)
+		return NewTypeSwitchStmt(parent, stmt)
 	default:
 		return nil
 	}

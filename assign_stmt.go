@@ -13,27 +13,23 @@ type AssignStmt struct {
 	*ast.AssignStmt
 }
 
-func NewAssignStmt(x *ast.AssignStmt) *AssignStmt {
-	return &AssignStmt{AssignStmt: x}
-}
-
-func NewAssignStmtWithParent(parent Stmt, stmt *ast.AssignStmt) *AssignStmt {
+func NewAssignStmt(parent Stmt, stmt *ast.AssignStmt) *AssignStmt {
 	return &AssignStmt{AssignStmt: stmt, parent: parent}
 }
 
-func (s *AssignStmt) PrependStmt(string) error {
+func (s *AssignStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.AssignStmt)
+}
+
+func (s *AssignStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.AssignStmt)
+}
+
+func (s *AssignStmt) PrependDecl(decl string) error {
 	return nil
 }
 
-func (s *AssignStmt) AppendStmt(string) error {
-	return nil
-}
-
-func (s *AssignStmt) PrependDecl(string) error {
-	return nil
-}
-
-func (s *AssignStmt) AppendDecl(string) error {
+func (s *AssignStmt) AppendDecl(decl string) error {
 	return nil
 }
 

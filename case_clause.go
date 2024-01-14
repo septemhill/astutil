@@ -13,12 +13,26 @@ type CaseClause struct {
 	*ast.CaseClause
 }
 
-func NewCaseClause(c *ast.CaseClause) *CaseClause {
-	return &CaseClause{CaseClause: c}
+func NewCaseClause(parent Stmt, stmt *ast.CaseClause) *CaseClause {
+	return &CaseClause{CaseClause: stmt, parent: parent}
 }
 
-func NewCaseClauseWithParent(parent Stmt, stmt *ast.CaseClause) *CaseClause {
-	return &CaseClause{CaseClause: stmt, parent: parent}
+func (s *CaseClause) PrependStmt(st string) error {
+	// TODO: Could only prepend case clause
+	return nil
+}
+
+func (s *CaseClause) AppendStmt(st string) error {
+	// TODO: Could only append case clause
+	return nil
+}
+
+func (s *CaseClause) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *CaseClause) AppendDecl(st string) error {
+	return nil
 }
 
 func (cc *CaseClause) StmtType() StmtType {
@@ -31,7 +45,7 @@ func (cc *CaseClause) List() []Expr {
 
 func (cc *CaseClause) Body() []Stmt {
 	// return toStmt(cc.CaseClause.Body)
-	return toStmtWithParent(cc, cc.CaseClause.Body)
+	return toStmt(cc, cc.CaseClause.Body)
 }
 
 // String returns a string representation of the CaseClause.

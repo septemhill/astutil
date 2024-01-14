@@ -9,12 +9,24 @@ type ExprStmt struct {
 	*ast.ExprStmt
 }
 
-func NewExprStmt(es *ast.ExprStmt) *ExprStmt {
-	return &ExprStmt{ExprStmt: es}
+func NewExprStmt(parent Stmt, stmt *ast.ExprStmt) *ExprStmt {
+	return &ExprStmt{ExprStmt: stmt, parent: parent}
 }
 
-func NewExprStmtWithParent(parent Stmt, stmt *ast.ExprStmt) *ExprStmt {
-	return &ExprStmt{ExprStmt: stmt, parent: parent}
+func (s *ExprStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.ExprStmt)
+}
+
+func (s *ExprStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.ExprStmt)
+}
+
+func (s *ExprStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *ExprStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (e *ExprStmt) StmtType() StmtType {

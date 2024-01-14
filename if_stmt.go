@@ -10,16 +10,16 @@ type IfStmt struct {
 	*ast.IfStmt
 }
 
-func NewIfStmt(is *ast.IfStmt) *IfStmt {
-	return &IfStmt{IfStmt: is}
+func NewIfStmt(parent Stmt, stmt *ast.IfStmt) *IfStmt {
+	return &IfStmt{IfStmt: stmt, parent: parent}
 }
 
 func (s *IfStmt) PrependStmt(st string) error {
-	return nil
+	return prependStmt(st, s.parent, s.IfStmt)
 }
 
 func (s *IfStmt) AppendStmt(st string) error {
-	return nil
+	return appendStmt(st, s.parent, s.IfStmt)
 }
 
 func (s *IfStmt) PrependDecl(st string) error {
@@ -30,17 +30,13 @@ func (s *IfStmt) AppendDecl(st string) error {
 	return nil
 }
 
-func NewIfStmtWithParent(parent Stmt, stmt *ast.IfStmt) *IfStmt {
-	return &IfStmt{IfStmt: stmt, parent: parent}
-}
-
 func (ifs *IfStmt) StmtType() StmtType {
 	return IfStmtType
 }
 
 func (ifs *IfStmt) Init() Stmt {
 	// return NewStmt(ifs.IfStmt.Init)
-	return NewStmtWithParent(ifs, ifs.IfStmt.Init)
+	return NewStmt(ifs, ifs.IfStmt.Init)
 }
 
 func (ifs *IfStmt) Cond() Expr {
@@ -48,12 +44,12 @@ func (ifs *IfStmt) Cond() Expr {
 }
 
 func (ifs *IfStmt) Body() *BlockStmt {
-	return NewBlockStmt(ifs.IfStmt.Body)
+	return NewBlockStmt(ifs, ifs.IfStmt.Body)
 }
 
 func (ifs *IfStmt) Else() Stmt {
 	// return NewStmt(ifs.IfStmt.Else)
-	return NewStmtWithParent(ifs, ifs.IfStmt.Else)
+	return NewStmt(ifs, ifs.IfStmt.Else)
 }
 
 // String returns a string representation of the IfStmt.

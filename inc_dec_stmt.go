@@ -10,12 +10,24 @@ type IncDecStmt struct {
 	*ast.IncDecStmt
 }
 
-func NewIncDecStmt(is *ast.IncDecStmt) *IncDecStmt {
-	return &IncDecStmt{IncDecStmt: is}
+func NewIncDecStmt(parent Stmt, stmt *ast.IncDecStmt) *IncDecStmt {
+	return &IncDecStmt{IncDecStmt: stmt, parent: parent}
 }
 
-func NewIncDecStmtWithParent(parent Stmt, stmt *ast.IncDecStmt) *IncDecStmt {
-	return &IncDecStmt{IncDecStmt: stmt, parent: parent}
+func (s *IncDecStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.IncDecStmt)
+}
+
+func (s *IncDecStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.IncDecStmt)
+}
+
+func (s *IncDecStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *IncDecStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (s *IncDecStmt) StmtType() StmtType {

@@ -10,12 +10,24 @@ type GoStmt struct {
 	*ast.GoStmt
 }
 
-func NewGoStmt(g *ast.GoStmt) *GoStmt {
-	return &GoStmt{GoStmt: g}
+func NewGoStmt(parent Stmt, stmt *ast.GoStmt) *GoStmt {
+	return &GoStmt{GoStmt: stmt, parent: parent}
 }
 
-func NewGoStmtWithParent(parent Stmt, stmt *ast.GoStmt) *GoStmt {
-	return &GoStmt{GoStmt: stmt, parent: parent}
+func (s *GoStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.GoStmt)
+}
+
+func (s *GoStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.GoStmt)
+}
+
+func (s *GoStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *GoStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (g *GoStmt) StmtType() StmtType {

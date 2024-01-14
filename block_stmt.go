@@ -12,12 +12,24 @@ type BlockStmt struct {
 	*ast.BlockStmt
 }
 
-func NewBlockStmt(block *ast.BlockStmt) *BlockStmt {
-	return &BlockStmt{BlockStmt: block}
+func NewBlockStmt(parent Stmt, stmt *ast.BlockStmt) *BlockStmt {
+	return &BlockStmt{BlockStmt: stmt, parent: parent}
 }
 
-func NewBlockStmtWithParent(parent Stmt, stmt *ast.BlockStmt) *BlockStmt {
-	return &BlockStmt{BlockStmt: stmt, parent: parent}
+func (s *BlockStmt) PrependStmt(st string) error {
+	return ErrNotAppendPrepend
+}
+
+func (s *BlockStmt) AppendStmt(st string) error {
+	return ErrNotAppendPrepend
+}
+
+func (s *BlockStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *BlockStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (b *BlockStmt) StmtType() StmtType {
@@ -26,52 +38,8 @@ func (b *BlockStmt) StmtType() StmtType {
 
 func (b *BlockStmt) Stmts() []Stmt {
 	// return toStmt(b.BlockStmt.List)
-	return toStmtWithParent(b, b.BlockStmt.List)
+	return toStmt(b, b.BlockStmt.List)
 }
-
-// TODO: remove PrependStmt, InsertStmt, and RemoveStmt
-// func (b *BlockStmt) PrependStmt(st string) error {
-// 	stmt, err := parserutil.ParseStmt(st)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	b.List = append([]ast.Stmt{stmt}, b.List...)
-// 	return nil
-// }
-
-// func (b *BlockStmt) InsertStmt(i int, st string) error {
-// 	if i < 0 || i > len(b.List) {
-// 		return errors.New("index out of range")
-// 	}
-
-// 	stmt, err := parserutil.ParseStmt(st)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	b.List = slices.Insert(b.List, i, stmt)
-// 	return nil
-// }
-
-// func (b *BlockStmt) RemoveStmt(i int) error {
-// 	if i < 0 || i >= len(b.List) {
-// 		return errors.New("index out of range")
-// 	}
-
-// 	b.List = slices.Delete(b.List, i, i+1)
-// 	return nil
-// }
-
-// func (b *BlockStmt) AppendStmt(st string) error {
-// 	stmt, err := parserutil.ParseStmt(st)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	b.List = append(b.List, stmt)
-// 	return nil
-// }
 
 // String returns a string representation of the BlockStmt.
 //

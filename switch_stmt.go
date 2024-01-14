@@ -13,12 +13,24 @@ type SwitchStmt struct {
 	*ast.SwitchStmt
 }
 
-func NewSwitchStmt(b *ast.SwitchStmt) *SwitchStmt {
-	return &SwitchStmt{SwitchStmt: b}
+func NewSwitchStmt(parent Stmt, stmt *ast.SwitchStmt) *SwitchStmt {
+	return &SwitchStmt{SwitchStmt: stmt, parent: parent}
 }
 
-func NewSwitchStmtWithParent(parent Stmt, stmt *ast.SwitchStmt) *SwitchStmt {
-	return &SwitchStmt{SwitchStmt: stmt, parent: parent}
+func (s *SwitchStmt) PrependStmt(st string) error {
+	return prependStmt(st, s.parent, s.SwitchStmt)
+}
+
+func (s *SwitchStmt) AppendStmt(st string) error {
+	return appendStmt(st, s.parent, s.SwitchStmt)
+}
+
+func (s *SwitchStmt) PrependDecl(st string) error {
+	return nil
+}
+
+func (s *SwitchStmt) AppendDecl(st string) error {
+	return nil
 }
 
 func (s *SwitchStmt) StmtType() StmtType {
@@ -30,7 +42,7 @@ func (s *SwitchStmt) Tag() Expr {
 }
 
 func (s *SwitchStmt) Body() *BlockStmt {
-	return NewBlockStmtWithParent(s, s.SwitchStmt.Body)
+	return NewBlockStmt(s, s.SwitchStmt.Body)
 }
 
 // TODO: add PrependCase, InsertCase, and RemoveCase
