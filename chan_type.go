@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type ChanType struct {
 	*ast.ChanType
 }
 
-func NewChanType(c *ast.ChanType) *ChanType {
-	return &ChanType{ChanType: c}
+func NewChanType(expr *ast.ChanType) *ChanType {
+	return &ChanType{ChanType: expr}
 }
 
 func (c *ChanType) ExprType() ExprType {

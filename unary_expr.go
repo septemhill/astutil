@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type UnaryExpr struct {
 	*ast.UnaryExpr
 }
 
-func NewUnaryExpr(x *ast.UnaryExpr) *UnaryExpr {
-	return &UnaryExpr{UnaryExpr: x}
+func NewUnaryExpr(expr *ast.UnaryExpr) *UnaryExpr {
+	return &UnaryExpr{UnaryExpr: expr}
 }
 
 func (v *UnaryExpr) ExprType() ExprType {

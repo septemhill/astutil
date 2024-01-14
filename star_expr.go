@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -6,8 +6,8 @@ type StarExpr struct {
 	*ast.StarExpr
 }
 
-func NewStarExpr(x *ast.StarExpr) *StarExpr {
-	return &StarExpr{StarExpr: x}
+func NewStarExpr(expr *ast.StarExpr) *StarExpr {
+	return &StarExpr{StarExpr: expr}
 }
 
 func (s *StarExpr) ExprType() ExprType {

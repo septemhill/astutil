@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewIncDecStmt(is *ast.IncDecStmt) *IncDecStmt {
 	return &IncDecStmt{IncDecStmt: is}
 }
 
-func NewIncDecStmtWithParent(parent Stmt, is *ast.IncDecStmt) *IncDecStmt {
-	return &IncDecStmt{IncDecStmt: is, parent: parent}
+func NewIncDecStmtWithParent(parent Stmt, stmt *ast.IncDecStmt) *IncDecStmt {
+	return &IncDecStmt{IncDecStmt: stmt, parent: parent}
 }
 
 func (s *IncDecStmt) StmtType() StmtType {

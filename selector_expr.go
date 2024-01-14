@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -6,8 +6,8 @@ type SelectorExpr struct {
 	*ast.SelectorExpr
 }
 
-func NewSelectorExpr(x *ast.SelectorExpr) *SelectorExpr {
-	return &SelectorExpr{SelectorExpr: x}
+func NewSelectorExpr(expr *ast.SelectorExpr) *SelectorExpr {
+	return &SelectorExpr{SelectorExpr: expr}
 }
 
 func (s *SelectorExpr) ExprType() ExprType {

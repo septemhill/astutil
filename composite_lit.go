@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -12,8 +12,8 @@ type CompositeLit struct {
 	*ast.CompositeLit
 }
 
-func NewCompositeLit(c *ast.CompositeLit) *CompositeLit {
-	return &CompositeLit{CompositeLit: c}
+func NewCompositeLit(expr *ast.CompositeLit) *CompositeLit {
+	return &CompositeLit{CompositeLit: expr}
 }
 
 func (c *CompositeLit) ExprType() ExprType {

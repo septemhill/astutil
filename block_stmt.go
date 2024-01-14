@@ -1,11 +1,10 @@
-package astutil
+package goastutil
 
 import (
 	"go/ast"
 	"strings"
 
 	"github.com/samber/lo"
-	"github.com/shurcooL/go/parserutil"
 )
 
 type BlockStmt struct {
@@ -17,8 +16,8 @@ func NewBlockStmt(block *ast.BlockStmt) *BlockStmt {
 	return &BlockStmt{BlockStmt: block}
 }
 
-func NewBlockStmtWithParent(parent Stmt, block *ast.BlockStmt) *BlockStmt {
-	return &BlockStmt{BlockStmt: block, parent: parent}
+func NewBlockStmtWithParent(parent Stmt, stmt *ast.BlockStmt) *BlockStmt {
+	return &BlockStmt{BlockStmt: stmt, parent: parent}
 }
 
 func (b *BlockStmt) StmtType() StmtType {
@@ -64,15 +63,15 @@ func (b *BlockStmt) Stmts() []Stmt {
 // 	return nil
 // }
 
-func (b *BlockStmt) AppendStmt(st string) error {
-	stmt, err := parserutil.ParseStmt(st)
-	if err != nil {
-		return err
-	}
+// func (b *BlockStmt) AppendStmt(st string) error {
+// 	stmt, err := parserutil.ParseStmt(st)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	b.List = append(b.List, stmt)
-	return nil
-}
+// 	b.List = append(b.List, stmt)
+// 	return nil
+// }
 
 // String returns a string representation of the BlockStmt.
 //

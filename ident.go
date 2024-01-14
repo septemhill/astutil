@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"go/ast"
@@ -8,8 +8,8 @@ type Ident struct {
 	*ast.Ident
 }
 
-func NewIdent(i *ast.Ident) *Ident {
-	return &Ident{Ident: i}
+func NewIdent(expr *ast.Ident) *Ident {
+	return &Ident{Ident: expr}
 }
 
 func (i *Ident) ExprType() ExprType {

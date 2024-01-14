@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -11,8 +11,8 @@ func NewBadStmt(x *ast.BadStmt) *BadStmt {
 	return &BadStmt{BadStmt: x}
 }
 
-func NewBadStmtWithParent(parent Stmt, x *ast.BadStmt) *BadStmt {
-	return &BadStmt{BadStmt: x, parent: parent}
+func NewBadStmtWithParent(parent Stmt, stmt *ast.BadStmt) *BadStmt {
+	return &BadStmt{BadStmt: stmt, parent: parent}
 }
 
 func (s *BadStmt) StmtType() StmtType {

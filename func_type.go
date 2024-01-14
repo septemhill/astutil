@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -20,8 +20,8 @@ type FuncType struct {
 	*ast.FuncType
 }
 
-func NewFuncType(f *ast.FuncType, name string, fnType string) *FuncType {
-	return &FuncType{FuncType: f, Name: name, FnType: fnType}
+func NewFuncType(expr *ast.FuncType, name string, fnType string) *FuncType {
+	return &FuncType{FuncType: expr, Name: name, FnType: fnType}
 }
 
 func (ft *FuncType) ExprType() ExprType {

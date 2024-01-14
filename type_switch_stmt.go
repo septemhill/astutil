@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewTypeSwitchStmt(b *ast.TypeSwitchStmt) *TypeSwitchStmt {
 	return &TypeSwitchStmt{TypeSwitchStmt: b}
 }
 
-func NewTypeSwitchStmtWithParent(parent Stmt, b *ast.TypeSwitchStmt) *TypeSwitchStmt {
-	return &TypeSwitchStmt{TypeSwitchStmt: b, parent: parent}
+func NewTypeSwitchStmtWithParent(parent Stmt, stmt *ast.TypeSwitchStmt) *TypeSwitchStmt {
+	return &TypeSwitchStmt{TypeSwitchStmt: stmt, parent: parent}
 }
 
 func (t *TypeSwitchStmt) StmtType() StmtType {

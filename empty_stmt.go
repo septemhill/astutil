@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -11,8 +11,8 @@ func NewEmptyStmt(x *ast.EmptyStmt) *EmptyStmt {
 	return &EmptyStmt{EmptyStmt: x}
 }
 
-func NewEmptyStmtWithParent(parent Stmt, x *ast.EmptyStmt) *EmptyStmt {
-	return &EmptyStmt{EmptyStmt: x, parent: parent}
+func NewEmptyStmtWithParent(parent Stmt, stmt *ast.EmptyStmt) *EmptyStmt {
+	return &EmptyStmt{EmptyStmt: stmt, parent: parent}
 }
 
 func (s *EmptyStmt) StmtType() StmtType {

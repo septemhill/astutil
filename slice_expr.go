@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type SliceExpr struct {
 	*ast.SliceExpr
 }
 
-func NewSliceExpr(x *ast.SliceExpr) *SliceExpr {
-	return &SliceExpr{SliceExpr: x}
+func NewSliceExpr(expr *ast.SliceExpr) *SliceExpr {
+	return &SliceExpr{SliceExpr: expr}
 }
 
 func (s *SliceExpr) ExprType() ExprType {

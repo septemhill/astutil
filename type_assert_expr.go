@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type TypeAssertExpr struct {
 	*ast.TypeAssertExpr
 }
 
-func NewTypeAssertExpr(x *ast.TypeAssertExpr) *TypeAssertExpr {
-	return &TypeAssertExpr{TypeAssertExpr: x}
+func NewTypeAssertExpr(expr *ast.TypeAssertExpr) *TypeAssertExpr {
+	return &TypeAssertExpr{TypeAssertExpr: expr}
 }
 
 func (t *TypeAssertExpr) ExprType() ExprType {

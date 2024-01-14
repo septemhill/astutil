@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type ArrayType struct {
 	*ast.ArrayType
 }
 
-func NewArrayType(a *ast.ArrayType) *ArrayType {
-	return &ArrayType{ArrayType: a}
+func NewArrayType(expr *ast.ArrayType) *ArrayType {
+	return &ArrayType{ArrayType: expr}
 }
 
 func (a *ArrayType) ExprType() ExprType {

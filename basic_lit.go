@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -6,8 +6,8 @@ type BasicLit struct {
 	*ast.BasicLit
 }
 
-func NewBasicLit(b *ast.BasicLit) *BasicLit {
-	return &BasicLit{BasicLit: b}
+func NewBasicLit(expr *ast.BasicLit) *BasicLit {
+	return &BasicLit{BasicLit: expr}
 }
 
 func (b *BasicLit) ExprType() ExprType {

@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -13,8 +13,8 @@ type InterfaceType struct {
 	*ast.InterfaceType
 }
 
-func NewInterfaceType(name string, interfaceType *ast.InterfaceType) *InterfaceType {
-	return &InterfaceType{Name: name, InterfaceType: interfaceType}
+func NewInterfaceType(name string, expr *ast.InterfaceType) *InterfaceType {
+	return &InterfaceType{Name: name, InterfaceType: expr}
 }
 
 func (it *InterfaceType) ExprType() ExprType {

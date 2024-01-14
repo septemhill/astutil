@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type FuncLit struct {
 	*ast.FuncLit
 }
 
-func NewFuncLit(f *ast.FuncLit) *FuncLit {
-	return &FuncLit{FuncLit: f}
+func NewFuncLit(expr *ast.FuncLit) *FuncLit {
+	return &FuncLit{FuncLit: expr}
 }
 
 func (f *FuncLit) ExprType() ExprType {

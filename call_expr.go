@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -12,8 +12,8 @@ type CallExpr struct {
 	*ast.CallExpr
 }
 
-func NewCallExpr(c *ast.CallExpr) *CallExpr {
-	return &CallExpr{CallExpr: c}
+func NewCallExpr(expr *ast.CallExpr) *CallExpr {
+	return &CallExpr{CallExpr: expr}
 }
 
 func (c *CallExpr) ExprType() ExprType {

@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewSendStmt(b *ast.SendStmt) *SendStmt {
 	return &SendStmt{SendStmt: b}
 }
 
-func NewSendStmtWithParent(parent Stmt, b *ast.SendStmt) *SendStmt {
-	return &SendStmt{SendStmt: b, parent: parent}
+func NewSendStmtWithParent(parent Stmt, stmt *ast.SendStmt) *SendStmt {
+	return &SendStmt{SendStmt: stmt, parent: parent}
 }
 
 func (send *SendStmt) StmtType() StmtType {

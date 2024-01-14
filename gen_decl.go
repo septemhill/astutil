@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"go/ast"

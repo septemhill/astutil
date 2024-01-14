@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type KeyValueExpr struct {
 	*ast.KeyValueExpr
 }
 
-func NewKeyValueExpr(x *ast.KeyValueExpr) *KeyValueExpr {
-	return &KeyValueExpr{KeyValueExpr: x}
+func NewKeyValueExpr(expr *ast.KeyValueExpr) *KeyValueExpr {
+	return &KeyValueExpr{KeyValueExpr: expr}
 }
 
 func (k *KeyValueExpr) ExprType() ExprType {

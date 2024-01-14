@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewSelectStmt(b *ast.SelectStmt) *SelectStmt {
 	return &SelectStmt{SelectStmt: b}
 }
 
-func NewSelectStmtWithParent(parent Stmt, b *ast.SelectStmt) *SelectStmt {
-	return &SelectStmt{SelectStmt: b, parent: parent}
+func NewSelectStmtWithParent(parent Stmt, stmt *ast.SelectStmt) *SelectStmt {
+	return &SelectStmt{SelectStmt: stmt, parent: parent}
 }
 
 func (ss *SelectStmt) StmtType() StmtType {
@@ -23,7 +23,7 @@ func (ss *SelectStmt) StmtType() StmtType {
 }
 
 func (ss *SelectStmt) Body() *BlockStmt {
-	return NewBlockStmt(ss.SelectStmt.Body)
+	return NewBlockStmtWithParent(ss, ss.SelectStmt.Body)
 }
 
 // TODO: add PrependCase, InsertCase, and RemoveCase

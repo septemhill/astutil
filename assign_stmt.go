@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -17,8 +17,24 @@ func NewAssignStmt(x *ast.AssignStmt) *AssignStmt {
 	return &AssignStmt{AssignStmt: x}
 }
 
-func NewAssignStmtWithParent(parent Stmt, x *ast.AssignStmt) *AssignStmt {
-	return &AssignStmt{AssignStmt: x, parent: parent}
+func NewAssignStmtWithParent(parent Stmt, stmt *ast.AssignStmt) *AssignStmt {
+	return &AssignStmt{AssignStmt: stmt, parent: parent}
+}
+
+func (s *AssignStmt) PrependStmt(string) error {
+	return nil
+}
+
+func (s *AssignStmt) AppendStmt(string) error {
+	return nil
+}
+
+func (s *AssignStmt) PrependDecl(string) error {
+	return nil
+}
+
+func (s *AssignStmt) AppendDecl(string) error {
+	return nil
 }
 
 func (s *AssignStmt) StmtType() StmtType {

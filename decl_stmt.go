@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -11,8 +11,8 @@ func NewDeclStmt(decl *ast.DeclStmt) *DeclStmt {
 	return &DeclStmt{DeclStmt: decl}
 }
 
-func NewDeclStmtWithParent(parent Stmt, decl *ast.DeclStmt) *DeclStmt {
-	return &DeclStmt{DeclStmt: decl, parent: parent}
+func NewDeclStmtWithParent(parent Stmt, stmt *ast.DeclStmt) *DeclStmt {
+	return &DeclStmt{DeclStmt: stmt, parent: parent}
 }
 
 func (decl *DeclStmt) StmtType() StmtType {

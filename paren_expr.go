@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type ParenExpr struct {
 	*ast.ParenExpr
 }
 
-func NewParenExpr(x *ast.ParenExpr) *ParenExpr {
-	return &ParenExpr{ParenExpr: x}
+func NewParenExpr(expr *ast.ParenExpr) *ParenExpr {
+	return &ParenExpr{ParenExpr: expr}
 }
 
 func (p *ParenExpr) ExprType() ExprType {

@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -17,8 +17,8 @@ func NewCaseClause(c *ast.CaseClause) *CaseClause {
 	return &CaseClause{CaseClause: c}
 }
 
-func NewCaseClauseWithParent(parent Stmt, c *ast.CaseClause) *CaseClause {
-	return &CaseClause{CaseClause: c, parent: parent}
+func NewCaseClauseWithParent(parent Stmt, stmt *ast.CaseClause) *CaseClause {
+	return &CaseClause{CaseClause: stmt, parent: parent}
 }
 
 func (cc *CaseClause) StmtType() StmtType {

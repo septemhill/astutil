@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -15,8 +15,8 @@ func NewForStmt(fs *ast.ForStmt) *ForStmt {
 	return &ForStmt{ForStmt: fs}
 }
 
-func NewForStmtWithParent(parent Stmt, fs *ast.ForStmt) *ForStmt {
-	return &ForStmt{ForStmt: fs, parent: parent}
+func NewForStmtWithParent(parent Stmt, stmt *ast.ForStmt) *ForStmt {
+	return &ForStmt{ForStmt: stmt, parent: parent}
 }
 
 func (fs *ForStmt) StmtType() StmtType {
@@ -38,7 +38,7 @@ func (fs *ForStmt) Post() Stmt {
 }
 
 func (fs *ForStmt) Body() *BlockStmt {
-	return NewBlockStmt(fs.ForStmt.Body)
+	return NewBlockStmtWithParent(fs, fs.ForStmt.Body)
 }
 
 // TODO: add PrependStmt, InsertStmt, and RemoveStmt

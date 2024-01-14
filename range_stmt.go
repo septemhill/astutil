@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewRangeStmt(b *ast.RangeStmt) *RangeStmt {
 	return &RangeStmt{RangeStmt: b}
 }
 
-func NewRangeStmtWithParent(parent Stmt, b *ast.RangeStmt) *RangeStmt {
-	return &RangeStmt{RangeStmt: b, parent: parent}
+func NewRangeStmtWithParent(parent Stmt, stmt *ast.RangeStmt) *RangeStmt {
+	return &RangeStmt{RangeStmt: stmt, parent: parent}
 }
 
 func (rs *RangeStmt) StmtType() StmtType {

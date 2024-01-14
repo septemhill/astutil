@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewIfStmt(is *ast.IfStmt) *IfStmt {
 	return &IfStmt{IfStmt: is}
 }
 
-func NewIfStmtWithParent(parent Stmt, is *ast.IfStmt) *IfStmt {
-	return &IfStmt{IfStmt: is, parent: parent}
+func NewIfStmtWithParent(parent Stmt, stmt *ast.IfStmt) *IfStmt {
+	return &IfStmt{IfStmt: stmt, parent: parent}
 }
 
 func (ifs *IfStmt) StmtType() StmtType {

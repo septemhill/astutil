@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -6,8 +6,8 @@ type Ellipsis struct {
 	*ast.Ellipsis
 }
 
-func NewEllipsis(e *ast.Ellipsis) *Ellipsis {
-	return &Ellipsis{Ellipsis: e}
+func NewEllipsis(expr *ast.Ellipsis) *Ellipsis {
+	return &Ellipsis{Ellipsis: expr}
 }
 
 func (e *Ellipsis) ExprType() ExprType {

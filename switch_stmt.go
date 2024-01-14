@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -17,8 +17,8 @@ func NewSwitchStmt(b *ast.SwitchStmt) *SwitchStmt {
 	return &SwitchStmt{SwitchStmt: b}
 }
 
-func NewSwitchStmtWithParent(parent Stmt, b *ast.SwitchStmt) *SwitchStmt {
-	return &SwitchStmt{SwitchStmt: b, parent: parent}
+func NewSwitchStmtWithParent(parent Stmt, stmt *ast.SwitchStmt) *SwitchStmt {
+	return &SwitchStmt{SwitchStmt: stmt, parent: parent}
 }
 
 func (s *SwitchStmt) StmtType() StmtType {
@@ -29,9 +29,8 @@ func (s *SwitchStmt) Tag() Expr {
 	return NewExpr(s.SwitchStmt.Tag)
 }
 
-func (s *SwitchStmt) Body() []Stmt {
-	// return toStmt(s.SwitchStmt.Body.List)
-	return toStmtWithParent(s, s.SwitchStmt.Body.List)
+func (s *SwitchStmt) Body() *BlockStmt {
+	return NewBlockStmtWithParent(s, s.SwitchStmt.Body)
 }
 
 // TODO: add PrependCase, InsertCase, and RemoveCase
@@ -42,7 +41,7 @@ func (s *SwitchStmt) InsertCase() error { return nil }
 func (s *SwitchStmt) RemoveCase() error { return nil }
 
 func (s *SwitchStmt) String() string {
-	bodies := lo.Map(s.Body(), func(x Stmt, _ int) string {
+	bodies := lo.Map(s.Body().Stmts(), func(x Stmt, _ int) string {
 		return x.String()
 	})
 

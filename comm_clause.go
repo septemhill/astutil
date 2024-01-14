@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -17,8 +17,8 @@ func NewCommClause(c *ast.CommClause) *CommClause {
 	return &CommClause{CommClause: c}
 }
 
-func NewCommClauseWithParent(parent Stmt, c *ast.CommClause) *CommClause {
-	return &CommClause{CommClause: c, parent: parent}
+func NewCommClauseWithParent(parent Stmt, stmt *ast.CommClause) *CommClause {
+	return &CommClause{CommClause: stmt, parent: parent}
 }
 
 func (c *CommClause) StmtType() StmtType {

@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewDeferStmt(ds *ast.DeferStmt) *DeferStmt {
 	return &DeferStmt{DeferStmt: ds}
 }
 
-func NewDeferStmtWithParent(parent Stmt, ds *ast.DeferStmt) *DeferStmt {
-	return &DeferStmt{DeferStmt: ds, parent: parent}
+func NewDeferStmtWithParent(parent Stmt, stmt *ast.DeferStmt) *DeferStmt {
+	return &DeferStmt{DeferStmt: stmt, parent: parent}
 }
 
 func (ds *DeferStmt) StmtType() StmtType {

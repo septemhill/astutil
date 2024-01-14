@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type BinaryExpr struct {
 	*ast.BinaryExpr
 }
 
-func NewBinaryExpr(b *ast.BinaryExpr) *BinaryExpr {
-	return &BinaryExpr{BinaryExpr: b}
+func NewBinaryExpr(expr *ast.BinaryExpr) *BinaryExpr {
+	return &BinaryExpr{BinaryExpr: expr}
 }
 
 func (be *BinaryExpr) ExprType() ExprType {

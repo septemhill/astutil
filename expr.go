@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"go/ast"
@@ -92,47 +92,47 @@ func toExprs(exprs []ast.Expr) []Expr {
 }
 
 func NewExpr(expr ast.Expr) Expr {
-	switch x := expr.(type) {
+	switch expr := expr.(type) {
 	case *ast.ArrayType:
-		return NewArrayType(x)
+		return NewArrayType(expr)
 	case *ast.BasicLit:
-		return NewBasicLit(x)
+		return NewBasicLit(expr)
 	case *ast.BinaryExpr:
-		return NewBinaryExpr(x)
+		return NewBinaryExpr(expr)
 	case *ast.CallExpr:
-		return NewCallExpr(x)
+		return NewCallExpr(expr)
 	case *ast.ChanType:
-		return NewChanType(x)
+		return NewChanType(expr)
 	case *ast.CompositeLit:
-		return NewCompositeLit(x)
+		return NewCompositeLit(expr)
 	case *ast.Ellipsis:
-		return NewEllipsis(x)
+		return NewEllipsis(expr)
 	case *ast.FuncLit:
-		return NewFuncLit(x)
+		return NewFuncLit(expr)
 	case *ast.FuncType:
-		return NewFuncType(x, "", FnExpr)
+		return NewFuncType(expr, "", FnExpr)
 	case *ast.Ident:
-		return NewIdent(x)
+		return NewIdent(expr)
 	case *ast.IndexExpr:
-		return NewIndexExpr(x)
+		return NewIndexExpr(expr)
 	case *ast.IndexListExpr:
-		return NewIndexListExpr(x)
+		return NewIndexListExpr(expr)
 	case *ast.InterfaceType:
-		return NewInterfaceType("", x)
+		return NewInterfaceType("", expr)
 	case *ast.KeyValueExpr:
-		return NewKeyValueExpr(x)
+		return NewKeyValueExpr(expr)
 	case *ast.ParenExpr:
-		return NewParenExpr(x)
+		return NewParenExpr(expr)
 	case *ast.SelectorExpr:
-		return NewSelectorExpr(x)
+		return NewSelectorExpr(expr)
 	case *ast.SliceExpr:
-		return NewSliceExpr(x)
+		return NewSliceExpr(expr)
 	case *ast.StarExpr:
-		return NewStarExpr(x)
+		return NewStarExpr(expr)
 	case *ast.TypeAssertExpr:
-		return NewTypeAssertExpr(x)
+		return NewTypeAssertExpr(expr)
 	case *ast.UnaryExpr:
-		return NewUnaryExpr(x)
+		return NewUnaryExpr(expr)
 	default:
 		return nil
 	}

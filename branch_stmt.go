@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -14,8 +14,8 @@ func NewBranchStmt(b *ast.BranchStmt) *BranchStmt {
 	return &BranchStmt{BranchStmt: b}
 }
 
-func NewBranchStmtWithParent(parent Stmt, b *ast.BranchStmt) *BranchStmt {
-	return &BranchStmt{BranchStmt: b, parent: parent}
+func NewBranchStmtWithParent(parent Stmt, stmt *ast.BranchStmt) *BranchStmt {
+	return &BranchStmt{BranchStmt: stmt, parent: parent}
 }
 
 func (br *BranchStmt) StmtType() StmtType {

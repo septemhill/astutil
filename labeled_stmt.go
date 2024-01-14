@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import "go/ast"
 
@@ -11,8 +11,8 @@ func NewLabeledStmt(ls *ast.LabeledStmt) *LabeledStmt {
 	return &LabeledStmt{LabeledStmt: ls}
 }
 
-func NewLabeledStmtWithParent(parent Stmt, ls *ast.LabeledStmt) *LabeledStmt {
-	return &LabeledStmt{LabeledStmt: ls, parent: parent}
+func NewLabeledStmtWithParent(parent Stmt, stmt *ast.LabeledStmt) *LabeledStmt {
+	return &LabeledStmt{LabeledStmt: stmt, parent: parent}
 }
 
 func (l *LabeledStmt) StmtType() StmtType {

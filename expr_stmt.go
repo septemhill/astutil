@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"go/ast"
@@ -13,8 +13,8 @@ func NewExprStmt(es *ast.ExprStmt) *ExprStmt {
 	return &ExprStmt{ExprStmt: es}
 }
 
-func NewExprStmtWithParent(parent Stmt, es *ast.ExprStmt) *ExprStmt {
-	return &ExprStmt{ExprStmt: es, parent: parent}
+func NewExprStmtWithParent(parent Stmt, stmt *ast.ExprStmt) *ExprStmt {
+	return &ExprStmt{ExprStmt: stmt, parent: parent}
 }
 
 func (e *ExprStmt) StmtType() StmtType {

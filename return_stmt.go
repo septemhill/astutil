@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -17,8 +17,8 @@ func NewReturnStmt(b *ast.ReturnStmt) *ReturnStmt {
 	return &ReturnStmt{ReturnStmt: b}
 }
 
-func NewReturnStmtWithParent(parent Stmt, b *ast.ReturnStmt) *ReturnStmt {
-	return &ReturnStmt{ReturnStmt: b, parent: parent}
+func NewReturnStmtWithParent(parent Stmt, stmt *ast.ReturnStmt) *ReturnStmt {
+	return &ReturnStmt{ReturnStmt: stmt, parent: parent}
 }
 
 func (r *ReturnStmt) StmtType() StmtType {

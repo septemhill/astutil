@@ -1,4 +1,4 @@
-package astutil
+package goastutil
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ type IndexExpr struct {
 	*ast.IndexExpr
 }
 
-func NewIndexExpr(i *ast.IndexExpr) *IndexExpr {
-	return &IndexExpr{IndexExpr: i}
+func NewIndexExpr(expr *ast.IndexExpr) *IndexExpr {
+	return &IndexExpr{IndexExpr: expr}
 }
 
 func (i *IndexExpr) ExprType() ExprType {
