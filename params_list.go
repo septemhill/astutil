@@ -30,5 +30,5 @@ func (pl *ParamsList) String() string {
 		return x.String()
 	})
 
-	return "(" + strings.Join(params, ", ") + ") "
+	return strings.Join(params, ", ")
 }

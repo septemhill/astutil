@@ -143,6 +143,8 @@ func (f *File) String() string {
 		strings.Join(fns, "\n\n"),
 	)
 
+	// fmt.Println(src)
+
 	bs, _ := format.Source([]byte(src), format.Options{})
 	return string(bs)
 }

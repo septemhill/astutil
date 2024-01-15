@@ -16,15 +16,19 @@ func (t *TypeSpec) SpecType() SpecType {
 	return TypeSpecType
 }
 
-func (t *TypeSpec) String() string {
-	switch x := t.Type.(type) {
+func (t *TypeSpec) Type() Expr {
+	switch x := t.TypeSpec.Type.(type) {
 	case *ast.InterfaceType:
-		return NewInterfaceType(t.Name.Name, x).String()
+		return NewInterfaceTypeWithTypeParams(t.Name.Name, x, t.TypeSpec.TypeParams)
 	case *ast.StructType:
-		return NewStructType(t.Name.Name, x).String()
+		return NewStructTypeWithTypeParams(t.Name.Name, x, t.TypeSpec.TypeParams)
 	case *ast.FuncType:
-		return NewFuncType(x, t.Name.Name, FnType).String()
+		return NewFuncTypeWithTypeParams(x, t.Name.Name, FnType, t.TypeSpec.TypeParams)
 	default:
-		return "unknown_type" + t.Name.Name
+		return nil
 	}
+}
+
+func (t *TypeSpec) String() string {
+	return t.Type().String()
 }

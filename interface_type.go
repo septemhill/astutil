@@ -9,12 +9,17 @@ import (
 )
 
 type InterfaceType struct {
-	Name string
+	Name       string
+	typeParams *ast.FieldList
 	*ast.InterfaceType
 }
 
 func NewInterfaceType(name string, expr *ast.InterfaceType) *InterfaceType {
 	return &InterfaceType{Name: name, InterfaceType: expr}
+}
+
+func NewInterfaceTypeWithTypeParams(name string, expr *ast.InterfaceType, typeParams *ast.FieldList) *InterfaceType {
+	return &InterfaceType{Name: name, InterfaceType: expr, typeParams: typeParams}
 }
 
 func (it *InterfaceType) ExprType() ExprType {
@@ -27,10 +32,21 @@ func (it *InterfaceType) Methods() []*FuncType {
 	})
 }
 
+func (it *InterfaceType) TypeParamsList() *ParamsList {
+	return &ParamsList{FieldList: it.typeParams}
+}
+
 func (it *InterfaceType) String() string {
 	methods := lo.Map(it.Methods(), func(x *FuncType, _ int) string {
 		return x.String()
 	})
+
+	if it.typeParams != nil {
+		typeParams := lo.Map(it.typeParams.List, func(x *ast.Field, _ int) string {
+			return fmt.Sprintf("%s %s", x.Names[0].Name, NewExpr(x.Type))
+		})
+		return fmt.Sprintf("type %s[%s] interface {\n\t%s\n}", it.Name, strings.Join(typeParams, ", "), strings.Join(methods, "\n\t"))
+	}
 
 	return fmt.Sprintf("type %s interface {\n\t%s\n}", it.Name, strings.Join(methods, "\n\t"))
 }

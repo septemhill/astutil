@@ -74,6 +74,7 @@ const (
 	SelectorExprType
 	SliceExprType
 	StarExprType
+	StructExprType
 	TypeAssertExprType
 	UnaryExprType
 )
@@ -129,6 +130,8 @@ func NewExpr(expr ast.Expr) Expr {
 		return NewSliceExpr(expr)
 	case *ast.StarExpr:
 		return NewStarExpr(expr)
+	case *ast.StructType:
+		return NewStructType("", expr)
 	case *ast.TypeAssertExpr:
 		return NewTypeAssertExpr(expr)
 	case *ast.UnaryExpr:

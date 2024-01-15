@@ -26,7 +26,7 @@ func (rl *ResultsList) String() string {
 	})
 
 	if len(rl.List) > 1 {
-		return "(" + strings.Join(res, ", ") + ")"
+		return strings.Join(res, ", ")
 	}
 
 	return strings.Join(res, ", ")
