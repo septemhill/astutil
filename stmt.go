@@ -111,7 +111,7 @@ func NewStmt(parent Stmt, stmt ast.Stmt) Stmt {
 	case *ast.BadStmt:
 		return NewBadStmt(parent, stmt)
 	case *ast.BlockStmt:
-		return NewBlockStmt(nil, stmt)
+		return NewBlockStmt(parent, stmt)
 	case *ast.BranchStmt:
 		return NewBranchStmt(parent, stmt)
 	case *ast.CaseClause:

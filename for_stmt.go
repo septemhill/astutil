@@ -28,7 +28,6 @@ func (fs *ForStmt) StmtType() StmtType {
 }
 
 func (fs *ForStmt) Init() Stmt {
-	// return NewStmt(fs.ForStmt.Init)
 	return NewStmt(fs, fs.ForStmt.Init)
 }
 
@@ -37,7 +36,6 @@ func (fs *ForStmt) Cond() Expr {
 }
 
 func (fs *ForStmt) Post() Stmt {
-	// return NewStmt(fs.ForStmt.Post)
 	return NewStmt(fs, fs.ForStmt.Post)
 }
 

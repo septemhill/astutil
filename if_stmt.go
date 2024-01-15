@@ -27,7 +27,6 @@ func (ifs *IfStmt) StmtType() StmtType {
 }
 
 func (ifs *IfStmt) Init() Stmt {
-	// return NewStmt(ifs.IfStmt.Init)
 	return NewStmt(ifs, ifs.IfStmt.Init)
 }
 
@@ -40,7 +39,6 @@ func (ifs *IfStmt) Body() *BlockStmt {
 }
 
 func (ifs *IfStmt) Else() Stmt {
-	// return NewStmt(ifs.IfStmt.Else)
 	return NewStmt(ifs, ifs.IfStmt.Else)
 }
 

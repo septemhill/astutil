@@ -27,12 +27,10 @@ func (t *TypeSwitchStmt) StmtType() StmtType {
 }
 
 func (t *TypeSwitchStmt) Init() Stmt {
-	// return NewStmt(t.TypeSwitchStmt.Init)
 	return NewStmt(t, t.TypeSwitchStmt.Init)
 }
 
 func (t *TypeSwitchStmt) Assign() Stmt {
-	// return NewStmt(t.TypeSwitchStmt.Assign)
 	return NewStmt(t, t.TypeSwitchStmt.Assign)
 }
 

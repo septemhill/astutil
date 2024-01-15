@@ -101,6 +101,16 @@ func (f *File) RemoveImports(pkgs []string) error {
 	return nil
 }
 
+// TODO: add decls (gen decl, value spec, type spec, func decl)
+func (f *File) AddDecls() error {
+	return nil
+}
+
+// TODO: remove decls by symbol name
+func (f *File) RemoveDecls([]string) error {
+	return nil
+}
+
 func (f *File) String() string {
 	imports := lo.Map(f.ImportSpecs(), func(x *ImportSpec, _ int) string {
 		return x.String()

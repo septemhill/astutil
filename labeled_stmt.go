@@ -24,7 +24,6 @@ func (l *LabeledStmt) StmtType() StmtType {
 }
 
 func (l *LabeledStmt) Stmt() Stmt {
-	// return NewStmt(l.LabeledStmt.Stmt)
 	return NewStmt(l, l.LabeledStmt.Stmt)
 }
 
