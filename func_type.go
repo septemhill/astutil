@@ -39,7 +39,7 @@ func (ft *FuncType) ParamsNames() []string {
 	})
 }
 
-func (ft *FuncType) ParamsTypes() []Expr {
+func (ft *FuncType) ParamsTypes() Exprs {
 	return lo.Map(ft.ParamsList().Params(), func(x *Param, _ int) Expr {
 		return x.Type()
 	})

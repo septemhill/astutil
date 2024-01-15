@@ -3,9 +3,6 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
-	"strings"
-
-	"github.com/samber/lo"
 )
 
 type CommClause struct {
@@ -33,13 +30,10 @@ func (c *CommClause) Comm() Stmt {
 	return NewStmt(c, c.CommClause.Comm)
 }
 
-func (c *CommClause) Body() []Stmt {
+func (c *CommClause) Body() Stmts {
 	return toStmt(c, c.CommClause.Body)
 }
 
 func (c *CommClause) String() string {
-	bodies := lo.Map(c.Body(), func(x Stmt, _ int) string {
-		return x.String()
-	})
-	return fmt.Sprintf("case %s:\n\t%s", c.Comm().String(), strings.Join(bodies, "\n\t"))
+	return fmt.Sprintf("case %s:\n\t%s", c.Comm().String(), c.Body())
 }

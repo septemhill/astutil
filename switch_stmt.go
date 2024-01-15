@@ -3,9 +3,6 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
-	"strings"
-
-	"github.com/samber/lo"
 )
 
 type SwitchStmt struct {
@@ -45,12 +42,8 @@ func (s *SwitchStmt) Body() *BlockStmt {
 // func (s *SwitchStmt) RemoveCase() error { return nil }
 
 func (s *SwitchStmt) String() string {
-	bodies := lo.Map(s.Body().Stmts(), func(x Stmt, _ int) string {
-		return x.String()
-	})
-
 	if s.SwitchStmt.Tag == nil {
-		return fmt.Sprintf("switch {\n\t%s\n}", strings.Join(bodies, "\n"))
+		return fmt.Sprintf("switch {\n\t%s\n}", s.Body())
 	}
-	return fmt.Sprintf("switch %s {\n\t%s\n}", s.Tag(), strings.Join(bodies, "\n"))
+	return fmt.Sprintf("switch %s %s", s.Tag(), s.Body())
 }

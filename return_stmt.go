@@ -3,9 +3,6 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
-	"strings"
-
-	"github.com/samber/lo"
 )
 
 type ReturnStmt struct {
@@ -29,13 +26,10 @@ func (r *ReturnStmt) StmtType() StmtType {
 	return ReturnStmtType
 }
 
-func (r *ReturnStmt) Results() []Expr {
+func (r *ReturnStmt) Results() Exprs {
 	return toExprs(r.ReturnStmt.Results)
 }
 
 func (r *ReturnStmt) String() string {
-	exprs := lo.Map(r.Results(), func(x Expr, _ int) string {
-		return x.String()
-	})
-	return fmt.Sprintf("return %s", strings.Join(exprs, ", "))
+	return fmt.Sprintf("return %s", r.Results())
 }

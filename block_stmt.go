@@ -1,10 +1,8 @@
 package goastutil
 
 import (
+	"fmt"
 	"go/ast"
-	"strings"
-
-	"github.com/samber/lo"
 )
 
 type BlockStmt struct {
@@ -28,8 +26,7 @@ func (b *BlockStmt) StmtType() StmtType {
 	return BlockStmtType
 }
 
-func (b *BlockStmt) Stmts() []Stmt {
-	// return toStmt(b.BlockStmt.List)
+func (b *BlockStmt) Stmts() Stmts {
 	return toStmt(b, b.BlockStmt.List)
 }
 
@@ -42,12 +39,5 @@ func (b *BlockStmt) Stmts() []Stmt {
 // Returns:
 // - The string representation of the BlockStmt.
 func (b *BlockStmt) String() string {
-	stmts := lo.Map(b.Stmts(), func(x Stmt, _ int) string {
-		return x.String()
-	})
-
-	if len(stmts) == 0 {
-		return "{}"
-	}
-	return "{\n\t" + strings.Join(stmts, "\n\t") + "\n}"
+	return fmt.Sprintf("{\n\t%s\n}", b.Stmts())
 }

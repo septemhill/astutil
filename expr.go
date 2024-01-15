@@ -2,6 +2,7 @@ package goastutil
 
 import (
 	"go/ast"
+	"strings"
 
 	"github.com/samber/lo"
 )
@@ -86,7 +87,15 @@ type Expr interface {
 	ExprType() ExprType
 }
 
-func toExprs(exprs []ast.Expr) []Expr {
+type Exprs []Expr
+
+func (e Exprs) String() string {
+	return strings.Join(lo.Map(e, func(x Expr, _ int) string {
+		return x.String()
+	}), ", ")
+}
+
+func toExprs(exprs []ast.Expr) Exprs {
 	return lo.Map(exprs, func(expr ast.Expr, _ int) Expr {
 		return NewExpr(expr)
 	})

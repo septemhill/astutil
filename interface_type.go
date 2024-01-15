@@ -42,10 +42,7 @@ func (it *InterfaceType) String() string {
 	})
 
 	if it.typeParams != nil {
-		typeParams := lo.Map(it.typeParams.List, func(x *ast.Field, _ int) string {
-			return fmt.Sprintf("%s %s", x.Names[0].Name, NewExpr(x.Type))
-		})
-		return fmt.Sprintf("type %s[%s] interface {\n\t%s\n}", it.Name, strings.Join(typeParams, ", "), strings.Join(methods, "\n\t"))
+		return fmt.Sprintf("type %s[%s] interface {\n\t%s\n}", it.Name, it.TypeParamsList(), strings.Join(methods, "\n\t"))
 	}
 
 	return fmt.Sprintf("type %s interface {\n\t%s\n}", it.Name, strings.Join(methods, "\n\t"))

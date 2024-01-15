@@ -3,9 +3,6 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
-	"strings"
-
-	"github.com/samber/lo"
 )
 
 type CompositeLit struct {
@@ -20,7 +17,7 @@ func (c *CompositeLit) ExprType() ExprType {
 	return CompositeLitExprType
 }
 
-func (c *CompositeLit) ElementTypes() []Expr {
+func (c *CompositeLit) ElementTypes() Exprs {
 	return toExprs(c.Elts)
 }
 
@@ -30,8 +27,5 @@ func (c *CompositeLit) Type() Expr {
 
 // String returns a string representation of the CompositeLit.
 func (c *CompositeLit) String() string {
-	lits := lo.Map(c.ElementTypes(), func(x Expr, _ int) string {
-		return x.String()
-	})
-	return fmt.Sprintf("%s{%s}", c.Type(), strings.Join(lits, ", "))
+	return fmt.Sprintf("%s{%s}", c.Type(), c.ElementTypes())
 }

@@ -2,6 +2,7 @@ package goastutil
 
 import (
 	"go/ast"
+	"strings"
 
 	"github.com/samber/lo"
 )
@@ -98,7 +99,15 @@ type Stmt interface {
 	StmtType() StmtType
 }
 
-func toStmt(parent Stmt, stmts []ast.Stmt) []Stmt {
+type Stmts []Stmt
+
+func (s Stmts) String() string {
+	return strings.Join(lo.Map(s, func(x Stmt, _ int) string {
+		return x.String()
+	}), "\n\t")
+}
+
+func toStmt(parent Stmt, stmts []ast.Stmt) Stmts {
 	return lo.Map(stmts, func(stmt ast.Stmt, _ int) Stmt {
 		return NewStmt(parent, stmt)
 	})

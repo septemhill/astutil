@@ -3,9 +3,6 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
-	"strings"
-
-	"github.com/samber/lo"
 )
 
 type CaseClause struct {
@@ -29,12 +26,11 @@ func (cc *CaseClause) StmtType() StmtType {
 	return CaseClauseType
 }
 
-func (cc *CaseClause) List() []Expr {
+func (cc *CaseClause) List() Exprs {
 	return toExprs(cc.CaseClause.List)
 }
 
-func (cc *CaseClause) Body() []Stmt {
-	// return toStmt(cc.CaseClause.Body)
+func (cc *CaseClause) Body() Stmts {
 	return toStmt(cc, cc.CaseClause.Body)
 }
 
@@ -50,16 +46,9 @@ func (cc *CaseClause) Body() []Stmt {
 // a newline character, prepended with "case" and the joined list of
 // expressions.
 func (cc *CaseClause) String() string {
-	list := lo.Map(cc.List(), func(x Expr, _ int) string {
-		return x.String()
-	})
-
-	bodies := lo.Map(cc.Body(), func(x Stmt, _ int) string {
-		return x.String()
-	})
-
+	list := cc.List()
 	if len(list) == 0 {
-		return fmt.Sprintf("default:\n\t%s", strings.Join(bodies, "\n\t"))
+		return fmt.Sprintf("default:\n\t%s", cc.Body())
 	}
-	return fmt.Sprintf("case %s:\n\t%s", strings.Join(list, ", "), strings.Join(bodies, "\n\t"))
+	return fmt.Sprintf("case %s:\n\t%s", list, cc.Body())
 }
