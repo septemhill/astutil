@@ -22,12 +22,28 @@ import "github.com/septemhill/goastutil"
 You can then use the utility functions provided by the goastutil package in your
 code.
 
+# Comparison with `Jennifier` Packages
+
+[`Jennifier`](https://github.com/dave/jennifer) is a good and awesome code generator tool for Go. In most of cases
+you should use it rather than `goastutil`. Unless you want to do some Source-to-Source (from Go to Go) code transformation and generation from AST, then we serve for you.
+
+
 # TODO
 
 - [ ] Introduce AST modify functionality
-  - [ ] Imports (Add / Remove)
-  - [ ] Statement (Add / Remove)
-  - [ ] Expression (Modify value / variable name)
+  - [ ] Imports
+    - [X] Add
+    - [ ] Remove
+  - [ ] Declaration
+    - [X] Add
+    - [ ] Remove
+  - [ ] Statement
+    - [X] Prepend
+    - [X] Append
+    - [ ] Remove
+  - [ ] Expression
+    - [ ] Modify value
+    - [ ] Variable renaming
 - [ ] Add generic support
 
 # Contributing

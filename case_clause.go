@@ -18,12 +18,10 @@ func NewCaseClause(parent Stmt, stmt *ast.CaseClause) *CaseClause {
 }
 
 func (s *CaseClause) PrependStmt(st string) error {
-	// TODO: Could only prepend case clause
 	return prependCaseStmt(st, s.parent, s.CaseClause)
 }
 
 func (s *CaseClause) AppendStmt(st string) error {
-	// TODO: Could only append case clause
 	return appendCaseStmt(st, s.parent, s.CaseClause)
 }
 

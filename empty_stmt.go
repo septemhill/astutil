@@ -24,5 +24,5 @@ func (s *EmptyStmt) StmtType() StmtType {
 }
 
 func (s *EmptyStmt) String() string {
-	return "todo_empty_stmt"
+	return ""
 }

@@ -18,12 +18,10 @@ func NewCommClause(parent Stmt, stmt *ast.CommClause) *CommClause {
 }
 
 func (s *CommClause) PrependStmt(st string) error {
-	// TODO: Could only prepend case clause
 	return prependCommStmt(st, s.parent, s.CommClause)
 }
 
 func (s *CommClause) AppendStmt(st string) error {
-	// TODO: Could only append case clause
 	return appendCommStmt(st, s.parent, s.CommClause)
 }
 

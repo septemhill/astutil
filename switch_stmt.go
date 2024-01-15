@@ -38,11 +38,11 @@ func (s *SwitchStmt) Body() *BlockStmt {
 }
 
 // TODO: add PrependCase, InsertCase, and RemoveCase
-func (s *SwitchStmt) PrependCase() error { return nil }
+// func (s *SwitchStmt) PrependCase() error { return nil }
 
-func (s *SwitchStmt) InsertCase() error { return nil }
+// func (s *SwitchStmt) InsertCase() error { return nil }
 
-func (s *SwitchStmt) RemoveCase() error { return nil }
+// func (s *SwitchStmt) RemoveCase() error { return nil }
 
 func (s *SwitchStmt) String() string {
 	bodies := lo.Map(s.Body().Stmts(), func(x Stmt, _ int) string {

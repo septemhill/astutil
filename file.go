@@ -78,6 +78,7 @@ func (f *File) AddImports(pkgs []string) error {
 
 	decl, err := parserutil.ParseDecl(imp)
 	if err != nil {
+		// TODO: [AST] define our own error
 		return err
 	}
 
@@ -101,8 +102,14 @@ func (f *File) RemoveImports(pkgs []string) error {
 	return nil
 }
 
-// TODO: add decls (gen decl, value spec, type spec, func decl)
-func (f *File) AddDecls() error {
+func (f *File) AddDecls(decls string) error {
+	decl, err := parseDecls(decls)
+
+	if err != nil {
+		return ErrInvalidDecl
+	}
+
+	f.File.Decls = append(f.File.Decls, decl...)
 	return nil
 }
 

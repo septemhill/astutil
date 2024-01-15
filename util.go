@@ -1,11 +1,41 @@
 package goastutil
 
 import (
+	"errors"
 	"go/ast"
+	"go/parser"
+	"go/token"
 	"slices"
 
+	"github.com/samber/lo"
 	"github.com/shurcooL/go/parserutil"
 )
+
+func parseStmts(s string) ([]ast.Stmt, error) {
+	file, err := parser.ParseFile(token.NewFileSet(), "", "package p;func _(){\n//line :1\n"+s+"\n;}", 0)
+	if err != nil {
+		return nil, err
+	}
+
+	// Filter out empty statements, the empty statement would impact the expected order of statements.
+	return lo.Filter(file.Decls[0].(*ast.FuncDecl).Body.List, func(stmt ast.Stmt, _ int) bool {
+		_, ok := stmt.(*ast.EmptyStmt)
+		return !ok
+	}), nil
+}
+
+func parseDecls(s string) ([]ast.Decl, error) {
+	file, err := parser.ParseFile(token.NewFileSet(), "", "package p\n//line :1\n"+s+"\n", 0)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(file.Decls) == 0 {
+		return nil, errors.New("no declaration")
+	}
+
+	return file.Decls, nil
+}
 
 func parseCaseStmts(s string) ([]ast.Stmt, error) {
 	stmt, err := parserutil.ParseStmt("switch {\n" + s + "\n}")
@@ -25,7 +55,7 @@ func parseCommStmts(s string) ([]ast.Stmt, error) {
 }
 
 func prependStmt(st string, parent Stmt, stmt ast.Stmt) error {
-	parsedStmt, err := parserutil.ParseStmt(st)
+	parsedStmts, err := parseStmts(st)
 	if err != nil {
 		return ErrInvalidStmt
 	}
@@ -38,13 +68,14 @@ func prependStmt(st string, parent Stmt, stmt ast.Stmt) error {
 	insertIndex := slices.Index(blockStmt.BlockStmt.List, stmt)
 
 	// No index check needed because statement always in the block statement list
-	blockStmt.BlockStmt.List = slices.Insert(blockStmt.BlockStmt.List, insertIndex, ast.Stmt(parsedStmt))
+	blockStmt.BlockStmt.List = slices.Insert(blockStmt.BlockStmt.List, insertIndex, parsedStmts...)
 
 	return nil
 }
 
 func appendStmt(st string, parent Stmt, stmt ast.Stmt) error {
-	parsedStmt, err := parserutil.ParseStmt(st)
+	// parsedStmt, err := parserutil.ParseStmt(st)
+	parsedStmts, err := parseStmts(st)
 	if err != nil {
 		return ErrInvalidStmt
 	}
@@ -57,7 +88,7 @@ func appendStmt(st string, parent Stmt, stmt ast.Stmt) error {
 	insertIndex := slices.Index(blockStmt.BlockStmt.List, stmt)
 
 	// No index check needed because statement always in the block statement list
-	blockStmt.BlockStmt.List = slices.Insert(blockStmt.BlockStmt.List, insertIndex+1, ast.Stmt(parsedStmt))
+	blockStmt.BlockStmt.List = slices.Insert(blockStmt.BlockStmt.List, insertIndex+1, parsedStmts...)
 
 	return nil
 }
