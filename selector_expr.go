@@ -1,6 +1,9 @@
 package goastutil
 
-import "go/ast"
+import (
+	"fmt"
+	"go/ast"
+)
 
 type SelectorExpr struct {
 	*ast.SelectorExpr
@@ -14,6 +17,14 @@ func (s *SelectorExpr) ExprType() ExprType {
 	return SelectorExprType
 }
 
+func (s *SelectorExpr) Expr() Expr {
+	return NewExpr(s.X)
+}
+
+func (s *SelectorExpr) Selector() *Ident {
+	return NewIdent(s.Sel)
+}
+
 func (s *SelectorExpr) String() string {
-	return s.X.(*ast.Ident).Name + "." + s.Sel.Name
+	return fmt.Sprintf("%s.%s", s.Expr(), s.Selector())
 }
