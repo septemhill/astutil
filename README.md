@@ -7,7 +7,7 @@ syntax tree (AST).
 # Comparison with `Jennifier` Package
 
 [`Jennifier`](https://github.com/dave/jennifer) is a good and awesome code generator tool for Go. In most of cases
-you should use it rather than `goastutil`. Unless you want to do some Source-to-Source (from Go to Go) code transformation and generation from AST, then we serve for you.
+you should use it rather than [`goastutil`](https://github.com/septemhill/goastutil). Unless you want to do some Source-to-Source (from Go to Go) code transformation and generation from AST, then we serve for you.
 
 # Installation
 
@@ -225,8 +225,8 @@ func main() {
   - [ ] Expression
     - [ ] Modify value
     - [ ] Variable renaming
-  - [ ] Comments
-  - [ ] Struct Tags
+  - [ ] Comments ([Issue](https://github.com/golang/go/issues/20744))
+  - [X] Struct Tags
 - [X] Add generic support
 
 # Contributing

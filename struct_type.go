@@ -22,7 +22,7 @@ func NewStructTypeWithTypeParams(name string, structType *ast.StructType, typePa
 	return &StructType{name: name, StructType: structType, typeParams: typeParams}
 }
 
-func (st *StructType) Fields() []*FieldDecl {
+func (st *StructType) Fields() FieldDecls {
 	return lo.Map(st.StructType.Fields.List, func(field *ast.Field, _ int) *FieldDecl {
 		return NewFieldDecl(field)
 	})
@@ -49,5 +49,5 @@ func (st *StructType) String() string {
 		return fmt.Sprintf("type %s[%s] struct {\n\t%s\n}", st.name, st.TypeParamsList(), strings.Join(fields, "\n\t"))
 	}
 
-	return fmt.Sprintf("type %s struct {\n\t%s\n}", st.name, strings.Join(fields, "\n\t"))
+	return fmt.Sprintf("type %s struct {\n\t%s\n}", st.name, st.Fields())
 }

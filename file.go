@@ -16,14 +16,16 @@ import (
 
 type File struct {
 	*ast.File
+	commentsMap ast.CommentMap
 }
 
 func NewFile(filename string) (*File, error) {
 	astFile, err := parser.ParseFile(token.NewFileSet(), filename, nil, parser.ParseComments)
+	cmap := ast.NewCommentMap(token.NewFileSet(), astFile, astFile.Comments)
 	if err != nil {
 		return nil, err
 	}
-	return &File{File: astFile}, nil
+	return &File{File: astFile, commentsMap: cmap}, nil
 }
 
 func (f *File) spec() []Spec {
@@ -179,8 +181,6 @@ func (f *File) String() string {
 		strings.Join(types, "\n"),
 		strings.Join(fns, "\n\n"),
 	)
-
-	// fmt.Println(src)
 
 	bs, _ := format.Source([]byte(src), format.Options{})
 	return string(bs)
