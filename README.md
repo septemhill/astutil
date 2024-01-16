@@ -31,13 +31,13 @@ you should use it rather than `goastutil`. Unless you want to do some Source-to-
 # TODO
 
 - [ ] Introduce AST modify functionality
-  - [X] Imports
+  - [X] [Import](https://github.com/septemhill/goastutil/tree/main/example/imports)
     - [X] Add
     - [X] Remove
-  - [X] Declaration
+  - [X] [Declaration](https://github.com/septemhill/goastutil/tree/main/example/decls)
     - [X] Add
     - [X] Remove
-  - [ ] Statement
+  - [ ] [Statement](https://github.com/septemhill/goastutil/tree/main/example/stmts)
     - [X] Prepend
     - [X] Append
     - [ ] Remove
