@@ -31,12 +31,12 @@ you should use it rather than `goastutil`. Unless you want to do some Source-to-
 # TODO
 
 - [ ] Introduce AST modify functionality
-  - [ ] Imports
+  - [X] Imports
     - [X] Add
-    - [ ] Remove
-  - [ ] Declaration
+    - [X] Remove
+  - [X] Declaration
     - [X] Add
-    - [ ] Remove
+    - [X] Remove
   - [ ] Statement
     - [X] Prepend
     - [X] Append
@@ -45,7 +45,7 @@ you should use it rather than `goastutil`. Unless you want to do some Source-to-
     - [ ] Modify value
     - [ ] Variable renaming
   - [ ] Comments
-- [ ] Add generic support
+- [X] Add generic support
 
 # Contributing
 
