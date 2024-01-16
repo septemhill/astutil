@@ -9,17 +9,17 @@ import (
 )
 
 type StructType struct {
-	Name       string
+	name       string
 	typeParams *ast.FieldList
 	*ast.StructType
 }
 
 func NewStructType(name string, structType *ast.StructType) *StructType {
-	return &StructType{Name: name, StructType: structType}
+	return &StructType{name: name, StructType: structType}
 }
 
 func NewStructTypeWithTypeParams(name string, structType *ast.StructType, typeParams *ast.FieldList) *StructType {
-	return &StructType{Name: name, StructType: structType, typeParams: typeParams}
+	return &StructType{name: name, StructType: structType, typeParams: typeParams}
 }
 
 func (st *StructType) Fields() []*FieldDecl {
@@ -38,7 +38,7 @@ func (st *StructType) ExprType() ExprType {
 
 func (st *StructType) String() string {
 	if len(st.StructType.Fields.List) == 0 {
-		return fmt.Sprintf("type %s struct {}", st.Name)
+		return fmt.Sprintf("type %s struct {}", st.name)
 	}
 
 	fields := lo.Map(st.Fields(), func(field *FieldDecl, _ int) string {
@@ -46,8 +46,8 @@ func (st *StructType) String() string {
 	})
 
 	if st.typeParams != nil {
-		return fmt.Sprintf("type %s[%s] struct {\n\t%s\n}", st.Name, st.TypeParamsList(), strings.Join(fields, "\n\t"))
+		return fmt.Sprintf("type %s[%s] struct {\n\t%s\n}", st.name, st.TypeParamsList(), strings.Join(fields, "\n\t"))
 	}
 
-	return fmt.Sprintf("type %s struct {\n\t%s\n}", st.Name, strings.Join(fields, "\n\t"))
+	return fmt.Sprintf("type %s struct {\n\t%s\n}", st.name, strings.Join(fields, "\n\t"))
 }

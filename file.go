@@ -3,6 +3,8 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
+	"go/parser"
+	"go/token"
 	"slices"
 
 	"strings"
@@ -16,8 +18,12 @@ type File struct {
 	*ast.File
 }
 
-func NewFile(file *ast.File) *File {
-	return &File{File: file}
+func NewFile(filename string) (*File, error) {
+	astFile, err := parser.ParseFile(token.NewFileSet(), filename, nil, parser.ParseComments)
+	if err != nil {
+		return nil, err
+	}
+	return &File{File: astFile}, nil
 }
 
 func (f *File) spec() []Spec {
@@ -114,7 +120,38 @@ func (f *File) AddDecls(decls string) error {
 }
 
 // TODO: remove decls by symbol name
-func (f *File) RemoveDecls([]string) error {
+func (f *File) RemoveDecls(symbols []string) error {
+	removeGenDeclSymbols := func(x *ast.GenDecl) []ast.Spec {
+		return lo.Filter(x.Specs, func(spec ast.Spec, _ int) bool {
+			switch spec := spec.(type) {
+			case *ast.ValueSpec:
+				return slices.Index(symbols, spec.Names[0].Name) < 0
+			case *ast.TypeSpec:
+				return slices.Index(symbols, spec.Name.Name) < 0
+			default:
+				return true
+			}
+		})
+	}
+
+	removeFuncDeclSymbols := func(x *ast.FuncDecl) bool {
+		if x.Recv != nil {
+			return slices.Index(symbols, fmt.Sprintf("%s.%s", x.Recv.List[0].Type, x.Name.Name)) < 0
+		}
+		return slices.Index(symbols, x.Name.Name) < 0
+	}
+
+	f.File.Decls = lo.FilterMap(f.File.Decls, func(decl ast.Decl, _ int) (ast.Decl, bool) {
+		switch decl := decl.(type) {
+		case *ast.GenDecl:
+			decl.Specs = removeGenDeclSymbols(decl)
+			return decl, true
+		case *ast.FuncDecl:
+			return decl, removeFuncDeclSymbols(decl)
+		default:
+			return decl, true
+		}
+	})
 	return nil
 }
 

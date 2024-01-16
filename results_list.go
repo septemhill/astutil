@@ -15,8 +15,13 @@ func (rl *ResultsList) Len() int {
 	return len(rl.List)
 }
 
-func (rl *ResultsList) String() string {
+func (rl *ResultsList) Params() []*Param {
+	return lo.Map(rl.List, func(field *ast.Field, _ int) *Param {
+		return NewParam(field)
+	})
+}
 
+func (rl *ResultsList) String() string {
 	if rl.FieldList == nil {
 		return ""
 	}
@@ -24,10 +29,6 @@ func (rl *ResultsList) String() string {
 	res := lo.Map(rl.FieldList.List, func(x *ast.Field, _ int) string {
 		return NewExpr(x.Type).String()
 	})
-
-	if len(rl.List) > 1 {
-		return strings.Join(res, ", ")
-	}
 
 	return strings.Join(res, ", ")
 }

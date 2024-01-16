@@ -3,11 +3,32 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
+	"strings"
+
+	"github.com/samber/lo"
 )
 
 type Param struct {
-	Name string
 	*ast.Field
+}
+
+type Params []*Param
+
+func (p Params) String() string {
+	return strings.Join(lo.Map(p, func(x *Param, _ int) string {
+		return x.String()
+	}), ", ")
+}
+
+func NewParam(field *ast.Field) *Param {
+	return &Param{Field: field}
+}
+
+func (p *Param) Name() string {
+	if p.Field.Names == nil {
+		return ""
+	}
+	return p.Field.Names[0].Name
 }
 
 func (p *Param) Type() Expr {
@@ -15,5 +36,5 @@ func (p *Param) Type() Expr {
 }
 
 func (p *Param) String() string {
-	return fmt.Sprintf("%s %s", p.Name, p.Type())
+	return fmt.Sprintf("%s %s", p.Name(), p.Type())
 }

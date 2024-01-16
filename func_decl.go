@@ -17,12 +17,12 @@ func (ft *FuncDecl) DeclType() DeclType {
 	return FuncDeclType
 }
 
-func (ft *FuncDecl) Recv() ReceiverExpr {
-	return ReceiverExpr{FieldList: ft.FuncDecl.Recv}
+func (ft *FuncDecl) Recv() *ReceiverExpr {
+	return NewReceiverExpr(ft.FuncDecl.Recv)
 }
 
 func (ft *FuncDecl) Name() *Ident {
-	return &Ident{Ident: ft.FuncDecl.Name}
+	return NewIdent(ft.FuncDecl.Name)
 }
 
 func (ft *FuncDecl) Body() *BlockStmt {
@@ -34,7 +34,6 @@ func (ft *FuncDecl) Type() *FuncType {
 		return NewFuncType(ft.FuncDecl.Type, ft.Name().String(), FnDecl)
 	}
 	return NewFuncType(ft.FuncDecl.Type, ft.Name().String(), FnMethod)
-
 }
 
 // String returns a string representation of the FuncDecl.
