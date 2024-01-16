@@ -22,8 +22,8 @@ func NewStructTypeWithTypeParams(name string, structType *ast.StructType, typePa
 	return &StructType{name: name, StructType: structType, typeParams: typeParams}
 }
 
-func (st *StructType) Fields() FieldDecls {
-	return lo.Map(st.StructType.Fields.List, func(field *ast.Field, _ int) *FieldDecl {
+func (st *StructType) Fields() StructFields {
+	return lo.Map(st.StructType.Fields.List, func(field *ast.Field, _ int) *StructField {
 		return NewFieldDecl(field)
 	})
 }
@@ -41,7 +41,7 @@ func (st *StructType) String() string {
 		return fmt.Sprintf("type %s struct {}", st.name)
 	}
 
-	fields := lo.Map(st.Fields(), func(field *FieldDecl, _ int) string {
+	fields := lo.Map(st.Fields(), func(field *StructField, _ int) string {
 		return field.String()
 	})
 
