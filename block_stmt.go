@@ -3,6 +3,7 @@ package goastutil
 import (
 	"fmt"
 	"go/ast"
+	"slices"
 )
 
 type BlockStmt struct {
@@ -20,6 +21,37 @@ func (s *BlockStmt) PrependStmt(st string) error {
 
 func (s *BlockStmt) AppendStmt(st string) error {
 	return ErrNotAppendPrepend
+}
+
+func (s *BlockStmt) InsertStmt(i int, st string) error {
+	if i < 0 || i > len(s.BlockStmt.List) {
+		return ErrOutOfIndex
+	}
+
+	stmts, err := parseStmts(st)
+	if err != nil {
+		return err
+	}
+
+	s.BlockStmt.List = slices.Insert(s.BlockStmt.List, i, stmts...)
+	return nil
+}
+
+func (s *BlockStmt) RemoveStmt(start, end int) error {
+	if start > end {
+		start, end = end, start
+	}
+
+	if start < 0 || start >= len(s.BlockStmt.List) {
+		return ErrOutOfIndex
+	}
+
+	if end < 0 || end >= len(s.BlockStmt.List) {
+		return ErrOutOfIndex
+	}
+
+	s.BlockStmt.List = slices.Delete(s.BlockStmt.List, start, end)
+	return nil
 }
 
 func (b *BlockStmt) StmtType() StmtType {

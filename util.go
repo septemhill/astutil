@@ -14,6 +14,7 @@ import (
 func parseStmts(s string) ([]ast.Stmt, error) {
 	file, err := parser.ParseFile(token.NewFileSet(), "", "package p;func _(){\n//line :1\n"+s+"\n;}", 0)
 	if err != nil {
+		// TODO: use our own error
 		return nil, err
 	}
 

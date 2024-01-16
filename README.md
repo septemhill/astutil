@@ -149,7 +149,7 @@ func main() {
   println(astFile.String())
 }
 ```
-## Add Statements
+## Add / Remove Statements
 ```go
 package main
 
@@ -191,11 +191,17 @@ func main() {
   	  var append = 123456
     `)
 
+  // Remove the first stmt in the first function body
+  // (which is `const prepend = "Septem"`)
+  astFile.
+    FuncDecl()[0].
+    Body().
+    RemoveStmt(0, 1)
+
   // After operations above, astFile should be like:
   // package main
   //
   // func existFunc(a int, b int) int {
-  // 		const prepend = "Septem"
   // 		append := 123456
   // 		fmt.Println(a, b)
   // 		return a + b
@@ -212,14 +218,15 @@ func main() {
   - [X] [Declaration](https://github.com/septemhill/goastutil/tree/main/example/decls)
     - [X] Add
     - [X] Remove
-  - [ ] [Statement](https://github.com/septemhill/goastutil/tree/main/example/stmts)
+  - [X] [Statement](https://github.com/septemhill/goastutil/tree/main/example/stmts)
     - [X] Prepend
     - [X] Append
-    - [ ] Remove
+    - [X] Remove
   - [ ] Expression
     - [ ] Modify value
     - [ ] Variable renaming
   - [ ] Comments
+  - [ ] Struct Tags
 - [X] Add generic support
 
 # Contributing
