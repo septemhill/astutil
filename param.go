@@ -28,7 +28,9 @@ func (p *Param) Name() string {
 	if p.Field.Names == nil {
 		return ""
 	}
-	return p.Field.Names[0].Name
+	return strings.Join(lo.Map(p.Field.Names, func(x *ast.Ident, _ int) string {
+		return x.Name
+	}), ", ")
 }
 
 func (p *Param) Type() Expr {
