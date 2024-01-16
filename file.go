@@ -136,7 +136,7 @@ func (f *File) RemoveDecls(symbols []string) error {
 
 	removeFuncDeclSymbols := func(x *ast.FuncDecl) bool {
 		if x.Recv != nil {
-			return slices.Index(symbols, fmt.Sprintf("%s.%s", x.Recv.List[0].Type, x.Name.Name)) < 0
+			return slices.Index(symbols, fmt.Sprintf("%s.%s", NewReceiverExpr(x.Recv).Type(), x.Name.Name)) < 0
 		}
 		return slices.Index(symbols, x.Name.Name) < 0
 	}
